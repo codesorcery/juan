@@ -9,4 +9,4 @@ addons:
     organization: "codesorcery-github"
 
 script:
-  - mvn test -PEnableReportPlugins coveralls:report sonar:sonar -Dsonar.projectKey=codesorcery_juan
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar

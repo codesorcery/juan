@@ -3,3 +3,10 @@ language: java
 jdk:
   - oraclejdk8
   - openjdk11
+
+addons:
+  sonarcloud:
+    organization: "codesorcery-github"
+
+script:
+  - mvn test -PEnableReportPlugins coveralls:report sonar:sonar -Dsonar.projectKey=codesorcery_juan

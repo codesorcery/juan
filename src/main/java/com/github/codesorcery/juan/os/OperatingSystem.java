@@ -8,11 +8,23 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public abstract class OperatingSystem {
-    public abstract String getOsVendor();
-    public abstract String getOsVersion();
-    public abstract String getOsName();
-    public abstract String getOsType();
-    public abstract String getDeviceId();
+    private final String vendor;
+    private final String name;
+    private final String version;
+    private final String type;
+    private final String deviceId;
+
+    protected OperatingSystem(final String vendor,
+                              final String name,
+                              final String version,
+                              final String type,
+                              final String deviceId) {
+        this.vendor = vendor;
+        this.name = name;
+        this.version = version;
+        this.type = type;
+        this.deviceId = deviceId;
+    }
 
     public static OperatingSystem fromUserAgent(final TokenizedUserAgent source) {
         final List<StringToken> tokens = source.getStringTokens();
@@ -52,14 +64,34 @@ public abstract class OperatingSystem {
         return new UnknownOS();
     }
 
+    public String getOsVendor() {
+        return vendor;
+    }
+
+    public String getOsName() {
+        return name;
+    }
+
+    public String getOsVersion() {
+        return version;
+    }
+
+    public String getOsType() {
+        return type;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
     @Override
     public String toString() {
-        return new StringJoiner(", ", this.getClass().getSimpleName() + "[", "]")
-                .add("vendor='" + this.getOsVendor() + "'")
-                .add("name='" + this.getOsName() + "'")
-                .add("version='" + this.getOsVersion() + "'")
-                .add("type='" + this.getOsType() + "'")
-                .add("deviceId='" + this.getDeviceId() + "'")
+        return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+                .add("vendor='" + vendor + "'")
+                .add("name='" + name + "'")
+                .add("version='" + version + "'")
+                .add("type='" + type + "'")
+                .add("deviceId='" + deviceId + "'")
                 .toString();
     }
 }

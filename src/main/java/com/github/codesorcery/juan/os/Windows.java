@@ -9,25 +9,23 @@ import com.github.codesorcery.juan.util.VersionExtractor;
 public class Windows extends OperatingSystem {
     private static final VersionExtractor VERSION_EXTRACTOR = VersionExtractor.forLimiter('.');
 
-    private final String osVersion;
-
     Windows(final TokenizedUserAgent source) {
-        osVersion = extractOsVersion(source);
+        super(Vendors.MICROSOFT, "Windows", extractOsVersion(source),
+                OsTypes.DESKTOP, "");
     }
 
-    private String extractOsVersion(final TokenizedUserAgent source) {
+    private static String extractOsVersion(final TokenizedUserAgent source) {
         for (final StringToken t : source.getStringTokens()) {
             if (t.getValue().contains("NT")) {
                 return mapOsVersion(
                         VERSION_EXTRACTOR.extract(t.getValue())
-                        .replace("_", ".")
                 );
             }
         }
         return "";
     }
 
-    private String mapOsVersion(final String version) {
+    private static String mapOsVersion(final String version) {
         switch (version) {
             case "5.0": return "2000";
             case "5.1": case "5.2": return "XP";
@@ -38,30 +36,5 @@ public class Windows extends OperatingSystem {
             case "10.0": return "10";
             default: return version;
         }
-    }
-
-    @Override
-    public String getOsVendor() {
-        return Vendors.MICROSOFT;
-    }
-
-    @Override
-    public String getOsVersion() {
-        return osVersion;
-    }
-
-    @Override
-    public String getOsName() {
-        return "Windows";
-    }
-
-    @Override
-    public String getOsType() {
-        return OsTypes.DESKTOP;
-    }
-
-    @Override
-    public String getDeviceId() {
-        return "";
     }
 }

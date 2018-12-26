@@ -8,6 +8,7 @@ public class StringToken {
     public StringToken(final String value) {
         this.value = value.trim();
     }
+
     public String getValue() {
         return value;
     }

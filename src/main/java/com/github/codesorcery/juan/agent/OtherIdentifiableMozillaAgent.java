@@ -3,6 +3,8 @@ package com.github.codesorcery.juan.agent;
 import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
+import com.github.codesorcery.juan.util.Tokens;
+import com.github.codesorcery.juan.util.Vendors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,58 +12,58 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public enum OtherIdentifiableMozillaAgent {
-    CHROME("Google", "Chrome", tokenList ->
-            tokenList.contains("AppleWebKit")
-                    && tokenList.contains("Chrome")
-                    && !tokenList.contains("Edge")
-                    && !tokenList.contains("Gecko"),
-            "Chrome"
+    CHROME(Vendors.GOOGLE, "Chrome", tokenList ->
+            tokenList.contains(Tokens.APPLE_WEBKIT)
+                    && tokenList.contains(Tokens.CHROME)
+                    && !tokenList.contains(Tokens.EDGE)
+                    && !tokenList.contains(Tokens.GECKO),
+            Tokens.CHROME
     ),
-    FIREFOX("Mozilla", "Firefox", tokenList ->
-            tokenList.contains("Gecko")
-                    && tokenList.contains("Firefox"),
-            "Firefox"
+    FIREFOX(Vendors.MOZILLA, "Firefox", tokenList ->
+            tokenList.contains(Tokens.GECKO)
+                    && tokenList.contains(Tokens.FIREFOX),
+            Tokens.FIREFOX
     ),
-    SAFARI("Apple", "Safari", tokenList ->
-            tokenList.contains("Safari")
-                && tokenList.contains("Version")
-                && !tokenList.contains("Mobile")
-                && !tokenList.contains("Chrome")
-                && !tokenList.contains("Firefox"),
-            tokenizedUA -> !containsStartingWith(tokenizedUA.getStringTokens(), "Android"),
-            "Version"
+    SAFARI(Vendors.APPLE, "Safari", tokenList ->
+            tokenList.contains(Tokens.SAFARI)
+                && tokenList.contains(Tokens.VERSION)
+                && !tokenList.contains(Tokens.MOBILE)
+                && !tokenList.contains(Tokens.CHROME)
+                && !tokenList.contains(Tokens.FIREFOX),
+            tokenizedUA -> !containsStartingWith(tokenizedUA.getStringTokens(), Tokens.ANDROID),
+            Tokens.VERSION
     ),
-    EDGE("Microsoft", "Edge", tokenList ->
-            tokenList.contains("Edge")
-                    && !tokenList.contains("Mobile Safari"),
-            "Edge"
+    EDGE(Vendors.MICROSOFT, "Edge", tokenList ->
+            tokenList.contains(Tokens.EDGE)
+                    && !tokenList.contains(Tokens.MOBILE_SAFARI),
+            Tokens.EDGE
     ),
-    EDGE_MOBILE("Microsoft", "Edge Mobile", tokenList ->
-            tokenList.contains("Edge")
-                    && tokenList.contains("Mobile Safari"),
-            "Edge"
+    EDGE_MOBILE(Vendors.MICROSOFT, "Edge Mobile", tokenList ->
+            tokenList.contains(Tokens.EDGE)
+                    && tokenList.contains(Tokens.MOBILE_SAFARI),
+            Tokens.EDGE
     ),
-    CHROME_MOBILE("Google", "Chrome Mobile", tokenList ->
-            tokenList.contains("Chrome")
-                    && tokenList.contains("Mobile Safari")
-                    && !tokenList.contains("Edge"),
-            "Chrome"
+    CHROME_MOBILE(Vendors.GOOGLE, "Chrome Mobile", tokenList ->
+            tokenList.contains(Tokens.CHROME)
+                    && tokenList.contains(Tokens.MOBILE_SAFARI)
+                    && !tokenList.contains(Tokens.EDGE),
+            Tokens.CHROME
     ),
-    SAFARI_MOBILE("Apple", "Safari Mobile", tokenList ->
-            tokenList.contains("Safari")
-                    && tokenList.contains("Version")
-                    && tokenList.contains("Mobile")
-                    && !tokenList.contains("Chrome")
-                    && !tokenList.contains("Firefox"),
-            "Version"
+    SAFARI_MOBILE(Vendors.APPLE, "Safari Mobile", tokenList ->
+            tokenList.contains(Tokens.SAFARI)
+                    && tokenList.contains(Tokens.VERSION)
+                    && tokenList.contains(Tokens.MOBILE)
+                    && !tokenList.contains(Tokens.CHROME)
+                    && !tokenList.contains(Tokens.FIREFOX),
+            Tokens.VERSION
     ),
-    ANDROID_BROWSER("Google", "Android Browser", tokenList ->
-            tokenList.contains("AppleWebKit")
-                    && tokenList.contains("Version")
-                    && !tokenList.contains("Chrome")
-                    && !tokenList.contains("Firefox"),
-            tokenizedUA -> containsStartingWith(tokenizedUA.getStringTokens(), "Android"),
-            "Version"
+    ANDROID_BROWSER(Vendors.GOOGLE, "Android Browser", tokenList ->
+            tokenList.contains(Tokens.APPLE_WEBKIT)
+                    && tokenList.contains(Tokens.VERSION)
+                    && !tokenList.contains(Tokens.CHROME)
+                    && !tokenList.contains(Tokens.FIREFOX),
+            tokenizedUA -> containsStartingWith(tokenizedUA.getStringTokens(), Tokens.ANDROID),
+            Tokens.VERSION
     ),
 ;
 

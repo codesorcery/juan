@@ -3,6 +3,8 @@ package com.github.codesorcery.juan.os;
 import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
+import com.github.codesorcery.juan.util.OsTypes;
+import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class X11 extends OperatingSystem {
     private static final List<String> OS_NAMES = Collections.unmodifiableList(
-            Arrays.asList("Linux", "CrOS", "OpenBSD", "FreeBSD", "SunOS", "DragonFly",
+            Arrays.asList(Tokens.LINUX, "CrOS", "OpenBSD", "FreeBSD", "SunOS", "DragonFly",
                     "TrueOS", "HP-UX"));
     private static final List<String> LINUX_DISTRBUTIONS = Collections.unmodifiableList(
             Arrays.asList("Ubuntu", "Fedora", "Debian", "Gentoo", "RedHat", "CentOS", "SUSE",
@@ -38,7 +40,7 @@ public class X11 extends OperatingSystem {
 
     private OsInfo mapOsName(final String name, final TokenizedUserAgent source) {
         switch (name) {
-            case "Linux": return extractLinuxDistribution(source);
+            case Tokens.LINUX: return extractLinuxDistribution(source);
             case "CrOS": return new OsInfo("Chrome OS", "");
             case "DragonFly": return new OsInfo("DragonFly BSD", "");
             default: return new OsInfo(name, "");
@@ -76,7 +78,7 @@ public class X11 extends OperatingSystem {
 
     @Override
     public String getOsType() {
-        return "Desktop";
+        return OsTypes.DESKTOP;
     }
 
     @Override

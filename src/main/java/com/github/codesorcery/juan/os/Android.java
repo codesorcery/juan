@@ -2,6 +2,9 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
+import com.github.codesorcery.juan.util.OsTypes;
+import com.github.codesorcery.juan.util.Tokens;
+import com.github.codesorcery.juan.util.Vendors;
 import com.github.codesorcery.juan.util.VersionExtractor;
 
 public class Android extends OperatingSystem {
@@ -17,7 +20,7 @@ public class Android extends OperatingSystem {
 
     private String extractOsVersion(final TokenizedUserAgent source) {
         for (final StringToken token : source.getStringTokens()) {
-            if (token.getValue().contains("Android")) {
+            if (token.getValue().contains(Tokens.ANDROID)) {
                 return VERSION_EXTRACTOR.extract(token.getValue());
             }
         }
@@ -36,7 +39,7 @@ public class Android extends OperatingSystem {
 
     @Override
     public String getOsVendor() {
-        return "Google";
+        return Vendors.GOOGLE;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class Android extends OperatingSystem {
 
     @Override
     public String getOsType() {
-        return "Mobile";
+        return OsTypes.MOBILE;
     }
 
     @Override

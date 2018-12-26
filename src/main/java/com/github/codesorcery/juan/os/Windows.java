@@ -2,6 +2,8 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
+import com.github.codesorcery.juan.util.OsTypes;
+import com.github.codesorcery.juan.util.Vendors;
 import com.github.codesorcery.juan.util.VersionExtractor;
 
 public class Windows extends OperatingSystem {
@@ -40,7 +42,7 @@ public class Windows extends OperatingSystem {
 
     @Override
     public String getOsVendor() {
-        return "Microsoft";
+        return Vendors.MICROSOFT;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class Windows extends OperatingSystem {
 
     @Override
     public String getOsType() {
-        return "Desktop";
+        return OsTypes.DESKTOP;
     }
 
     @Override

@@ -1,13 +1,15 @@
 package com.github.codesorcery.juan.agent;
 
+import com.github.codesorcery.juan.util.Vendors;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public enum NonMozillaAgent {
     /* Applications */
-    WINDOWS_LIVE_MAIL("Outlook-Express", "Microsoft", "Windows Live Mail"),
+    WINDOWS_LIVE_MAIL("Outlook-Express", Vendors.MICROSOFT, "Windows Live Mail"),
     EVOLUTION("Evolution", "GNOME Foundation", "Evolution (mail client)"),
-    SAFARI_RSS("AppleSyndication", "Apple", "Safari RSS Reader"),
+    SAFARI_RSS("AppleSyndication", Vendors.APPLE, "Safari RSS Reader"),
     CYBERDUCK("Cyberduck", "iterate GmbH", "Cyberduck"),
     INSOMNIA("insomnia", "Floating Keyboard Software", "Insomnia REST client"),
     /* Command line tools */
@@ -25,7 +27,7 @@ public enum NonMozillaAgent {
     LIBSOUP("libsoup", "GNOME Foundation", "libsoup (GNOME library)"),
     CFNETWORK("CFNetwork", "Apple", "CFNetwork (Apple libary)"),
     HTTP_REQUESTS2("HTTP_Requests2", "Alexey Borzov", "HTTP_Requests2 (PHP library)"),
-    GO_HTTP_CLIENT("Go-http-client", "Google", "HTTP client (Go library)"),
+    GO_HTTP_CLIENT("Go-http-client", Vendors.GOOGLE, "HTTP client (Go library)"),
     /* Validators */
     W3C_CHECKLINK("W3C-checklink", "W3C", "W3C Link Checker"),
     W3C_CSS_VALIDATOR("Jigsaw", "W3C", "W3C CSS Validator"),
@@ -35,10 +37,10 @@ public enum NonMozillaAgent {
     /* Media players */
     VLC("VLC", "VideoLAN team", "VLC Media Player"),
     FOOBAR200("foobar2000", "Peter Pawlowski", "foobar2000"),
-    ITUNES("iTunes", "Apple", "iTunes"),
+    ITUNES("iTunes", Vendors.APPLE, "iTunes"),
     PLEX("Plex", "Plex community", "Plex Medica Center"),
-    ALEXA_MEDIAPLAYER("AlexaMediaPlayer", "Amazon", "Alexa MediaPlayer"),
-    APPLE_TV("AppleTV", "Apple", "tvOS"),
+    ALEXA_MEDIAPLAYER("AlexaMediaPlayer", Vendors.AMAZON, "Alexa MediaPlayer"),
+    APPLE_TV("AppleTV", Vendors.APPLE, "tvOS"),
     ;
 
     private final String identifier;

@@ -2,6 +2,7 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
+import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -22,9 +23,9 @@ public abstract class OperatingSystem {
             systemIdentifier = tokens.get(0).getValue();
         }
         switch (systemIdentifier) {
-            case "Windows":
+            case Tokens.WINDOWS:
                 return new Windows(source);
-            case "Android":
+            case Tokens.ANDROID:
                 return new Android(source);
             case "iPad":
             case "iPhone":
@@ -42,9 +43,9 @@ public abstract class OperatingSystem {
 
     private static OperatingSystem fallback(final TokenizedUserAgent source) {
         for (final StringToken t : source.getStringTokens()) {
-            if (t.getValue().contains("Android")) {
+            if (t.getValue().contains(Tokens.ANDROID)) {
                 return new Android(source);
-            } else if (t.getValue().contains("Windows")) {
+            } else if (t.getValue().contains(Tokens.WINDOWS)) {
                 return new Windows(source);
             }
         }

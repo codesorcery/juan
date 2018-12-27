@@ -2,16 +2,17 @@ package com.github.codesorcery.juan.token;
 
 import java.util.StringJoiner;
 
-public class VersionedToken extends StringToken {
+public class VersionedToken {
+    private final String value;
     private final String version;
 
-    public VersionedToken(final String value, final String  version) {
-        super(value);
+    VersionedToken(final String value, final String  version) {
+        this.value = value.trim();
         this.version = version.trim();
     }
 
-    public static VersionedToken empty() {
-        return new VersionedToken("", "");
+    public String getValue() {
+        return value;
     }
 
     public String getVersion() {

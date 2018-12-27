@@ -1,6 +1,5 @@
 package com.github.codesorcery.juan.os;
 
-import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
@@ -52,7 +51,7 @@ public abstract class OperatingSystem {
     }
 
     private static OperatingSystem linuxBasedOs(final TokenizedUserAgent source) {
-        for (final StringToken t : source.getSystemTokens()) {
+        for (final VersionedToken t : source.getSystemTokens()) {
             if (t.getValue().equals(Tokens.ANDROID)) {
                 return new Android(source);
             }

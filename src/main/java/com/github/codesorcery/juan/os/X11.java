@@ -1,6 +1,5 @@
 package com.github.codesorcery.juan.os;
 
-import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.OsTypes;
@@ -27,7 +26,7 @@ public class X11 extends OperatingSystem {
     }
 
     private static OsInfo extractOsName(final TokenizedUserAgent source) {
-        for (final StringToken t : source.getSystemTokens()) {
+        for (final VersionedToken t : source.getSystemTokens()) {
             for (final String s : OS_NAMES) {
                 if (t.getValue().contains(s)) {
                     return mapOsName(s, source);
@@ -52,7 +51,7 @@ public class X11 extends OperatingSystem {
                 return new OsInfo("Linux (" + t.getValue() + ")", t.getVersion());
             }
         }
-        for (final StringToken t : source.getSystemTokens()) {
+        for (final VersionedToken t : source.getSystemTokens()) {
             if (LINUX_DISTRBUTIONS.contains(t.getValue())) {
                 return new OsInfo("Linux (" + t.getValue() + ")", "");
             }

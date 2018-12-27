@@ -1,7 +1,7 @@
 package com.github.codesorcery.juan.device;
 
-import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
+import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 
 import java.io.BufferedReader;
@@ -39,7 +39,7 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
        if (!isAndroid(tokenizedUserAgent)) {
            return Optional.empty();
        }
-       for (final StringToken token : tokenizedUserAgent.getSystemTokens()) {
+       for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
            String value = token.getValue();
            if (!value.startsWith(Tokens.ANDROID) && !value.equals(Tokens.LINUX)) {
                final int tokenPos = token.getValue().indexOf("Build");
@@ -56,7 +56,7 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
    }
 
    private boolean isAndroid(final TokenizedUserAgent tokenizedUserAgent) {
-       for (final StringToken token : tokenizedUserAgent.getSystemTokens()) {
+       for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
            if (token.getValue().startsWith(Tokens.LINUX)) {
                return true;
            }

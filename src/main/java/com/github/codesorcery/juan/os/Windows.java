@@ -13,7 +13,7 @@ public class Windows extends OperatingSystem {
 
     private static String extractOsVersion(final TokenizedUserAgent source) {
         for (final VersionedToken t : source.getSystemTokens()) {
-            if (t.getValue().contains("NT")) {
+            if (t.getValue().equals("Windows NT")) {
                 return mapOsVersion(t.getVersion());
             }
         }

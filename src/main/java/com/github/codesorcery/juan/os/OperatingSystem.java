@@ -35,8 +35,8 @@ public abstract class OperatingSystem {
         switch (systemIdentifier) {
             case Tokens.WINDOWS:
                 return new Windows(source);
-            case Tokens.ANDROID:
-                return new Android(source);
+            case Tokens.LINUX:
+                return linuxBasedOs(source);
             case "iPad":
             case "iPhone":
                 return new IOS(source);
@@ -47,16 +47,14 @@ public abstract class OperatingSystem {
             case "Mobile":
                 return new Mobile(source);
             default:
-                return fallback(source);
+                return new UnknownOS();
         }
     }
 
-    private static OperatingSystem fallback(final TokenizedUserAgent source) {
+    private static OperatingSystem linuxBasedOs(final TokenizedUserAgent source) {
         for (final StringToken t : source.getSystemTokens()) {
-            if (t.getValue().contains(Tokens.ANDROID)) {
+            if (t.getValue().equals(Tokens.ANDROID)) {
                 return new Android(source);
-            } else if (t.getValue().contains(Tokens.WINDOWS)) {
-                return new Windows(source);
             }
         }
         return new UnknownOS();

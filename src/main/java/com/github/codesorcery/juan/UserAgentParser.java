@@ -19,7 +19,7 @@ public class UserAgentParser {
                 .forUserAgentString(userAgentString);
         final Agent agent = Agent.fromUserAgent(tokenizedUserAgent);
         final OperatingSystem os = OperatingSystem.fromUserAgent(tokenizedUserAgent);
-        final DeviceInfo device = deviceLookup.getDeviceInfo(os.getDeviceId())
+        final DeviceInfo device = deviceLookup.getDeviceInfo(tokenizedUserAgent)
                 .orElse(DeviceInfo.empty());
         return new ParsedUserAgent(agent, os, device);
     }

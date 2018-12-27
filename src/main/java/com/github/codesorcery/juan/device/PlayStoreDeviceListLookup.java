@@ -1,5 +1,9 @@
 package com.github.codesorcery.juan.device;
 
+import com.github.codesorcery.juan.token.StringToken;
+import com.github.codesorcery.juan.token.TokenizedUserAgent;
+import com.github.codesorcery.juan.util.Tokens;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,13 +34,34 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
       }
    }
 
-   public Optional<DeviceInfo> getDeviceInfo(final String deviceId) {
-       final DeviceListEntry entry = deviceList.get(deviceId);
-       if (entry != null) {
-           return Optional.of(new DeviceInfo(entry.vendor, entry.name));
-       } else {
+    @Override
+   public Optional<DeviceInfo> getDeviceInfo(final TokenizedUserAgent tokenizedUserAgent) {
+       if (!isAndroid(tokenizedUserAgent)) {
            return Optional.empty();
        }
+       for (final StringToken token : tokenizedUserAgent.getSystemTokens()) {
+           String value = token.getValue();
+           if (!value.startsWith(Tokens.ANDROID) && !value.equals(Tokens.LINUX)) {
+               final int tokenPos = token.getValue().indexOf("Build");
+               if (tokenPos > -1) {
+                   value = token.getValue().substring(0, tokenPos).trim();
+               }
+               final DeviceListEntry entry = deviceList.get(value);
+               if (entry != null) {
+                   return Optional.of(new DeviceInfo(entry.vendor, entry.name));
+               }
+           }
+       }
+       return Optional.empty();
+   }
+
+   private boolean isAndroid(final TokenizedUserAgent tokenizedUserAgent) {
+       for (final StringToken token : tokenizedUserAgent.getSystemTokens()) {
+           if (token.getValue().startsWith(Tokens.LINUX)) {
+               return true;
+           }
+       }
+       return false;
    }
 
    private static class DeviceListEntry {

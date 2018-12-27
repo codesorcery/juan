@@ -8,8 +8,7 @@ import com.github.codesorcery.juan.util.Vendors;
 public class Windows extends OperatingSystem {
 
     Windows(final TokenizedUserAgent source) {
-        super(Vendors.MICROSOFT, "Windows", extractOsVersion(source),
-                OsTypes.DESKTOP, "");
+        super(Vendors.MICROSOFT, "Windows", extractOsVersion(source), OsTypes.DESKTOP);
     }
 
     private static String extractOsVersion(final TokenizedUserAgent source) {

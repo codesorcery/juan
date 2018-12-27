@@ -23,8 +23,7 @@ public class X11 extends OperatingSystem {
     }
 
     private X11(final OsInfo extractedInfo) {
-        super("", extractedInfo.name, extractedInfo.version,
-                OsTypes.DESKTOP, "");
+        super("", extractedInfo.name, extractedInfo.version, OsTypes.DESKTOP);
     }
 
     private static OsInfo extractOsName(final TokenizedUserAgent source) {

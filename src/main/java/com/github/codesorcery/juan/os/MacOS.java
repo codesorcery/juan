@@ -8,8 +8,7 @@ import com.github.codesorcery.juan.util.Vendors;
 public class MacOS extends OperatingSystem {
 
     MacOS(final TokenizedUserAgent source) {
-        super(Vendors.APPLE, "macOS", extractOsVersion(source),
-                OsTypes.DESKTOP, "");
+        super(Vendors.APPLE, "macOS", extractOsVersion(source), OsTypes.DESKTOP);
     }
 
     private static String extractOsVersion(final TokenizedUserAgent source) {

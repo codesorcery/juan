@@ -1,5 +1,7 @@
 package com.github.codesorcery.juan.device;
 
+import com.github.codesorcery.juan.token.TokenizedUserAgent;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +13,10 @@ public class CombinedDeviceLookup implements DeviceLookup {
         this.deviceLists = Arrays.asList(deviceLists);
     }
 
-    public Optional<DeviceInfo> getDeviceInfo(final String deviceId) {
+    @Override
+    public Optional<DeviceInfo> getDeviceInfo(final TokenizedUserAgent tokenizedUserAgent) {
         for (final DeviceLookup lookup : deviceLists) {
-            final Optional<DeviceInfo> deviceInfo = lookup.getDeviceInfo(deviceId);
+            final Optional<DeviceInfo> deviceInfo = lookup.getDeviceInfo(tokenizedUserAgent);
             if (deviceInfo.isPresent()) {
                 return deviceInfo;
             }

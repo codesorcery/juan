@@ -14,8 +14,7 @@ public class Mobile extends OperatingSystem {
     }
 
     private Mobile(final VersionedToken osInfo) {
-        super("", osInfo.getValue(), osInfo.getVersion(),
-                OsTypes.MOBILE, "");
+        super("", osInfo.getValue(), osInfo.getVersion(), OsTypes.MOBILE);
     }
 
     private static VersionedToken extractOsInfo(final TokenizedUserAgent source) {

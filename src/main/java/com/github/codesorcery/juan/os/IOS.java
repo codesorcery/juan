@@ -6,9 +6,8 @@ import com.github.codesorcery.juan.util.OsTypes;
 import com.github.codesorcery.juan.util.Vendors;
 
 public class IOS extends OperatingSystem {
-    IOS(final String systemIdentifier, final TokenizedUserAgent source) {
-        super(Vendors.APPLE, "iOS", extractOsVersion(source),
-                OsTypes.MOBILE, systemIdentifier);
+    IOS(final TokenizedUserAgent source) {
+        super(Vendors.APPLE, "iOS", extractOsVersion(source), OsTypes.MOBILE);
     }
 
     private static String extractOsVersion(final TokenizedUserAgent source) {

@@ -13,18 +13,15 @@ public abstract class OperatingSystem {
     private final String name;
     private final String version;
     private final String type;
-    private final String deviceId;
 
     protected OperatingSystem(final String vendor,
                               final String name,
                               final String version,
-                              final String type,
-                              final String deviceId) {
+                              final String type) {
         this.vendor = vendor;
         this.name = name;
         this.version = version;
         this.type = type;
-        this.deviceId = deviceId;
     }
 
     public static OperatingSystem fromUserAgent(final TokenizedUserAgent source) {
@@ -42,7 +39,7 @@ public abstract class OperatingSystem {
                 return new Android(source);
             case "iPad":
             case "iPhone":
-                return new IOS(systemIdentifier, source);
+                return new IOS(source);
             case "Macintosh":
                 return new MacOS(source);
             case "X11":
@@ -81,10 +78,6 @@ public abstract class OperatingSystem {
         return type;
     }
 
-    public String getDeviceId() {
-        return deviceId;
-    }
-
     @Override
     public String toString() {
         return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
@@ -92,7 +85,6 @@ public abstract class OperatingSystem {
                 .add("name='" + name + "'")
                 .add("version='" + version + "'")
                 .add("type='" + type + "'")
-                .add("deviceId='" + deviceId + "'")
                 .toString();
     }
 }

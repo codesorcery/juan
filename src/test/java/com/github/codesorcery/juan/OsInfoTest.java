@@ -4,8 +4,6 @@ import com.github.codesorcery.juan.os.OperatingSystem;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class OsInfoTest {
 
     @Test
@@ -15,7 +13,6 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "Google", "Android", "7.0", "Mobile");
-        assertEquals("SM-G892A", os.getDeviceId());
     }
 
     @Test
@@ -25,7 +22,6 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
         
         Validators.validateOS(os, "Google", "Android", "6.0", "Mobile");
-        assertEquals(os.getDeviceId(), "HTC One X10");
     }
 
     @Test
@@ -35,7 +31,6 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "Google", "Android", "4.4.3", "Mobile");
-        assertEquals("KFTHWI", os.getDeviceId());
     }
 
     @Test

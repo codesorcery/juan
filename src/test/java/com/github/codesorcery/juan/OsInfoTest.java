@@ -15,6 +15,14 @@ public class OsInfoTest {
     }
 
     @Test
+    public void randomString() {
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("Mozilla/5.0 (foo; bar) foobar/1.0 [foo/2.0; bar/3.0]");
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "", "", "");
+    }
+
+    @Test
     public void samsungGalaxyS8() {
         final String input = "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -42,6 +50,15 @@ public class OsInfoTest {
     }
 
     @Test
+    public void unknownLinuxBased() {
+        final String input = "Mozilla/5.0 (Linux; foobar)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "", "", "");
+    }
+
+    @Test
     public void iPhoneX() {
         final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -57,6 +74,15 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "Microsoft", "Windows", "10", "Desktop");
+    }
+
+    @Test
+    public void unknownWithCompatibleToken() {
+        final String input = "Mozilla/4.0 (compatible; foobar)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "", "", "");
     }
 
     @Test

@@ -15,6 +15,14 @@ public class BrowserInfoTest {
     }
 
     @Test
+    public void randomString() {
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("Mozilla/5.0 (foo; bar) foobar/1.0 [foo/2.0; bar/3.0]");
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent, "", "", "");
+    }
+
+    @Test
     public void firefoxIOS() {
         final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) FxiOS/7.5b3349 Mobile/14F89 Safari/603.2.4";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);

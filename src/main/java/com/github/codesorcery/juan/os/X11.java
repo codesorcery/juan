@@ -2,7 +2,6 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
-import com.github.codesorcery.juan.util.OsTypes;
 import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.Arrays;
@@ -22,7 +21,7 @@ public class X11 extends OperatingSystem {
     }
 
     private X11(final OsInfo extractedInfo) {
-        super("", extractedInfo.name, extractedInfo.version, OsTypes.DESKTOP);
+        super("", extractedInfo.name, extractedInfo.version, OsType.DESKTOP);
     }
 
     private static OsInfo extractOsName(final TokenizedUserAgent source) {

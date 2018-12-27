@@ -11,12 +11,12 @@ public abstract class OperatingSystem {
     private final String vendor;
     private final String name;
     private final String version;
-    private final String type;
+    private final OsType type;
 
     protected OperatingSystem(final String vendor,
                               final String name,
                               final String version,
-                              final String type) {
+                              final OsType type) {
         this.vendor = vendor;
         this.name = name;
         this.version = version;
@@ -83,7 +83,7 @@ public abstract class OperatingSystem {
     }
 
     public String getType() {
-        return type;
+        return type.toString();
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
-import com.github.codesorcery.juan.util.OsTypes;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
@@ -15,7 +14,7 @@ public class Mobile extends OperatingSystem {
     }
 
     private Mobile(final OsInfo osInfo) {
-        super(osInfo.vendor, osInfo.name, osInfo.version, OsTypes.MOBILE);
+        super(osInfo.vendor, osInfo.name, osInfo.version, OsType.MOBILE);
     }
 
     private static OsInfo extractOsInfo(final TokenizedUserAgent source) {

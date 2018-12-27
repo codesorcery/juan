@@ -2,14 +2,13 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
-import com.github.codesorcery.juan.util.OsTypes;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
 public class Windows extends OperatingSystem {
 
     Windows(final TokenizedUserAgent source) {
-        super(Vendors.MICROSOFT, "Windows", extractOsVersion(source), OsTypes.DESKTOP);
+        super(Vendors.MICROSOFT, "Windows", extractOsVersion(source), OsType.DESKTOP);
     }
 
     private static String extractOsVersion(final TokenizedUserAgent source) {

@@ -120,7 +120,7 @@ public class OsInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
-        Validators.validateOS(os, "", "KaiOS", "2.0", "Mobile");
+        Validators.validateOS(os, "KaiOS Technologies Inc.", "KaiOS", "2.0", "Mobile");
     }
 
     @Test
@@ -129,6 +129,15 @@ public class OsInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
-        Validators.validateOS(os, "", "Firefox OS", "18.1", "Mobile");
+        Validators.validateOS(os, "Mozilla", "Firefox OS", "18.1", "Mobile");
+    }
+
+    @Test
+    public void nokiaLumia640WindowsPhone() {
+        final String input = "Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; Microsoft; Lumia 640 LTE) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows Phone", "8.1", "Mobile");
     }
 }

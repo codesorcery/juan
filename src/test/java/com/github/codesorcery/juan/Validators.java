@@ -23,10 +23,10 @@ class Validators {
                            final String vendor, final String name, final String version,
                            final String type) {
         assertAll("os",
-                () -> assertEquals(vendor, os.getOsVendor()),
-                () -> assertEquals(name, os.getOsName()),
-                () -> assertEquals(version, os.getOsVersion()),
-                () -> assertEquals(type, os.getOsType())
+                () -> assertEquals(vendor, os.getVendor()),
+                () -> assertEquals(name, os.getName()),
+                () -> assertEquals(version, os.getVersion()),
+                () -> assertEquals(type, os.getType())
         );
     }
 

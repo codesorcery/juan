@@ -70,19 +70,19 @@ public abstract class OperatingSystem {
         return new UnknownOS();
     }
 
-    public String getOsVendor() {
+    public String getVendor() {
         return vendor;
     }
 
-    public String getOsName() {
+    public String getName() {
         return name;
     }
 
-    public String getOsVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public String getOsType() {
+    public String getType() {
         return type;
     }
 

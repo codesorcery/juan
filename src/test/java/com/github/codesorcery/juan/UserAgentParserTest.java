@@ -22,10 +22,10 @@ public class UserAgentParserTest {
                 () -> assertEquals(result.agent().getVersion(), "60.0.3112.107")
         );
         assertAll("os",
-                () -> assertEquals(result.os().getOsVendor(), "Google"),
-                () -> assertEquals(result.os().getOsName(), "Android"),
-                () -> assertEquals(result.os().getOsVersion(), "7.0"),
-                () -> assertEquals(result.os().getOsType(), "Mobile")
+                () -> assertEquals(result.os().getVendor(), "Google"),
+                () -> assertEquals(result.os().getName(), "Android"),
+                () -> assertEquals(result.os().getVersion(), "7.0"),
+                () -> assertEquals(result.os().getType(), "Mobile")
         );
         assertAll("device",
                 () -> assertEquals(result.device().getVendor(), ""),
@@ -48,10 +48,10 @@ public class UserAgentParserTest {
                 () -> assertEquals(result.agent().getVersion(), "60.0.3112.107")
         );
         assertAll("os",
-                () -> assertEquals(result.os().getOsVendor(), "Google"),
-                () -> assertEquals(result.os().getOsName(), "Android"),
-                () -> assertEquals(result.os().getOsVersion(), "7.0"),
-                () -> assertEquals(result.os().getOsType(), "Mobile")
+                () -> assertEquals(result.os().getVendor(), "Google"),
+                () -> assertEquals(result.os().getName(), "Android"),
+                () -> assertEquals(result.os().getVersion(), "7.0"),
+                () -> assertEquals(result.os().getType(), "Mobile")
         );
         assertAll("device",
                 () -> assertEquals(result.device().getVendor(), "Samsung"),

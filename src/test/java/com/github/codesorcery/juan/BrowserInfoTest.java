@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 public class BrowserInfoTest {
 
     @Test
+    public void emptyString() {
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("");
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent, "", "", "");
+    }
+
+    @Test
     public void firefoxIOS() {
         final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) FxiOS/7.5b3349 Mobile/14F89 Safari/603.2.4";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -175,6 +183,15 @@ public class BrowserInfoTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent, "Google", "Android Browser", "4.0");
+    }
+
+    @Test
+    public void chromeAndroid() {
+        final String input = "Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent, "Google", "Chrome Mobile", "63.0.3239.83");
     }
 
     @Test

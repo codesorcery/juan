@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeviceInfoTest {
@@ -18,6 +19,13 @@ public class DeviceInfoTest {
                 .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"));
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
                  new DirectlyIdentifiableDeviceLookup());
+    }
+
+    @Test
+    public void emptyString() {
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("");
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertFalse(deviceInfo.isPresent());
     }
 
     @Test

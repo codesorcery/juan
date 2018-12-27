@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 public class OsInfoTest {
 
     @Test
+    public void emptyString() {
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("");
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "", "", "");
+    }
+
+    @Test
     public void samsungGalaxyS8() {
         final String input = "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -52,12 +60,57 @@ public class OsInfoTest {
     }
 
     @Test
+    public void windows200InternetExplorer() {
+        final String input = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "2000", "Desktop");
+    }
+
+    @Test
+    public void windowsXPInternetExplorer() {
+        final String input = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "XP", "Desktop");
+    }
+
+    @Test
+    public void windowsVistaInternetExplorer() {
+        final String input = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "Vista", "Desktop");
+    }
+
+    @Test
     public void windows7Chrome() {
         final String input = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "Microsoft", "Windows", "7", "Desktop");
+    }
+
+    @Test
+    public void windows8Chrome() {
+        final String input = "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "8", "Desktop");
+    }
+
+    @Test
+    public void windows8_1Chrome() {
+        final String input = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "8.1", "Desktop");
     }
 
     @Test

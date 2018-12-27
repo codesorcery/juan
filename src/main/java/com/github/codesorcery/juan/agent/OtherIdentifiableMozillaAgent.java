@@ -14,6 +14,7 @@ public enum OtherIdentifiableMozillaAgent {
     CHROME(Vendors.GOOGLE, "Chrome", tokenList ->
             tokenList.contains(Tokens.APPLE_WEBKIT)
                     && tokenList.contains(Tokens.CHROME)
+                    && !tokenList.contains(Tokens.MOBILE_SAFARI)
                     && !tokenList.contains(Tokens.EDGE)
                     && !tokenList.contains(Tokens.GECKO),
             Tokens.CHROME

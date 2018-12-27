@@ -3,6 +3,7 @@ package com.github.codesorcery.juan.os;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.OsTypes;
+import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
 public class Windows extends OperatingSystem {
@@ -13,7 +14,7 @@ public class Windows extends OperatingSystem {
 
     private static String extractOsVersion(final TokenizedUserAgent source) {
         for (final VersionedToken t : source.getSystemTokens()) {
-            if (t.getValue().equals("Windows NT")) {
+            if (t.getValue().equals(Tokens.WINDOWS)) {
                 return mapOsVersion(t.getVersion());
             }
         }

@@ -45,6 +45,8 @@ public abstract class OperatingSystem {
                 return new X11(source);
             case "Mobile":
                 return new Mobile(source);
+            case "compatible":
+                return compatibleOs(source);
             default:
                 return new UnknownOS();
         }
@@ -54,6 +56,15 @@ public abstract class OperatingSystem {
         for (final VersionedToken t : source.getSystemTokens()) {
             if (t.getValue().equals(Tokens.ANDROID)) {
                 return new Android(source);
+            }
+        }
+        return new UnknownOS();
+    }
+
+    private static OperatingSystem compatibleOs(final TokenizedUserAgent source) {
+        for (final VersionedToken t : source.getSystemTokens()) {
+            if (t.getValue().equals(Tokens.WINDOWS)) {
+                return new Windows(source);
             }
         }
         return new UnknownOS();

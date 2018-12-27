@@ -17,7 +17,7 @@ public class DeviceInfoTest {
         final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
                 .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"));
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
-                new SimpleAppleLookup(), new DirectlyIdentifiableDeviceLookup());
+                 new DirectlyIdentifiableDeviceLookup());
     }
 
     @Test
@@ -81,6 +81,24 @@ public class DeviceInfoTest {
         final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
         assertTrue(deviceInfo.isPresent());
         Validators.validateDeviceInfo(deviceInfo.get(), "Apple", "iPhone");
+    }
+
+    @Test
+    public void appleiPod() {
+        final String input = "Mozilla/5.0 (iPod; U; CPU iPhone OS 3_1_3 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Mobile/7E18";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Apple", "iPod");
+    }
+
+    @Test
+    public void appleiPodTouch() {
+        final String input = "Mozilla/5.0 (iPod touch; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.0 Mobile/14F89 Safari/602.1";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Apple", "iPod Touch");
     }
 
     @Test

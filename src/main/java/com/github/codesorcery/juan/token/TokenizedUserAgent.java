@@ -1,10 +1,14 @@
 package com.github.codesorcery.juan.token;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class TokenizedUserAgent {
+    private static final List<String> MOZILLA_STYLE_PREFIXES =
+            Arrays.asList("Mozilla", "Dalvik", "Opera");
+
     private final String prefixValue;
     private final String prefixVersion;
     private final List<VersionedToken> systemTokens;
@@ -26,15 +30,13 @@ public class TokenizedUserAgent {
 
     public static TokenizedUserAgent forUserAgentString(final String userAgentString) {
         final int prefixLimiterPos = userAgentString.indexOf('/');
-        final int prefixEnd = prefixLimiterPos > -1 ? userAgentString.indexOf(' ', prefixLimiterPos) : -1;
         if (prefixLimiterPos > -1) {
+            final int prefixEnd = userAgentString.indexOf(' ', prefixLimiterPos);
             final String prefixValue = userAgentString.substring(0, prefixLimiterPos);
             final String prefixVersion = prefixEnd > -1
                     ? userAgentString.substring(prefixLimiterPos + 1, prefixEnd)
                     : userAgentString.substring(prefixLimiterPos + 1);
-            if (prefixValue.equals("Mozilla")
-                    || prefixValue.equals("Dalvik")
-                    || prefixValue.equals("Opera")) {
+            if (MOZILLA_STYLE_PREFIXES.contains(prefixValue)) {
                 final int systemOpen = userAgentString.indexOf('(');
                 final int systemClose = findMatchingClosingBracket(
                         systemOpen, userAgentString, '(', ')');
@@ -42,17 +44,19 @@ public class TokenizedUserAgent {
                 final int additionalClose = findMatchingClosingBracket(
                         additionalOpen, userAgentString, '[', ']');
                 if (systemClose > -1) {
+                    final String systemString =
+                            userAgentString.substring(systemOpen + 1, systemClose);
                     if (additionalOpen > -1 && additionalClose > -1) {
                         return new TokenizedUserAgent(
                                 prefixValue, prefixVersion,
-                                userAgentString.substring(systemOpen + 1, systemClose),
+                                systemString,
                                 userAgentString.substring(systemClose + 1, additionalOpen),
                                 userAgentString.substring(additionalOpen + 1, additionalClose)
                         );
                     } else {
                         return new TokenizedUserAgent(
                                 prefixValue, prefixVersion,
-                                userAgentString.substring(systemOpen + 1, systemClose),
+                                systemString,
                                 userAgentString.substring(systemClose + 1),
                                 ""
                         );

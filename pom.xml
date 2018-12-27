@@ -23,6 +23,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <junit-jupiter.version>5.3.2</junit-jupiter.version>
+        <hamcrest.version>2.1</hamcrest.version>
         <maven-surefire.version>2.22.1</maven-surefire.version>
     </properties>
 
@@ -38,6 +39,11 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
         </dependency>
     </dependencies>
 

@@ -5,6 +5,7 @@ import com.github.codesorcery.juan.token.VersionedToken;
 
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class Agent {
     private static final Map<String, DirectlyIdentifiableMozillaAgent>
@@ -65,5 +66,14 @@ public class Agent {
 
     public String getVersion() {
         return version;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+                .add("name='" + name + "'")
+                .add("vendor='" + vendor + "'")
+                .add("version='" + version + "'")
+                .toString();
     }
 }

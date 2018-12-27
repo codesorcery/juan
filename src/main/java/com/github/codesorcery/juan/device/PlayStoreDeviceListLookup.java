@@ -5,9 +5,9 @@ import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,8 +19,9 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
       this.deviceList = deviceList;
    }
 
-   public static PlayStoreDeviceListLookup fromCsvFile(final InputStream fileInputStream) throws IOException {
-      try (final BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream))) {
+   public static PlayStoreDeviceListLookup fromCsvFile(final InputStream fileInputStream,
+                                                       final Charset charset) {
+      try (final BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream, charset))) {
           final Map<String, DeviceListEntry> deviceList = br.lines()
                   .skip(1)
                   .map(line -> line.split(","))
@@ -31,6 +32,8 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
                           (a, b) -> a)
                   );
           return new PlayStoreDeviceListLookup(deviceList);
+      } catch (final Exception e) {
+          throw new InitializationException(e);
       }
    }
 
@@ -71,6 +74,12 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
        private DeviceListEntry(final String vendor, final String name) {
            this.vendor = vendor;
            this.name = name;
+       }
+   }
+
+   public static class InitializationException extends RuntimeException {
+       private InitializationException(final Exception cause) {
+           super("Failed to initialize device list", cause);
        }
    }
 }

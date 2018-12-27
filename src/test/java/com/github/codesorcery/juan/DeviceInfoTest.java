@@ -5,6 +5,7 @@ import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,7 +17,8 @@ public class DeviceInfoTest {
     public DeviceInfoTest() throws IOException {
         final ClassLoader classLoader = getClass().getClassLoader();
         final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
-                .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"));
+                .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"),
+                        Charset.defaultCharset());
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
                  new DirectlyIdentifiableDeviceLookup());
     }

@@ -1,12 +1,7 @@
 package com.github.codesorcery.juan;
 
-import com.github.codesorcery.juan.device.DirectlyIdentifiableDeviceLookup;
-import com.github.codesorcery.juan.device.PlayStoreDeviceListLookup;
-import com.github.codesorcery.juan.device.SimpleAmazonFireLookup;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -14,14 +9,10 @@ import static org.hamcrest.Matchers.*;
 public class ToStringFunctionTest {
     private final UserAgentParser userAgentParser;
 
-    public ToStringFunctionTest() throws IOException {
+    public ToStringFunctionTest() {
         final ClassLoader classLoader = getClass().getClassLoader();
-        final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
-                .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"));
-        userAgentParser = UserAgentParser.builder()
-                .withDeviceLookups(playStoreDeviceList, new SimpleAmazonFireLookup(),
-                        new DirectlyIdentifiableDeviceLookup())
-                .build();
+        userAgentParser = UserAgentParser.withPlayStoreDeviceList(
+                classLoader.getResourceAsStream("supported_devices_subset.csv"));
     }
 
     @Test

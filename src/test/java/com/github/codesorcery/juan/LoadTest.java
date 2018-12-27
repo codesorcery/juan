@@ -1,23 +1,16 @@
 package com.github.codesorcery.juan;
 
-import com.github.codesorcery.juan.device.DirectlyIdentifiableDeviceLookup;
-import com.github.codesorcery.juan.device.PlayStoreDeviceListLookup;
-import com.github.codesorcery.juan.device.SimpleAmazonFireLookup;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.stream.IntStream;
 
 public class LoadTest {
     private final UserAgentParser userAgentParser;
 
-    public LoadTest() throws IOException {
+    public LoadTest() {
         final ClassLoader classLoader = getClass().getClassLoader();
-        final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
-                .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"));
-        userAgentParser = UserAgentParser.builder()
-                .withDeviceLookups(playStoreDeviceList, new SimpleAmazonFireLookup(), new DirectlyIdentifiableDeviceLookup())
-                .build();
+        userAgentParser = UserAgentParser.withPlayStoreDeviceList(
+                classLoader.getResourceAsStream("supported_devices_subset.csv"));
     }
 
     @Test

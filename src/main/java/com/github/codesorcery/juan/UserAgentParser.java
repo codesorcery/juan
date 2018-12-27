@@ -5,7 +5,8 @@ import com.github.codesorcery.juan.device.*;
 import com.github.codesorcery.juan.os.OperatingSystem;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 
-import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.Charset;
 
 public class UserAgentParser {
@@ -15,14 +16,10 @@ public class UserAgentParser {
         deviceLookup = new CombinedDeviceLookup(deviceLookups);
     }
 
-    public static UserAgentParser withPlayStoreDeviceList(final InputStream inputStream) {
-        return withPlayStoreDeviceList(inputStream, Charset.defaultCharset());
-    }
-
-    public static UserAgentParser withPlayStoreDeviceList(final InputStream inputStream,
-                                                          final Charset charset) {
+    public static UserAgentParser withPlayStoreDeviceList(final URL location, final Charset charset)
+            throws IOException {
         return new UserAgentParser(
-                PlayStoreDeviceListLookup.fromCsvFile(inputStream, charset),
+                PlayStoreDeviceListLookup.fromCsvFile(location, charset),
                 new DirectlyIdentifiableDeviceLookup(),
                 new SimpleAmazonFireLookup()
         );

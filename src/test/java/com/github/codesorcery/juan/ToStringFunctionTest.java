@@ -3,16 +3,19 @@ package com.github.codesorcery.juan;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class ToStringFunctionTest {
     private final UserAgentParser userAgentParser;
 
-    public ToStringFunctionTest() {
+    public ToStringFunctionTest() throws IOException {
         final ClassLoader classLoader = getClass().getClassLoader();
         userAgentParser = UserAgentParser.withPlayStoreDeviceList(
-                classLoader.getResourceAsStream("supported_devices_subset.csv"));
+                classLoader.getResource("supported_devices_subset.csv"), Charset.forName("UTF-8"));
     }
 
     @Test

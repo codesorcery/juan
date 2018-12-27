@@ -1,12 +1,12 @@
 package com.github.codesorcery.juan;
 
-import com.github.codesorcery.juan.device.PlayStoreDeviceListLookup;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.charset.Charset;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserAgentParserTest {
     @Test
@@ -34,10 +34,10 @@ public class UserAgentParserTest {
     }
 
     @Test
-    public void withDeviceList() {
+    public void withDeviceList() throws IOException {
         final ClassLoader classLoader = getClass().getClassLoader();
         final UserAgentParser userAgentParser = UserAgentParser.withPlayStoreDeviceList(
-                classLoader.getResourceAsStream("supported_devices_subset.csv"));
+                classLoader.getResource("supported_devices_subset.csv"), Charset.forName("UTF-8"));
 
         final String input = "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36";
         final ParsedUserAgent result = userAgentParser.parse(input);
@@ -57,19 +57,5 @@ public class UserAgentParserTest {
                 () -> assertEquals(result.device().getVendor(), "Samsung"),
                 () -> assertEquals(result.device().getName(), "Galaxy S8 Active")
         );
-    }
-
-    @Test
-    public void initializeWithFailingInputStream() {
-        assertThrows(PlayStoreDeviceListLookup.InitializationException.class,
-                () ->UserAgentParser.withPlayStoreDeviceList(new FailingInputStream())
-        );
-    }
-
-    private static class FailingInputStream extends InputStream {
-        @Override
-        public int read() throws IOException {
-            throw new IOException("here2fail");
-        }
     }
 }

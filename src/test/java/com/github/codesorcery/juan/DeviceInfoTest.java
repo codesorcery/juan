@@ -17,8 +17,8 @@ public class DeviceInfoTest {
     public DeviceInfoTest() throws IOException {
         final ClassLoader classLoader = getClass().getClassLoader();
         final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
-                .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"),
-                        Charset.defaultCharset());
+                .fromCsvFile(classLoader.getResource("supported_devices_subset.csv"),
+                        Charset.forName("UTF-8"));
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
                  new DirectlyIdentifiableDeviceLookup());
     }

@@ -2,15 +2,17 @@ package com.github.codesorcery.juan;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.stream.IntStream;
 
 public class LoadTest {
     private final UserAgentParser userAgentParser;
 
-    public LoadTest() {
+    public LoadTest() throws IOException {
         final ClassLoader classLoader = getClass().getClassLoader();
         userAgentParser = UserAgentParser.withPlayStoreDeviceList(
-                classLoader.getResourceAsStream("supported_devices_subset.csv"));
+                classLoader.getResource("supported_devices_subset.csv"), Charset.forName("UTF-8"));
     }
 
     @Test

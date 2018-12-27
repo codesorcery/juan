@@ -2,6 +2,7 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
+import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public abstract class OperatingSystem {
     }
 
     public static OperatingSystem fromUserAgent(final TokenizedUserAgent source) {
-        final List<StringToken> tokens = source.getStringTokens();
+        final List<VersionedToken> tokens = source.getSystemTokens();
         final String systemIdentifier;
         if (tokens.isEmpty()) {
             return new UnknownOS();
@@ -54,7 +55,7 @@ public abstract class OperatingSystem {
     }
 
     private static OperatingSystem fallback(final TokenizedUserAgent source) {
-        for (final StringToken t : source.getStringTokens()) {
+        for (final StringToken t : source.getSystemTokens()) {
             if (t.getValue().contains(Tokens.ANDROID)) {
                 return new Android(source);
             } else if (t.getValue().contains(Tokens.WINDOWS)) {

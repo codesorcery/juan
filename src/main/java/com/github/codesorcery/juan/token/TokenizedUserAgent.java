@@ -7,17 +7,21 @@ import java.util.StringJoiner;
 public class TokenizedUserAgent {
     private final String prefixValue;
     private final String prefixVersion;
-    private final List<StringToken> stringTokens;
-    private final List<VersionedToken> versionedTokens;
+    private final List<VersionedToken> systemTokens;
+    private final List<VersionedToken> browserTokens;
+    private final List<VersionedToken> allTokens;
 
     private TokenizedUserAgent(final String prefixValue, final String prefixVersion,
                                final String systemInfoString, final String browserInfoString,
                                final String additionalInfoString) {
         this.prefixValue = prefixValue;
         this.prefixVersion = prefixVersion;
-        this.stringTokens = extractSystemInfo(systemInfoString);
-        this.versionedTokens = extractBrowserInfo(browserInfoString);
-        this.versionedTokens.addAll(extractAdditionalInfo(additionalInfoString));
+        this.systemTokens = extractSemicolonSeparated(systemInfoString);
+        browserTokens = extractBrowserInfo(browserInfoString);
+        browserTokens.addAll(extractSemicolonSeparated(additionalInfoString));
+        allTokens = new ArrayList<>();
+        allTokens.addAll(systemTokens);
+        allTokens.addAll(browserTokens);
     }
 
     public static TokenizedUserAgent forUserAgentString(final String userAgentString) {
@@ -91,44 +95,50 @@ public class TokenizedUserAgent {
         return charAtPos >= '0' && charAtPos <= '9';
     }
 
-    private static List<StringToken> extractSystemInfo(final String subString) {
-        final List<StringToken> result = new ArrayList<>();
+    private static List<VersionedToken> extractSemicolonSeparated(final String subString) {
+        final List<VersionedToken> result = new ArrayList<>();
+        int valueStart = 0;
         final int n = subString.length();
-        int start = 0;
         for (int i = 0; i < n; i++) {
             final char curChar = subString.charAt(i);
             if (curChar == ';') {
-                result.add(new StringToken(subString.substring(start, i)));
-                start = i + 1;
+                result.add(extractToken(subString.substring(valueStart, i)));
+                valueStart = i + 1;
             }
         }
-        if (start < n) {
-            result.add(new StringToken(subString.substring(start, n)));
+        if (valueStart != n) {
+            result.add(extractToken(subString.substring(valueStart)));
         }
         return result;
     }
 
-    private static List<VersionedToken> extractAdditionalInfo(final String subString) {
-        final List<VersionedToken> result = new ArrayList<>();
-        int valueStart = 0;
-        int valueEnd = -1;
-        int versionStart = -1;
-        final int n = subString.length();
-        for (int i = 0; i < n; i++) {
-            final char curChar = subString.charAt(i);
-            if (curChar == '/' && i + 1 < n) {
-                valueEnd = i;
-                versionStart = i + 1;
-            } else if ((curChar == ';' || i + 1 == n) && valueEnd >= 0 && versionStart >= 0) {
-                final String value = subString.substring(valueStart, valueEnd);
-                final String version = subString.substring(versionStart, curChar == ';' ? i : i + 1);
-                result.add(new VersionedToken(value, version));
-                valueStart = i + 1;
-                valueEnd = -1;
-                versionStart = -1;
-            }
+    private static final VersionExtractor VERSION_EXTRACTOR = VersionExtractor.forLimiter('.', '_');
+
+    private static VersionedToken extractToken(final String tokenString) {
+        final int n = tokenString.length();
+        int separatorPos = tokenString.lastIndexOf('/');
+        if (separatorPos > 0 && separatorPos < n - 1) {
+            return new VersionedToken(
+                    tokenString.substring(0, separatorPos),
+                    tokenString.substring(separatorPos + 1)
+            );
         }
-        return result;
+        separatorPos = tokenString.lastIndexOf(':');
+        if (separatorPos > 0 && separatorPos < n - 1) {
+            return new VersionedToken(
+                    tokenString.substring(0, separatorPos),
+                    tokenString.substring(separatorPos + 1)
+            );
+        }
+        final VersionExtractor.ExtractionResult extractionResult =
+                VERSION_EXTRACTOR.extract(tokenString);
+        if (extractionResult.getPos() > -1) {
+            return new VersionedToken(
+                    tokenString.substring(0, extractionResult.getPos()),
+                    extractionResult.getValue()
+            );
+        }
+        return new VersionedToken(tokenString, "");
     }
 
     public String getPrefixValue() {
@@ -139,12 +149,16 @@ public class TokenizedUserAgent {
         return prefixVersion;
     }
 
-    public List<StringToken> getStringTokens() {
-        return stringTokens;
+    public List<VersionedToken> getSystemTokens() {
+        return systemTokens;
     }
 
-    public List<VersionedToken> getVersionedTokens() {
-        return versionedTokens;
+    public List<VersionedToken> getBrowserTokens() {
+        return browserTokens;
+    }
+
+    public List<VersionedToken> getAllTokens() {
+        return allTokens;
     }
 
     @Override
@@ -152,8 +166,8 @@ public class TokenizedUserAgent {
         return new StringJoiner(", ", TokenizedUserAgent.class.getSimpleName() + "[", "]")
                 .add("prefixValue='" + prefixValue + "'")
                 .add("prefixVersion='" + prefixVersion + "'")
-                .add("stringTokens=" + stringTokens)
-                .add("versionedTokens=" + versionedTokens)
+                .add("systemTokens=" + systemTokens)
+                .add("browserTokens=" + browserTokens)
                 .toString();
     }
 }

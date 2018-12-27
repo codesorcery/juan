@@ -1,6 +1,5 @@
 package com.github.codesorcery.juan.agent;
 
-import com.github.codesorcery.juan.token.StringToken;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
@@ -29,9 +28,13 @@ public enum OtherIdentifiableMozillaAgent {
                 && tokenList.contains(Tokens.VERSION)
                 && !tokenList.contains(Tokens.MOBILE)
                 && !tokenList.contains(Tokens.CHROME)
-                && !tokenList.contains(Tokens.FIREFOX),
-            tokenizedUA -> !containsStartingWith(tokenizedUA.getStringTokens(), Tokens.ANDROID),
+                && !tokenList.contains(Tokens.FIREFOX)
+                && !containsStartingWith(tokenList, Tokens.ANDROID),
             Tokens.VERSION
+    ),
+    INTERNET_EXPLORER(Vendors.MICROSOFT, "Internet Explorer", tokenList ->
+            tokenList.contains("Trident"),
+            "rv"
     ),
     EDGE(Vendors.MICROSOFT, "Edge", tokenList ->
             tokenList.contains(Tokens.EDGE)
@@ -61,14 +64,13 @@ public enum OtherIdentifiableMozillaAgent {
             tokenList.contains(Tokens.APPLE_WEBKIT)
                     && tokenList.contains(Tokens.VERSION)
                     && !tokenList.contains(Tokens.CHROME)
-                    && !tokenList.contains(Tokens.FIREFOX),
-            tokenizedUA -> containsStartingWith(tokenizedUA.getStringTokens(), Tokens.ANDROID),
+                    && !tokenList.contains(Tokens.FIREFOX)
+                    && containsStartingWith(tokenList, Tokens.ANDROID),
             Tokens.VERSION
     ),
 ;
 
     private final Predicate<List<String>> predicate;
-    private final Predicate<TokenizedUserAgent> additionalPredicate;
     private final String vendor;
     private final String name;
     private final String versionSource;
@@ -77,27 +79,18 @@ public enum OtherIdentifiableMozillaAgent {
                                   final String name,
                                   final Predicate<List<String>> predicate,
                                   final String versionSource) {
-        this(vendor, name, predicate, x -> true, versionSource);
-    }
-
-    OtherIdentifiableMozillaAgent(final String vendor,
-                                  final String name,
-                                  final Predicate<List<String>> predicate,
-                                  final Predicate<TokenizedUserAgent> additionalPredicate,
-                                  final String versionSource) {
         this.vendor = vendor;
         this.name = name;
         this.predicate = predicate;
-        this.additionalPredicate = additionalPredicate;
         this.versionSource = versionSource;
     }
 
     boolean matches(final TokenizedUserAgent source) {
         final List<String> tokenList = new ArrayList<>();
-        for (final VersionedToken token : source.getVersionedTokens()) {
+        for (final VersionedToken token : source.getAllTokens()) {
             tokenList.add(token.getValue());
         }
-        return predicate.test(tokenList) && additionalPredicate.test(source);
+        return predicate.test(tokenList);
     }
 
     String getVendor() {
@@ -113,10 +106,10 @@ public enum OtherIdentifiableMozillaAgent {
     }
 
     /* Utility functions */
-    private static boolean containsStartingWith(final List<StringToken> tokenList,
+    private static boolean containsStartingWith(final List<String> tokenList,
                                                 final String value) {
-        for (final StringToken token : tokenList) {
-            if (token.getValue().startsWith(value)) {
+        for (final String token : tokenList) {
+            if (token.startsWith(value)) {
                 return true;
             }
         }

@@ -20,7 +20,7 @@ public class Mobile extends OperatingSystem {
 
     private static VersionedToken extractOsInfo(final TokenizedUserAgent source) {
         final List<String> tokenValues = new ArrayList<>();
-        for (final VersionedToken token : source.getVersionedTokens()) {
+        for (final VersionedToken token : source.getBrowserTokens()) {
             tokenValues.add(token.getValue());
         }
         if (tokenValues.contains("KAIOS")) {
@@ -33,7 +33,7 @@ public class Mobile extends OperatingSystem {
     }
 
     private static String extractVersion(final TokenizedUserAgent source, final String value) {
-        for (final VersionedToken t : source.getVersionedTokens()) {
+        for (final VersionedToken t : source.getBrowserTokens()) {
             if (t.getValue().equals(value)) {
                 return t.getVersion();
             }

@@ -28,7 +28,7 @@ public class X11 extends OperatingSystem {
     }
 
     private static OsInfo extractOsName(final TokenizedUserAgent source) {
-        for (final StringToken t : source.getStringTokens()) {
+        for (final StringToken t : source.getSystemTokens()) {
             for (final String s : OS_NAMES) {
                 if (t.getValue().contains(s)) {
                     return mapOsName(s, source);
@@ -48,12 +48,12 @@ public class X11 extends OperatingSystem {
     }
 
     private static OsInfo extractLinuxDistribution(final TokenizedUserAgent source) {
-        for (final VersionedToken t : source.getVersionedTokens()) {
+        for (final VersionedToken t : source.getBrowserTokens()) {
             if (LINUX_DISTRBUTIONS.contains(t.getValue())) {
                 return new OsInfo("Linux (" + t.getValue() + ")", t.getVersion());
             }
         }
-        for (final StringToken t : source.getStringTokens()) {
+        for (final StringToken t : source.getSystemTokens()) {
             if (LINUX_DISTRBUTIONS.contains(t.getValue())) {
                 return new OsInfo("Linux (" + t.getValue() + ")", "");
             }

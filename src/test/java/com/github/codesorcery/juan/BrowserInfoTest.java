@@ -213,4 +213,13 @@ public class BrowserInfoTest {
         Validators.validateAgent(agent, "Microsoft", "Bing Search App", "6.7.25183495");
     }
 
+    @Test
+    public void internetExplorerWindows10() {
+        final String input = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent, "Microsoft", "Internet Explorer", "11.0");
+    }
+
 }

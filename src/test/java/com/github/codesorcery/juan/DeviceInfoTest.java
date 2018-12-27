@@ -17,7 +17,7 @@ public class DeviceInfoTest {
         final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
                 .fromCsvFile(classLoader.getResourceAsStream("supported_devices_subset.csv"));
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
-                new SimpleAppleLookup());
+                new SimpleAppleLookup(), new DirectlyIdentifiableDeviceLookup());
     }
 
     @Test
@@ -81,5 +81,86 @@ public class DeviceInfoTest {
         final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
         assertTrue(deviceInfo.isPresent());
         Validators.validateDeviceInfo(deviceInfo.get(), "Apple", "iPhone");
+    }
+
+    @Test
+    public void playStation4() {
+        final String input = "Mozilla/5.0 (PlayStation 4 5.01) AppleWebKit/601.2 (KHTML, like Gecko)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Sony", "PlayStation 4");
+    }
+
+    @Test
+    public void playStation3() {
+        final String input = "Mozilla/5.0 (PLAYSTATION 3 4.76) AppleWebKit/531.22.8 (KHTML, like Gecko)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Sony", "PlayStation 3");
+    }
+
+    @Test
+    public void playStationVita() {
+        final String input = "Mozilla/5.0 (PlayStation Vita 3.65) AppleWebKit/537.73 (KHTML, like Gecko) Silk/3.2";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Sony", "PlayStation Vita");
+    }
+
+    @Test
+    public void playStationPortable() {
+        final String input = "Mozilla/4.0 (PSP (PlayStation Portable); 2.00)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Sony", "PlayStation Portable");
+    }
+
+    @Test
+    public void nintendoWiiU() {
+        final String input = "Mozilla/5.0 (Nintendo WiiU) AppleWebKit/536.30 (KHTML, like Gecko) NX/3.0.4.2.12 NintendoBrowser/4.3.1.11264.EU";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Nintendo", "WiiU");
+    }
+
+    @Test
+    public void nintendoDSi() {
+        final String input = "Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Nintendo", "DSi");
+    }
+
+    @Test
+    public void nintendo3DS() {
+        final String input = "Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7630.US";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Nintendo", "3DS");
+    }
+
+    @Test
+    public void nintendo3DSNew() {
+        final String input = "Mozilla/5.0 (New Nintendo 3DS like iPhone) AppleWebKit/536.30 (KHTML, like Gecko) NX/3.0.0.5.20 Mobile NintendoBrowser/1.9.10160.EU";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Nintendo", "3DS");
+    }
+
+    @Test
+    public void nintendoSwitch() {
+        final String input = "Mozilla/5.0 (Nintendo Switch; WifiWebAuthApplet) AppleWebKit/601.6 (KHTML, like Gecko) NF/4.0.0.9.3 NintendoBrowser/5.1.0.16958";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Nintendo", "Switch");
     }
 }

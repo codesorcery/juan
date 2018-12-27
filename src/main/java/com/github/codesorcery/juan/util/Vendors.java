@@ -9,4 +9,6 @@ public class Vendors {
     public static final String MOZILLA = "Mozilla";
     public static final String OPERA = "Opera";
     public static final String AMAZON = "Amazon";
+    public static final String NINTENDO = "Nintendo";
+    public static final String SONY = "Sony";
 }

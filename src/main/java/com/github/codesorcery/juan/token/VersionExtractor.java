@@ -19,16 +19,13 @@ class VersionExtractor {
         boolean currentValid = true;
         for (int i = versionedString.length() - 1; i >= 0; i--) {
             final char c = versionedString.charAt(i);
-            if (currentValid && ((c >= '0' && c <= '9') || limiters.contains(c))) {
+            if (currentValid && isPartOfVersionNumber(c)) {
                 if (end == -1) {
                     end = i;
                 }
             } else if (c == ' '){
-                if (currentValid) {
-                    return new ExtractionResult(i + 1,
-                            versionedString.substring(i + 1, end + 1)
-                                    .replace('_', '.')
-                    );
+                if (currentValid && end > -1) {
+                    return getResult(versionedString, i + 1, end + 1);
                 }
                 currentValid = true;
             } else {
@@ -37,13 +34,21 @@ class VersionExtractor {
             }
         }
         if (end > -1) {
-            return new ExtractionResult(0,
-                    versionedString.substring(0, end + 1)
-                            .replace('_', '.')
-            );
+            return getResult(versionedString, 0, end + 1);
         } else {
             return new ExtractionResult(-1, "");
         }
+    }
+
+    private boolean isPartOfVersionNumber(final char c) {
+        return (c >= '0' && c <= '9') || limiters.contains(c);
+    }
+
+    private ExtractionResult getResult(final String string,
+                                       final int start, final int end) {
+        return new ExtractionResult(start, string.substring(start, end)
+                .replace('_', '.'));
+
     }
 
     static class ExtractionResult {

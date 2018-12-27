@@ -36,9 +36,11 @@ public class TokenizedUserAgent {
                     || prefixValue.equals("Dalvik")
                     || prefixValue.equals("Opera")) {
                 final int systemOpen = userAgentString.indexOf('(');
-                final int systemClose = userAgentString.indexOf(')', systemOpen);
+                final int systemClose = findMatchingClosingBracket(
+                        systemOpen, userAgentString, '(', ')');
                 final int additionalOpen = userAgentString.indexOf('[', systemClose);
-                final int additionalClose = userAgentString.indexOf(']', additionalOpen);
+                final int additionalClose = findMatchingClosingBracket(
+                        additionalOpen, userAgentString, '[', ']');
                 if (systemClose > -1) {
                     if (additionalOpen > -1 && additionalClose > -1) {
                         return new TokenizedUserAgent(
@@ -63,6 +65,29 @@ public class TokenizedUserAgent {
         }
         return new TokenizedUserAgent("", "", "",
                 userAgentString, "");
+    }
+
+    private static int findMatchingClosingBracket(final int pos,
+                                                  final String string,
+                                                  final char opening,
+                                                  final char closing) {
+        if (pos == -1) {
+            return -1;
+        }
+        int open = 0;
+        for (int i = pos + 1; i < string.length(); i++) {
+            final char curChar = string.charAt(i);
+            if (curChar == opening) {
+                open ++;
+            } else if (curChar == closing) {
+                if (open == 0) {
+                    return i;
+                } else {
+                    open --;
+                }
+            }
+        }
+        return -1;
     }
 
     private static List<VersionedToken> extractBrowserInfo(final String subString) {

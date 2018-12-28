@@ -17,13 +17,14 @@ public class UserAgentParserExample {
     private final UserAgentParser userAgentParser;
     
     public UserAgentParserExample() throws IOException {
+        // To detect the device name and vendor for Android devices, we use Google's device list:
         URL deviceList =
                 new URL("http://storage.googleapis.com/play_public/supported_devices.csv");
-        UserAgentParser userAgentParser =
+        userAgentParser =
                 UserAgentParser.withPlayStoreDeviceList(deviceList, Charset.forName("UTF-16"));
         
         // If you do not need Android device info, you can use the parser without the device list:
-        // UserAgentParser userAgentParser = UserAgentParser.withoutPlayStoreDeviceList();
+        // userAgentParser = UserAgentParser.withoutPlayStoreDeviceList();
     }
     
     public void parsingExample() {

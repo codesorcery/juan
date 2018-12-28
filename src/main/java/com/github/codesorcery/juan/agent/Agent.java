@@ -34,18 +34,18 @@ public class Agent {
         for (final VersionedToken token : source.getBrowserTokens()) {
             final DirectlyIdentifiableMozillaAgent agent = DIRECTLY_IDENTIFIABLE_BROWSERS_MAP.get(token.getValue());
             if (agent != null) {
-                return new Agent(agent.getName(), agent.getVendor(), token.getVersion(), agent.getType());
+                return new Agent(agent.name, agent.vendor, token.getVersion(), agent.type);
             }
         }
         for (final OtherIdentifiableMozillaAgent agent : OTHER_IDENTIFIABLE_BROWSERS_LIST) {
             if (agent.matches(source)) {
-                return new Agent(agent.getName(), agent.getVendor(),
-                        getVersion(source.getAllTokens(), agent.getVersionSource()), agent.getType());
+                return new Agent(agent.name, agent.vendor,
+                        getVersion(source.getAllTokens(), agent.versionSource), agent.type);
             }
         }
         final NonMozillaAgent agent = NON_MOZILLA_AGENT_MAP.get(source.getPrefixValue());
         if (agent != null) {
-            return new Agent(agent.getName(), agent.getVendor(), source.getPrefixVersion(), agent.getType());
+            return new Agent(agent.name, agent.vendor, source.getPrefixVersion(), agent.type);
         }
         return EMPTY;
     }

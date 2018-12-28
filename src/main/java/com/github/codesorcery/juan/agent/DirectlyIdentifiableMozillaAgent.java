@@ -58,9 +58,9 @@ enum DirectlyIdentifiableMozillaAgent {
    ;
 
    private final String identifier;
-   private final String vendor;
-   private final String name;
-   private final AgentType type;
+   final String vendor;
+   final String name;
+   final AgentType type;
 
    DirectlyIdentifiableMozillaAgent(final String identifier, final String vendor, final String name,
                                     final AgentType type) {
@@ -68,18 +68,6 @@ enum DirectlyIdentifiableMozillaAgent {
       this.vendor = vendor;
       this.name = name;
       this.type = type;
-   }
-
-   String getVendor() {
-      return vendor;
-   }
-
-   String getName() {
-      return name;
-   }
-
-   AgentType getType() {
-      return type;
    }
 
    static Map<String, DirectlyIdentifiableMozillaAgent> valuesAsMap() {

@@ -44,9 +44,9 @@ public enum NonMozillaAgent {
     ;
 
     private final String identifier;
-    private final String vendor;
-    private final String name;
-    private final AgentType type;
+    final String vendor;
+    final String name;
+    final AgentType type;
 
     NonMozillaAgent(final String identifier, final String vendor, final String name,
                     final AgentType type) {
@@ -54,18 +54,6 @@ public enum NonMozillaAgent {
         this.vendor = vendor;
         this.name = name;
         this.type = type;
-    }
-
-    String getVendor() {
-        return vendor;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    AgentType getType() {
-        return type;
     }
 
     static Map<String, NonMozillaAgent> valuesAsMap() {

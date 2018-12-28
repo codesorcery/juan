@@ -4,7 +4,6 @@ import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -80,10 +79,10 @@ public enum OtherIdentifiableMozillaAgent {
 ;
 
     private final Predicate<List<String>> predicate;
-    private final String vendor;
-    private final String name;
-    private final String versionSource;
-    private final AgentType type;
+    final String vendor;
+    final String name;
+    final String versionSource;
+    final AgentType type;
 
     OtherIdentifiableMozillaAgent(final String vendor,
                                   final String name,
@@ -106,23 +105,7 @@ public enum OtherIdentifiableMozillaAgent {
         return predicate.test(tokenList);
     }
 
-    String getVendor() {
-        return vendor;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    String getVersionSource() {
-        return versionSource;
-    }
-
-    AgentType getType() {
-        return type;
-    }
-
     static List<OtherIdentifiableMozillaAgent> valuesAsList() {
-        return new ArrayList<>(Arrays.asList(OtherIdentifiableMozillaAgent.values()));
+        return Arrays.asList(OtherIdentifiableMozillaAgent.values());
     }
 }

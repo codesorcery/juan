@@ -15,34 +15,37 @@ public class Agent {
     private static final Map<String, NonMozillaAgent>
             NON_MOZILLA_AGENT_MAP = NonMozillaAgent.valuesAsMap();
 
-    private static final Agent EMPTY = new Agent("", "", "");
+    private static final Agent EMPTY = new Agent("", "", "", AgentType.UNKNOWN);
 
     private final String name;
     private final String vendor;
     private final String version;
+    private final AgentType type;
 
-    private Agent(final String name, final String vendor, final String version) {
+    private Agent(final String name, final String vendor, final String version,
+                  final AgentType type) {
         this.name = name;
         this.vendor = vendor;
         this.version = version;
+        this.type = type;
     }
 
     public static Agent fromUserAgent(final TokenizedUserAgent source) {
         for (final VersionedToken token : source.getBrowserTokens()) {
             final DirectlyIdentifiableMozillaAgent agent = DIRECTLY_IDENTIFIABLE_BROWSERS_MAP.get(token.getValue());
             if (agent != null) {
-                return new Agent(agent.getName(), agent.getVendor(), token.getVersion());
+                return new Agent(agent.getName(), agent.getVendor(), token.getVersion(), agent.getType());
             }
         }
         for (final OtherIdentifiableMozillaAgent agent : OTHER_IDENTIFIABLE_BROWSERS_LIST) {
             if (agent.matches(source)) {
                 return new Agent(agent.getName(), agent.getVendor(),
-                        getVersion(source.getAllTokens(), agent.getVersionSource()));
+                        getVersion(source.getAllTokens(), agent.getVersionSource()), agent.getType());
             }
         }
         final NonMozillaAgent agent = NON_MOZILLA_AGENT_MAP.get(source.getPrefixValue());
         if (agent != null) {
-            return new Agent(agent.getName(), agent.getVendor(), source.getPrefixVersion());
+            return new Agent(agent.getName(), agent.getVendor(), source.getPrefixVersion(), agent.getType());
         }
         return EMPTY;
     }
@@ -68,12 +71,17 @@ public class Agent {
         return version;
     }
 
+    public String getType() {
+        return type.toString();
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
                 .add("name='" + name + "'")
                 .add("vendor='" + vendor + "'")
                 .add("version='" + version + "'")
+                .add("type='" + type + "'")
                 .toString();
     }
 }

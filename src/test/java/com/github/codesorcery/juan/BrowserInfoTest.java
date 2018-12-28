@@ -11,7 +11,7 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("");
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "", "", "");
+        Validators.validateAgent(agent, "", "", "", "");
     }
 
     @Test
@@ -19,7 +19,7 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString("Mozilla/5.0 (foo; bar) foobar/1.0 [foo/2.0; bar/3.0]");
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "", "", "");
+        Validators.validateAgent(agent, "", "", "", "");
     }
 
     @Test
@@ -28,7 +28,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Mozilla", "Firefox Mobile", "7.5b3349");
+        Validators.validateAgent(agent,
+                "Mozilla", "Firefox Mobile", "7.5b3349", "Browser (mobile)");
     }
 
     @Test
@@ -37,7 +38,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "UCWeb", "UC Browser", "11.3.8.976");
+        Validators.validateAgent(agent,
+                "UCWeb", "UC Browser", "11.3.8.976", "Browser (mobile)");
     }
 
     @Test
@@ -46,7 +48,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Samsung", "Samsung Browser", "5.4");
+        Validators.validateAgent(agent,
+                "Samsung", "Samsung Browser", "5.4", "Browser (mobile)");
     }
 
     @Test
@@ -55,7 +58,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Yandex", "Yandex Browser", "17.4.1.352.00");
+        Validators.validateAgent(agent,
+                "Yandex", "Yandex Browser", "17.4.1.352.00", "Browser (mobile)");
     }
 
     @Test
@@ -64,7 +68,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Microsoft", "Edge Mobile", "15.14977");
+        Validators.validateAgent(agent,
+                "Microsoft", "Edge Mobile", "15.14977", "Browser (mobile)");
     }
 
     @Test
@@ -73,7 +78,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Microsoft", "Edge", "12.246");
+        Validators.validateAgent(agent,
+                "Microsoft", "Edge", "12.246", "Browser (desktop)");
     }
 
     @Test
@@ -82,7 +88,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Mozilla", "Firefox", "15.0.1");
+        Validators.validateAgent(agent,
+                "Mozilla", "Firefox", "15.0.1", "Browser (desktop)");
     }
 
     @Test
@@ -91,7 +98,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Google", "Chrome", "47.0.2526.111");
+        Validators.validateAgent(agent,
+                "Google", "Chrome", "47.0.2526.111", "Browser (desktop)");
     }
 
     @Test
@@ -100,7 +108,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Apple", "Safari", "9.0.2");
+        Validators.validateAgent(agent,
+                "Apple", "Safari", "9.0.2", "Browser (desktop)");
     }
 
     @Test
@@ -109,7 +118,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Apple", "Safari Mobile", "7.0");
+        Validators.validateAgent(agent,
+                "Apple", "Safari Mobile", "7.0", "Browser (mobile)");
     }
 
     @Test
@@ -118,7 +128,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "KDE", "Konqueror", "5.28");
+        Validators.validateAgent(agent,
+                "KDE", "Konqueror", "5.28", "Browser (desktop)");
     }
 
     @Test
@@ -127,7 +138,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "SRWare", "Iron", "38.0.2150.0");
+        Validators.validateAgent(agent,
+                "SRWare", "Iron", "38.0.2150.0", "Browser (desktop)");
     }
 
     @Test
@@ -136,7 +148,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "SRWare", "Iron Mobile", "1.6.0");
+        Validators.validateAgent(agent,
+                "SRWare", "Iron Mobile", "1.6.0", "Browser (mobile)");
     }
 
     @Test
@@ -145,7 +158,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "GNOME Foundation", "GNOME Web", "2.30.6");
+        Validators.validateAgent(agent,
+                "GNOME Foundation", "GNOME Web", "2.30.6", "Browser (desktop)");
     }
 
     @Test
@@ -154,7 +168,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Amazon", "Silk", "47.1.79");
+        Validators.validateAgent(agent,
+                "Amazon", "Silk", "47.1.79", "Browser (mobile)");
     }
 
     @Test
@@ -163,7 +178,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Nintendo", "Nintendo Browser", "4.3.1.11264.US");
+        Validators.validateAgent(agent,
+                "Nintendo", "Nintendo Browser", "4.3.1.11264.US", "Browser");
     }
 
     @Test
@@ -172,7 +188,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Microsoft", "Edge Mobile", "13.10586");
+        Validators.validateAgent(agent,
+                "Microsoft", "Edge Mobile", "13.10586", "Browser (mobile)");
     }
 
     @Test
@@ -181,7 +198,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Google", "Android Browser", "4.0");
+        Validators.validateAgent(agent,
+                "Google", "Android Browser", "4.0", "Browser (mobile)");
     }
 
     @Test
@@ -190,7 +208,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Google", "Android Browser", "4.0");
+        Validators.validateAgent(agent,
+                "Google", "Android Browser", "4.0", "Browser (mobile)");
     }
 
     @Test
@@ -199,7 +218,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Google", "Chrome Mobile", "63.0.3239.83");
+        Validators.validateAgent(agent,
+                "Google", "Chrome Mobile", "63.0.3239.83", "Browser (mobile)");
     }
 
     @Test
@@ -208,7 +228,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Adobe", "Adobe AIR Runtime", "13.0");
+        Validators.validateAgent(agent,
+                "Adobe", "Adobe AIR Runtime", "13.0", "Library");
     }
 
     @Test
@@ -217,7 +238,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Facebook", "Facebook App", "28.0.0.20.16");
+        Validators.validateAgent(agent,
+                "Facebook", "Facebook App", "28.0.0.20.16", "Application (mobile)");
     }
 
     @Test
@@ -226,7 +248,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Facebook", "Facebook App", "6.0.1");
+        Validators.validateAgent(agent,
+                "Facebook", "Facebook App", "6.0.1", "Application (mobile)");
     }
 
     @Test
@@ -235,7 +258,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Microsoft", "Bing Search App", "6.7.25183495");
+        Validators.validateAgent(agent,
+                "Microsoft", "Bing Search App", "6.7.25183495", "Application (mobile)");
     }
 
     @Test
@@ -244,7 +268,8 @@ public class BrowserInfoTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Microsoft", "Internet Explorer", "11.0");
+        Validators.validateAgent(agent,
+                "Microsoft", "Internet Explorer", "11.0", "Browser (desktop)");
     }
 
 }

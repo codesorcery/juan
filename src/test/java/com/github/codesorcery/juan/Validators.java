@@ -11,11 +11,12 @@ class Validators {
     private Validators() {}
 
     static void validateAgent(final Agent agent,
-                              final String vendor, final String name, final String version) {
+                              final String vendor, final String name, final String version, final String type) {
         assertAll("agent",
                 () -> assertEquals(vendor, agent.getVendor()),
                 () -> assertEquals(name, agent.getName()),
-                () -> assertEquals(version, agent.getVersion())
+                () -> assertEquals(version, agent.getVersion()),
+                () -> assertEquals(type, agent.getType())
         );
     }
 

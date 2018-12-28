@@ -39,7 +39,7 @@ public class ToStringFunctionTest {
         final String toStringResult = parsedUserAgent.toString();
 
         assertThat(toStringResult, startsWith("ParsedUserAgent["));
-        assertThat(toStringResult, containsString("agent=Agent[name='Firefox Mobile', vendor='Mozilla', version='7.5b3349']"));
+        assertThat(toStringResult, containsString("agent=Agent[name='Firefox Mobile', vendor='Mozilla', version='7.5b3349', type='Browser (mobile)']"));
         assertThat(toStringResult, containsString("os=IOS[vendor='Apple', name='iOS', version='10.3.2', type='Mobile']"));
         assertThat(toStringResult, containsString("device=DeviceInfo[vendor='Apple', name='iPhone']"));
     }

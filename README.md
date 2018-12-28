@@ -33,8 +33,9 @@ public class UserAgentParserExample {
                 userAgentParser.parse(userAgentString);
         
         parsed.agent().getVendor(); // => Google
-        parsed.agent().getName(); // => Chrome
+        parsed.agent().getName(); // => Chrome Mobile
         parsed.agent().getVersion(); // => 60.0.3112.107
+        parsed.agent().getType(); // => Browser (mobile)
         
         parsed.os().getVendor(); // => Google
         parsed.os().getName(); // => Android

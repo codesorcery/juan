@@ -16,12 +16,14 @@ public enum OtherIdentifiableMozillaAgent {
                     && !tokenList.contains(Tokens.MOBILE_SAFARI)
                     && !tokenList.contains(Tokens.EDGE)
                     && !tokenList.contains(Tokens.GECKO),
-            Tokens.CHROME
+            Tokens.CHROME,
+            AgentType.DESKTOP_BROWSER
     ),
     FIREFOX(Vendors.MOZILLA, "Firefox", tokenList ->
             tokenList.contains(Tokens.GECKO)
                     && tokenList.contains(Tokens.FIREFOX),
-            Tokens.FIREFOX
+            Tokens.FIREFOX,
+            AgentType.DESKTOP_BROWSER
     ),
     SAFARI(Vendors.APPLE, "Safari", tokenList ->
             tokenList.contains(Tokens.SAFARI)
@@ -30,27 +32,32 @@ public enum OtherIdentifiableMozillaAgent {
                 && !tokenList.contains(Tokens.CHROME)
                 && !tokenList.contains(Tokens.FIREFOX)
                 && !tokenList.contains(Tokens.ANDROID),
-            Tokens.VERSION
+            Tokens.VERSION,
+            AgentType.DESKTOP_BROWSER
     ),
     INTERNET_EXPLORER(Vendors.MICROSOFT, "Internet Explorer", tokenList ->
             tokenList.contains("Trident"),
-            "rv"
+            "rv",
+            AgentType.DESKTOP_BROWSER
     ),
     EDGE(Vendors.MICROSOFT, "Edge", tokenList ->
             tokenList.contains(Tokens.EDGE)
                     && !tokenList.contains(Tokens.MOBILE_SAFARI),
-            Tokens.EDGE
+            Tokens.EDGE,
+            AgentType.DESKTOP_BROWSER
     ),
     EDGE_MOBILE(Vendors.MICROSOFT, "Edge Mobile", tokenList ->
             tokenList.contains(Tokens.EDGE)
                     && tokenList.contains(Tokens.MOBILE_SAFARI),
-            Tokens.EDGE
+            Tokens.EDGE,
+            AgentType.MOBILE_BROWSER
     ),
     CHROME_MOBILE(Vendors.GOOGLE, "Chrome Mobile", tokenList ->
             tokenList.contains(Tokens.CHROME)
                     && tokenList.contains(Tokens.MOBILE_SAFARI)
                     && !tokenList.contains(Tokens.EDGE),
-            Tokens.CHROME
+            Tokens.CHROME,
+            AgentType.MOBILE_BROWSER
     ),
     SAFARI_MOBILE(Vendors.APPLE, "Safari Mobile", tokenList ->
             tokenList.contains(Tokens.SAFARI)
@@ -58,7 +65,8 @@ public enum OtherIdentifiableMozillaAgent {
                     && tokenList.contains(Tokens.MOBILE)
                     && !tokenList.contains(Tokens.CHROME)
                     && !tokenList.contains(Tokens.FIREFOX),
-            Tokens.VERSION
+            Tokens.VERSION,
+            AgentType.MOBILE_BROWSER
     ),
     ANDROID_BROWSER(Vendors.GOOGLE, "Android Browser", tokenList ->
             tokenList.contains(Tokens.APPLE_WEBKIT)
@@ -66,7 +74,8 @@ public enum OtherIdentifiableMozillaAgent {
                     && tokenList.contains(Tokens.ANDROID)
                     && !tokenList.contains(Tokens.CHROME)
                     && !tokenList.contains(Tokens.FIREFOX),
-            Tokens.VERSION
+            Tokens.VERSION,
+            AgentType.MOBILE_BROWSER
     ),
 ;
 
@@ -74,15 +83,18 @@ public enum OtherIdentifiableMozillaAgent {
     private final String vendor;
     private final String name;
     private final String versionSource;
+    private final AgentType type;
 
     OtherIdentifiableMozillaAgent(final String vendor,
                                   final String name,
                                   final Predicate<List<String>> predicate,
-                                  final String versionSource) {
+                                  final String versionSource,
+                                  final AgentType type) {
         this.vendor = vendor;
         this.name = name;
         this.predicate = predicate;
         this.versionSource = versionSource;
+        this.type = type;
     }
 
     boolean matches(final TokenizedUserAgent source) {
@@ -104,6 +116,10 @@ public enum OtherIdentifiableMozillaAgent {
 
     String getVersionSource() {
         return versionSource;
+    }
+
+    AgentType getType() {
+        return type;
     }
 
     static List<OtherIdentifiableMozillaAgent> valuesAsList() {

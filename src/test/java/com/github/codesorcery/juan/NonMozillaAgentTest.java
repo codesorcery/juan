@@ -11,7 +11,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Microsoft", "Windows Live Mail", "7.0");
+        Validators.validateAgent(agent,
+                "Microsoft", "Windows Live Mail", "7.0", "Application (desktop)");
     }
 
     @Test
@@ -20,7 +21,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "haxx", "curl", "7.15.1");
+        Validators.validateAgent(agent,
+                "haxx", "curl", "7.15.1", "Application (command line)");
     }
 
     @Test
@@ -29,7 +31,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "FSF", "GNU Wget", "1.16");
+        Validators.validateAgent(agent,
+                "FSF", "GNU Wget", "1.16", "Application (command line)");
     }
 
     @Test
@@ -38,7 +41,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Apache Foundation", "Apache HttpClient", "4.1.3");
+        Validators.validateAgent(agent,
+                "Apache Foundation", "Apache HttpClient", "4.1.3", "Library");
     }
 
     @Test
@@ -47,7 +51,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Square", "OkHttp (Java library)", "2.5.0");
+        Validators.validateAgent(agent,
+                "Square", "OkHttp (Java library)", "2.5.0", "Library");
     }
 
     @Test
@@ -56,7 +61,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Kenneth Reitz", "requests (Python library)", "0.8.1");
+        Validators.validateAgent(agent,
+                "Kenneth Reitz", "requests (Python library)", "0.8.1", "Library");
     }
 
     @Test
@@ -65,7 +71,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Python Software Foundation", "urllib (Python libary)", "2.7");
+        Validators.validateAgent(agent,
+                "Python Software Foundation", "urllib (Python libary)", "2.7", "Library");
     }
 
     @Test
@@ -74,7 +81,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "Tatsuhiro Tsujikawa", "aria2", "1.23.0");
+        Validators.validateAgent(agent,
+                "Tatsuhiro Tsujikawa", "aria2", "1.23.0", "Application (command line)");
     }
 
     @Test
@@ -83,7 +91,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "W3C", "W3C Link Checker", "3.6.2.3");
+        Validators.validateAgent(agent,
+                "W3C", "W3C Link Checker", "3.6.2.3", "Validator");
     }
 
     @Test
@@ -92,7 +101,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "W3C", "W3C CSS Validator", "2.2.5");
+        Validators.validateAgent(agent,
+                "W3C", "W3C CSS Validator", "2.2.5", "Validator");
     }
 
     @Test
@@ -101,7 +111,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "W3C", "W3C Internationalization Checker", "1.0");
+        Validators.validateAgent(agent,
+                "W3C", "W3C Internationalization Checker", "1.0", "Validator");
     }
 
     @Test
@@ -110,7 +121,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "W3C", "Unicorn - W3C's Unified Validator", "1.0");
+        Validators.validateAgent(agent,
+                "W3C", "Unicorn - W3C's Unified Validator", "1.0", "Validator");
     }
 
     @Test
@@ -119,7 +131,8 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "W3C",  "W3C Validator", "1.654");
+        Validators.validateAgent(agent,
+                "W3C",  "W3C Validator", "1.654", "Validator");
     }
 
     @Test
@@ -128,6 +141,7 @@ public class NonMozillaAgentTest {
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Agent agent = Agent.fromUserAgent(ua);
 
-        Validators.validateAgent(agent, "VideoLAN team", "VLC Media Player", "2.2.6");
+        Validators.validateAgent(agent,
+                "VideoLAN team", "VLC Media Player", "2.2.6", "Media player");
     }
 }

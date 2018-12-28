@@ -1,7 +1,6 @@
 package com.github.codesorcery.juan.agent;
 
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
-import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
@@ -30,7 +29,7 @@ public enum OtherIdentifiableMozillaAgent {
                 && !tokenList.contains(Tokens.MOBILE)
                 && !tokenList.contains(Tokens.CHROME)
                 && !tokenList.contains(Tokens.FIREFOX)
-                && !containsStartingWith(tokenList, Tokens.ANDROID),
+                && !tokenList.contains(Tokens.ANDROID),
             Tokens.VERSION
     ),
     INTERNET_EXPLORER(Vendors.MICROSOFT, "Internet Explorer", tokenList ->
@@ -64,9 +63,9 @@ public enum OtherIdentifiableMozillaAgent {
     ANDROID_BROWSER(Vendors.GOOGLE, "Android Browser", tokenList ->
             tokenList.contains(Tokens.APPLE_WEBKIT)
                     && tokenList.contains(Tokens.VERSION)
+                    && tokenList.contains(Tokens.ANDROID)
                     && !tokenList.contains(Tokens.CHROME)
-                    && !tokenList.contains(Tokens.FIREFOX)
-                    && containsStartingWith(tokenList, Tokens.ANDROID),
+                    && !tokenList.contains(Tokens.FIREFOX),
             Tokens.VERSION
     ),
 ;
@@ -87,9 +86,10 @@ public enum OtherIdentifiableMozillaAgent {
     }
 
     boolean matches(final TokenizedUserAgent source) {
-        final List<String> tokenList = new ArrayList<>();
-        for (final VersionedToken token : source.getAllTokens()) {
-            tokenList.add(token.getValue());
+        final int n = source.getAllTokens().size();
+        final List<String> tokenList = Arrays.asList(new String[n]);
+        for (int i = 0; i < n; i++) {
+            tokenList.set(i, source.getAllTokens().get(i).getValue());
         }
         return predicate.test(tokenList);
     }
@@ -104,17 +104,6 @@ public enum OtherIdentifiableMozillaAgent {
 
     String getVersionSource() {
         return versionSource;
-    }
-
-    /* Utility functions */
-    private static boolean containsStartingWith(final List<String> tokenList,
-                                                final String value) {
-        for (final String token : tokenList) {
-            if (token.startsWith(value)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     static List<OtherIdentifiableMozillaAgent> valuesAsList() {

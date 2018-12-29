@@ -20,6 +20,7 @@ public enum DirectlyIdentifiableDevice {
     NINTENDO_3DS("Nintendo 3DS", Vendors.NINTENDO, "3DS"),
     NINTENDO_3DS_2("New Nintendo 3DS like iPhone", Vendors.NINTENDO, "3DS"),
     NINTENDO_SWITCH("Nintendo Switch", Vendors.NINTENDO, "Switch"),
+    BLACKBERRY_PLAYBOOK("PlayBook", Vendors.BLACKBERRY, "PlayBook"),
     ;
 
     private final String identifier;

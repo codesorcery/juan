@@ -38,6 +38,7 @@ enum DirectlyIdentifiableMozillaAgent {
    /* Mobile & Desktop */
    BRAVE("Brave", "Brave Software", "Brave", AgentType.BROWSER),
    /* Desktop */
+   SEAMONKEY("SeaMonkey", "Mozilla", "SeaMonkey", AgentType.DESKTOP_BROWSER),
    VIVALDI("Vivaldi", "Vivaldi Technologies", "Vivaldi", AgentType.DESKTOP_BROWSER),
    IRON("Iron", "SRWare", "Iron", AgentType.DESKTOP_BROWSER),
    SLEIPNIR("Sleipnir", "Fenrir", "Sleipnir", AgentType.DESKTOP_BROWSER),
@@ -45,10 +46,13 @@ enum DirectlyIdentifiableMozillaAgent {
    /* Linux */
    GNOME_WEB("Epiphany", "GNOME Foundation", "GNOME Web", AgentType.DESKTOP_BROWSER),
    KONQUEROR("Konqueror", "KDE", "Konqueror", AgentType.DESKTOP_BROWSER),
+   /* TV */
+   VIERA("Viera", "Panasonic", "VIERA TV Browser", AgentType.EMBEDDED_BROWSER),
    /* Other */
+   WEBOS_BROWSER("wOSBrowser", "HP", "WebOS Browser", AgentType.MOBILE_BROWSER),
    THUNDERBIRD("Thunderbird", "Mozilla", "Thunderbird", AgentType.DESKTOP_APPLICATION),
    KINDLE("Kindle", Vendors.APPLE, "Kindle Browser", AgentType.MOBILE_BROWSER),
-   NINTENDO_BROWSER("NintendoBrowser", "Nintendo", "Nintendo Browser", AgentType.BROWSER),
+   NINTENDO_BROWSER("NintendoBrowser", "Nintendo", "Nintendo Browser", AgentType.EMBEDDED_BROWSER),
    EVERNOTE_WINDOWS("Evernote Windows", "Evernote Corporation", "Evernote", AgentType.DESKTOP_APPLICATION),
    SAILFISH_BROWSER("SailfishBrowser", "Jolla", "Sailfish Browser", AgentType.MOBILE_BROWSER),
    KAIOS("KAIOS", "KaiOS Technologies", "KaiOS", AgentType.MOBILE_BROWSER),

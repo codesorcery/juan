@@ -158,6 +158,42 @@ public class OsInfoTest {
     }
 
     @Test
+    public void freeBSDChrome() {
+        final String input = "Mozilla/5.0 (X11; FreeBSD; U; Viera; en-IE) AppleWebKit/537.11 (KHTML, like Gecko) Viera/3.18.1 Chrome/23.0.1271.97 Safari/537.11";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "FreeBSD", "", "Desktop");
+    }
+
+    @Test
+    public void openBSDChrome() {
+        final String input = "Mozilla/5.0 (X11; OpenBSD amd64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "OpenBSD", "", "Desktop");
+    }
+
+    @Test
+    public void netBSDChrome() {
+        final String input = "Mozilla/5.0 (X11; NetBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "NetBSD", "", "Desktop");
+    }
+
+    @Test
+    public void dragonFlyBSDFirefox() {
+        final String input = "Mozilla/5.0 (X11; U; DragonFly i386; de; rv:1.9.1) Gecko/20090720 Firefox/3.5.1";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "", "DragonFly BSD", "", "Desktop");
+    }
+
+    @Test
     public void chromeBook() {
         final String input = "Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -218,5 +254,32 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "Microsoft", "Windows Phone", "8.1", "Mobile");
+    }
+
+    @Test
+    public void nokiaLumia535WindowsPhone() {
+        final String input = "Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; Microsoft; Lumia 535) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows Phone", "8.1", "Mobile");
+    }
+
+    @Test
+    public void hpWebOsTablet() {
+        final String input = "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.5; U; en-GB) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.83 Safari/534.6 TouchPad/1.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "HP", "WebOS", "3.0.5", "Mobile");
+    }
+
+    @Test
+    public void blackBerryPlayBookTablet() {
+        final String input = "Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.1.0; en-US) AppleWebKit/536.2+ (KHTML, like Gecko) Version/7.2.1.0 Safari/536.2+";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "BlackBerry", "RIM Tablet OS", "2.1.0", "Mobile");
     }
 }

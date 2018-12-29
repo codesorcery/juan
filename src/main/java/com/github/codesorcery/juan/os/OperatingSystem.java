@@ -6,6 +6,7 @@ import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Predicate;
 
 public abstract class OperatingSystem {
     private final String vendor;
@@ -47,6 +48,10 @@ public abstract class OperatingSystem {
                 return new Mobile(source);
             case "compatible":
                 return compatibleOs(source);
+            case "hp-tablet":
+                return new HPWebOs(source);
+            case "PlayBook":
+                return new RimTabletOs(source);
             default:
                 return new UnknownOS();
         }
@@ -63,11 +68,26 @@ public abstract class OperatingSystem {
 
     private static OperatingSystem compatibleOs(final TokenizedUserAgent source) {
         for (final VersionedToken t : source.getSystemTokens()) {
-            if (t.getValue().equals(Tokens.WINDOWS)) {
-                return new Windows(source);
+            switch (t.getValue()) {
+                case Tokens.WINDOWS:
+                    return new Windows(source);
+                case Tokens.WINDOWS_PHONE:
+                    return new Mobile(source);
+                default:
+                    // continue search
             }
         }
         return new UnknownOS();
+    }
+
+    protected static String extractOsVersion(final TokenizedUserAgent source,
+                                             final Predicate<VersionedToken> matcher) {
+        for (final VersionedToken t : source.getSystemTokens()) {
+            if (matcher.test(t)) {
+                return t.getVersion();
+            }
+        }
+        return "";
     }
 
     public String getVendor() {

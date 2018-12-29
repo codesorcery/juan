@@ -198,4 +198,13 @@ public class DeviceInfoTest {
         assertTrue(deviceInfo.isPresent());
         Validators.validateDeviceInfo(deviceInfo.get(), "Nintendo", "Switch");
     }
+
+    @Test
+    public void blackBerryPlayBookTablet() {
+        final String input = "Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.1.0; en-US) AppleWebKit/536.2+ (KHTML, like Gecko) Version/7.2.1.0 Safari/536.2+";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "BlackBerry", "PlayBook");
+    }
 }

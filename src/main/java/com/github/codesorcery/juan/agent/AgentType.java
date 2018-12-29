@@ -4,6 +4,7 @@ public enum AgentType {
     BROWSER("Browser"),
     MOBILE_BROWSER("Browser (mobile)"),
     DESKTOP_BROWSER("Browser (desktop)"),
+    EMBEDDED_BROWSER("Browser (embedded)"),
     MOBILE_APPLICATION("Application (mobile)"),
     DESKTOP_APPLICATION("Application (desktop)"),
     CLI_APPLICATION("Application (command line)"),
@@ -23,4 +24,5 @@ public enum AgentType {
     public String toString() {
         return value;
     }
+
 }

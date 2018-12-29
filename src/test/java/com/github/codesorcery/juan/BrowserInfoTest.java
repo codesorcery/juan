@@ -179,7 +179,7 @@ public class BrowserInfoTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Nintendo", "Nintendo Browser", "4.3.1.11264.US", "Browser");
+                "Nintendo", "Nintendo Browser", "4.3.1.11264.US", "Browser (embedded)");
     }
 
     @Test
@@ -270,6 +270,36 @@ public class BrowserInfoTest {
 
         Validators.validateAgent(agent,
                 "Microsoft", "Internet Explorer", "11.0", "Browser (desktop)");
+    }
+
+    @Test
+    public void vieraTV() {
+        final String input = "Mozilla/5.0 (X11; FreeBSD; U; Viera; en-IE) AppleWebKit/537.11 (KHTML, like Gecko) Viera/3.18.1 Chrome/23.0.1271.97 Safari/537.11";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Panasonic", "VIERA TV Browser", "3.18.1", "Browser (embedded)");
+    }
+
+    @Test
+    public void seaMonkeyFreeBSD() {
+        final String input = "Mozilla/5.0 (X11; OpenBSD i386; rv:43.0) Gecko/20100101 Firefox/43.0 SeaMonkey/2.40";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Mozilla", "SeaMonkey", "2.40", "Browser (desktop)");
+    }
+
+    @Test
+    public void webOsBrowser() {
+        final String input = "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.5; U; en-GB) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.83 Safari/534.6 TouchPad/1.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "HP", "WebOS Browser", "234.83", "Browser (mobile)");
     }
 
 }

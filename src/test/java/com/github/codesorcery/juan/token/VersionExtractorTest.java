@@ -10,8 +10,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("1.34.1");
-        assertEquals("1.34.1", result.getValue());
-        assertEquals(0, result.getPos());
+        assertEquals(0, result.getStart());
+        assertEquals(6, result.getEnd());
     }
 
     @Test
@@ -19,8 +19,7 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('_');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("1_34_1");
-        assertEquals("1.34.1", result.getValue());
-        assertEquals(0, result.getPos());
+        assertEquals(0, result.getStart());
     }
 
     @Test
@@ -28,8 +27,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("24");
-        assertEquals("24", result.getValue());
-        assertEquals(0, result.getPos());
+        assertEquals(0, result.getStart());
+        assertEquals(2, result.getEnd());
     }
 
     @Test
@@ -37,8 +36,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("foo 1.2.3");
-        assertEquals("1.2.3", result.getValue());
-        assertEquals(4, result.getPos());
+        assertEquals(4, result.getStart());
+        assertEquals(9, result.getEnd());
     }
 
     @Test
@@ -46,8 +45,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("1.2.3 bar");
-        assertEquals("1.2.3", result.getValue());
-        assertEquals(0, result.getPos());
+        assertEquals(0, result.getStart());
+        assertEquals(5, result.getEnd());
     }
 
     @Test
@@ -55,8 +54,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("foo12 1.2.3");
-        assertEquals("1.2.3", result.getValue());
-        assertEquals(6, result.getPos());
+        assertEquals(6, result.getStart());
+        assertEquals(11, result.getEnd());
     }
 
     @Test
@@ -64,8 +63,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("12foo 1.2.3");
-        assertEquals("1.2.3", result.getValue());
-        assertEquals(6, result.getPos());
+        assertEquals(6, result.getStart());
+        assertEquals(11, result.getEnd());
     }
 
     @Test
@@ -73,8 +72,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("1.2.3 foo12");
-        assertEquals("1.2.3", result.getValue());
-        assertEquals(0, result.getPos());
+        assertEquals(0, result.getStart());
+        assertEquals(5, result.getEnd());
     }
 
     @Test
@@ -82,8 +81,17 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("1.2.3 12foo");
-        assertEquals("1.2.3", result.getValue());
-        assertEquals(0, result.getPos());
+        assertEquals(0, result.getStart());
+        assertEquals(5, result.getEnd());
+    }
+
+    @Test
+    public void withPreAndPostfix() {
+        final VersionExtractor extractor = VersionExtractor.forLimiter('.');
+        final VersionExtractor.ExtractionResult result =
+                extractor.extract("bar 1.2.3 12foo");
+        assertEquals(4, result.getStart());
+        assertEquals(9, result.getEnd());
     }
 
     @Test
@@ -91,8 +99,8 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("bar 12foo");
-        assertEquals("", result.getValue());
-        assertEquals(-1, result.getPos());
+        assertEquals(-1, result.getStart());
+        assertEquals(-1, result.getEnd());
     }
 
     @Test
@@ -100,7 +108,7 @@ public class VersionExtractorTest {
         final VersionExtractor extractor = VersionExtractor.forLimiter('.');
         final VersionExtractor.ExtractionResult result =
                 extractor.extract("");
-        assertEquals("", result.getValue());
-        assertEquals(-1, result.getPos());
+        assertEquals(-1, result.getStart());
+        assertEquals(-1, result.getEnd());
     }
 }

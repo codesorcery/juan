@@ -25,7 +25,7 @@ class VersionExtractor {
                 }
             } else if (c == ' '){
                 if (currentValid && end > -1) {
-                    return getResult(versionedString, i + 1, end + 1);
+                    return getResult(i + 1, end + 1);
                 }
                 currentValid = true;
             } else {
@@ -34,9 +34,9 @@ class VersionExtractor {
             }
         }
         if (end > -1) {
-            return getResult(versionedString, 0, end + 1);
+            return getResult(0, end + 1);
         } else {
-            return new ExtractionResult(-1, "");
+            return new ExtractionResult(-1, -1);
         }
     }
 
@@ -44,28 +44,26 @@ class VersionExtractor {
         return (c >= '0' && c <= '9') || limiters.contains(c);
     }
 
-    private ExtractionResult getResult(final String string,
-                                       final int start, final int end) {
-        return new ExtractionResult(start, string.substring(start, end)
-                .replace('_', '.'));
+    private ExtractionResult getResult(final int start, final int end) {
+        return new ExtractionResult(start, end);
 
     }
 
     static class ExtractionResult {
-        private final int pos;
-        private final String value;
+        private final int start;
+        private final int end;
 
-        private ExtractionResult(final int pos, final String value) {
-            this.pos = pos;
-            this.value = value;
+        private ExtractionResult(final int start, final int end) {
+            this.start = start;
+            this.end = end;
         }
 
-        int getPos() {
-            return pos;
+        int getStart() {
+            return start;
         }
 
-        String getValue() {
-            return value;
+        int getEnd() {
+            return end;
         }
     }
 }

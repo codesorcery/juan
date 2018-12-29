@@ -21,14 +21,16 @@ public class UserAgentParser {
         return new UserAgentParser(
                 PlayStoreDeviceListLookup.fromCsvFile(location, charset),
                 new DirectlyIdentifiableDeviceLookup(),
-                new SimpleAmazonFireLookup()
+                new SimpleAmazonFireLookup(),
+                new WindowsPhoneDeviceLookup()
         );
     }
 
     public static UserAgentParser withoutPlayStoreDeviceList() {
         return new UserAgentParser(
                 new DirectlyIdentifiableDeviceLookup(),
-                new SimpleAmazonFireLookup()
+                new SimpleAmazonFireLookup(),
+                new WindowsPhoneDeviceLookup()
         );
     }
 

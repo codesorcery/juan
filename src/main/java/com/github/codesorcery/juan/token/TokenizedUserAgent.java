@@ -161,10 +161,10 @@ public class TokenizedUserAgent {
         }
         final VersionExtractor.ExtractionResult extractionResult =
                 VERSION_EXTRACTOR.extract(tokenString);
-        if (extractionResult.getPos() > -1) {
+        if (extractionResult.getStart() > -1) {
             return new VersionedToken(
-                    tokenString.substring(0, extractionResult.getPos()),
-                    extractionResult.getValue()
+                    tokenString.substring(0, extractionResult.getStart()),
+                    tokenString.substring(extractionResult.getStart()).replace('_', '.')
             );
         }
         return new VersionedToken(tokenString, "");

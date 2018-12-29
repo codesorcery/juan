@@ -8,7 +8,8 @@ public class IOS extends OperatingSystem {
         super(
                 Vendors.APPLE,
                 "iOS",
-                extractOsVersion(source, t -> t.getValue().contains("CPU")),
+                extractOsVersion(source, t -> t.getValue().contains("CPU"))
+                        .replace(" like Mac OS X", ""),
                 OsType.MOBILE
         );
     }

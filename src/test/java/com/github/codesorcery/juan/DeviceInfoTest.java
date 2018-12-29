@@ -20,7 +20,7 @@ public class DeviceInfoTest {
                 .fromCsvFile(classLoader.getResource("supported_devices_subset.csv"),
                         Charset.forName("UTF-8"));
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
-                 new DirectlyIdentifiableDeviceLookup());
+                 new DirectlyIdentifiableDeviceLookup(), new WindowsPhoneDeviceLookup());
     }
 
     @Test
@@ -206,5 +206,23 @@ public class DeviceInfoTest {
         final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
         assertTrue(deviceInfo.isPresent());
         Validators.validateDeviceInfo(deviceInfo.get(), "BlackBerry", "PlayBook");
+    }
+
+    @Test
+    public void microsoftLumia640WindowsPhone() {
+        final String input = "Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; Microsoft; Lumia 640 LTE) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Microsoft", "Lumia 640 LTE");
+    }
+
+    @Test
+    public void microsoftLumia535WindowsPhone() {
+        final String input = "Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; Microsoft; Lumia 535) like iPhone OS 7_0_3 Mac OS X AppleWebKit/537 (KHTML, like Gecko) Mobile Safari/537";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Microsoft", "Lumia 535");
     }
 }

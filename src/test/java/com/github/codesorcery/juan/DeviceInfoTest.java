@@ -19,7 +19,7 @@ public class DeviceInfoTest {
         final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
                 .fromCsvFile(classLoader.getResource("supported_devices_subset.csv"),
                         Charset.forName("UTF-8"));
-        deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
+        deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new AmazonFireDeviceLookup(),
                 new DirectlyIdentifiableDeviceLookup(), new WindowsPhoneDeviceLookup(),
                 new BlackBerryDeviceLookup());
     }
@@ -75,12 +75,21 @@ public class DeviceInfoTest {
     }
 
     @Test
-    public void kindleFireHDX7() {
+    public void kindleFire2013() {
         final String input = "Mozilla/5.0 (Linux; Android 4.4.3; KFTHWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/47.1.79 like Chrome/47.0.2526.80 Safari/537.36";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
         final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
         assertTrue(deviceInfo.isPresent());
-        Validators.validateDeviceInfo(deviceInfo.get(), "Amazon", "Kindle Fire Tablet");
+        Validators.validateDeviceInfo(deviceInfo.get(), "Amazon", "Kindle Fire HDX (2013)");
+    }
+
+    @Test
+    public void kindleTVGen2() {
+        final String input = "Mozilla/5.0 (Linux; Android 5.1.1; AFTT Build/LVY48F) AppleWebKit/537.36 (KHTML, like Gecko) Silk/64.2.6 like Chrome/64.0.3282.137 Safari/537.36 ";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Amazon", "Fire TV Stick (Gen 2)");
     }
 
     @Test

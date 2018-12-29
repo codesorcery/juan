@@ -4,8 +4,6 @@ import com.github.codesorcery.juan.agent.Agent;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
 
-import java.util.logging.Logger;
-
 public class BrowserInfoTest {
 
     @Test
@@ -278,7 +276,6 @@ public class BrowserInfoTest {
     public void vieraTV() {
         final String input = "Mozilla/5.0 (X11; FreeBSD; U; Viera; en-IE) AppleWebKit/537.11 (KHTML, like Gecko) Viera/3.18.1 Chrome/23.0.1271.97 Safari/537.11";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
-        Logger.getAnonymousLogger().info("ua: " + ua);
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,

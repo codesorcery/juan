@@ -20,7 +20,8 @@ public class DeviceInfoTest {
                 .fromCsvFile(classLoader.getResource("supported_devices_subset.csv"),
                         Charset.forName("UTF-8"));
         deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new SimpleAmazonFireLookup(),
-                 new DirectlyIdentifiableDeviceLookup(), new WindowsPhoneDeviceLookup());
+                new DirectlyIdentifiableDeviceLookup(), new WindowsPhoneDeviceLookup(),
+                new BlackBerryDeviceLookup());
     }
 
     @Test
@@ -224,5 +225,23 @@ public class DeviceInfoTest {
         final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
         assertTrue(deviceInfo.isPresent());
         Validators.validateDeviceInfo(deviceInfo.get(), "Microsoft", "Lumia 535");
+    }
+
+    @Test
+    public void blackBerry9720() {
+        final String input = "Mozilla/5.0 (BlackBerry; U; BlackBerry 9720; en) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.1.0.1121 Mobile Safari/534.11+";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "BlackBerry", "9720");
+    }
+
+    @Test
+    public void blackBerry8330() {
+        final String input = "BlackBerry8330/4.5.0.77 Profile/MIDP-2.0 Configuration/CLDC-1.1 VendorID/105";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "BlackBerry", "8330");
     }
 }

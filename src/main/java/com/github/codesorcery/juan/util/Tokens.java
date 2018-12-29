@@ -2,6 +2,7 @@ package com.github.codesorcery.juan.util;
 
 public class Tokens {
 
+
     private Tokens() {}
 
     public static final String FIREFOX = "Firefox";
@@ -18,4 +19,5 @@ public class Tokens {
     public static final String LINUX = "Linux";
     public static final String WINDOWS = "Windows NT";
     public static final String WINDOWS_PHONE = "Windows Phone";
+    public static final String BLACKBERRY = "BlackBerry";
 }

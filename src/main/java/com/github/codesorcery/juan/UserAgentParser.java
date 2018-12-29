@@ -22,7 +22,8 @@ public class UserAgentParser {
                 PlayStoreDeviceListLookup.fromCsvFile(location, charset),
                 new DirectlyIdentifiableDeviceLookup(),
                 new SimpleAmazonFireLookup(),
-                new WindowsPhoneDeviceLookup()
+                new WindowsPhoneDeviceLookup(),
+                new BlackBerryDeviceLookup()
         );
     }
 
@@ -30,7 +31,8 @@ public class UserAgentParser {
         return new UserAgentParser(
                 new DirectlyIdentifiableDeviceLookup(),
                 new SimpleAmazonFireLookup(),
-                new WindowsPhoneDeviceLookup()
+                new WindowsPhoneDeviceLookup(),
+                new BlackBerryDeviceLookup()
         );
     }
 

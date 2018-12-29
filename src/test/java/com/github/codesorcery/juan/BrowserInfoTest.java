@@ -305,4 +305,44 @@ public class BrowserInfoTest {
                 "HP", "WebOS Browser", "234.83", "Browser (mobile)");
     }
 
+    @Test
+    public void electron() {
+        final String input = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) nagi-test/1.0.0 Chrome/58.0.3029.110 Electron/1.7.10 Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Electron community", "Electron framework", "1.7.10", "Application (desktop)");
+    }
+
+    @Test
+    public void pinterestAndroid() {
+        final String input = "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFTT Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30 [Pinterest/Android]";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Pinterest", "Pinterest App", "Android", "Application (mobile)");
+    }
+
+    @Test
+    public void pinterestiOS() {
+        final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15G77 [Pinterest/iOS]";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Pinterest", "Pinterest App", "iOS", "Application (mobile)");
+    }
+
+    @Test
+    public void paleMoonBrowser() {
+        final String input = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.9) Gecko/20100101 Goanna/3.4 Firefox/52.9 PaleMoon/27.9.1";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "M.C. Straver", "PaleMoon Browser", "27.9.1", "Browser (desktop)");
+    }
+
 }

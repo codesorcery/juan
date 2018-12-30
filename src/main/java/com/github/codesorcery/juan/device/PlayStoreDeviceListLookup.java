@@ -50,7 +50,10 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
                }
                final DeviceListEntry entry = deviceList.get(value);
                if (entry != null) {
-                   return Optional.of(new DeviceInfo(entry.vendor, entry.name));
+                   return Optional.of(new DeviceInfo(
+                           entry.vendor,
+                           entry.name.isEmpty() ? value.replace('_', ' ') : entry.name
+                   ));
                }
            }
        }

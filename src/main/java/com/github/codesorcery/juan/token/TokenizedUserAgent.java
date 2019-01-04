@@ -107,6 +107,7 @@ public class TokenizedUserAgent {
                 versionStart = i + 1;
             } else if (curChar == ')') {
                 valueStart = i + 1;
+                valueEnd = -1;
             } else if ((curChar == ' ' || i + 1 == n) && valueEnd >= 0 && versionStart >= 0) {
                 final String value = subString.substring(valueStart, valueEnd);
                 final String version = subString.substring(versionStart, i + 1);

@@ -7,7 +7,6 @@ public class Tokens {
 
     public static final String FIREFOX = "Firefox";
     public static final String SAFARI = "Safari";
-    public static final String MOBILE_SAFARI = "Mobile Safari";
     public static final String CHROME = "Chrome";
     public static final String EDGE = "Edge";
     public static final String APPLE_WEBKIT = "AppleWebKit";

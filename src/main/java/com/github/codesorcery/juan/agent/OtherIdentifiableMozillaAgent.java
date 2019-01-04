@@ -12,7 +12,7 @@ public enum OtherIdentifiableMozillaAgent {
     CHROME(Vendors.GOOGLE, "Chrome", tokenList ->
             tokenList.contains(Tokens.APPLE_WEBKIT)
                     && tokenList.contains(Tokens.CHROME)
-                    && !tokenList.contains(Tokens.MOBILE_SAFARI)
+                    && !tokenList.contains(Tokens.MOBILE)
                     && !tokenList.contains(Tokens.EDGE)
                     && !tokenList.contains(Tokens.GECKO),
             Tokens.CHROME,
@@ -41,19 +41,19 @@ public enum OtherIdentifiableMozillaAgent {
     ),
     EDGE(Vendors.MICROSOFT, "Edge", tokenList ->
             tokenList.contains(Tokens.EDGE)
-                    && !tokenList.contains(Tokens.MOBILE_SAFARI),
+                    && !tokenList.contains(Tokens.MOBILE),
             Tokens.EDGE,
             AgentType.DESKTOP_BROWSER
     ),
     EDGE_MOBILE(Vendors.MICROSOFT, "Edge Mobile", tokenList ->
             tokenList.contains(Tokens.EDGE)
-                    && tokenList.contains(Tokens.MOBILE_SAFARI),
+                    && tokenList.contains(Tokens.MOBILE),
             Tokens.EDGE,
             AgentType.MOBILE_BROWSER
     ),
     CHROME_MOBILE(Vendors.GOOGLE, "Chrome Mobile", tokenList ->
             tokenList.contains(Tokens.CHROME)
-                    && tokenList.contains(Tokens.MOBILE_SAFARI)
+                    && tokenList.contains(Tokens.MOBILE)
                     && !tokenList.contains(Tokens.EDGE),
             Tokens.CHROME,
             AgentType.MOBILE_BROWSER
@@ -62,6 +62,7 @@ public enum OtherIdentifiableMozillaAgent {
             tokenList.contains(Tokens.SAFARI)
                     && tokenList.contains(Tokens.VERSION)
                     && tokenList.contains(Tokens.MOBILE)
+                    && !tokenList.contains(Tokens.ANDROID)
                     && !tokenList.contains(Tokens.CHROME)
                     && !tokenList.contains(Tokens.FIREFOX),
             Tokens.VERSION,

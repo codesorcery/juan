@@ -97,32 +97,55 @@ public class TokenizedUserAgent {
     private static List<VersionedToken> extractBrowserInfo(final String subString) {
         final List<VersionedToken> result = new ArrayList<>();
         int valueStart = 0;
-        int valueEnd = -1;
-        int versionStart = -1;
+        int separatorPos = -1;
         final int n = subString.length();
-        for (int i = 0; i < n; i++) {
+        int i = 0;
+        while (i < n){
             final char curChar = subString.charAt(i);
-            if (curChar == '/' && i + 1 < n && charIsNumber(subString, i + 1)) {
-                valueEnd = i;
-                versionStart = i + 1;
-            } else if (curChar == ')') {
+            if (curChar == '/') {
+                separatorPos = i;
+            } else if (curChar == '(') {
+                final int closing = findMatchingClosingBracket(i, subString, '(', ')');
+                if (closing != -1) {
+                    final String value = subString.substring(i, closing + 1);
+                    result.add(new VersionedToken(value, ""));
+                    i = closing;
+                    valueStart = i + 1;
+                    separatorPos = -1;
+                }
+            } else if (curChar == ' ' || i + 1 == n) {
+                if (separatorPos != -1) {
+                    final String value = subString.substring(valueStart, separatorPos);
+                    final String version = subString.substring(separatorPos + 1, i + 1);
+                    result.add(new VersionedToken(value, version));
+                } else if (i > valueStart) {
+                    final String value = subString.substring(valueStart, i);
+                    final String version = getNextTokenIfVersion(subString, i + 1);
+                    result.add(new VersionedToken(value, version));
+                    i += version.length();
+                }
+                separatorPos = -1;
                 valueStart = i + 1;
-                valueEnd = -1;
-            } else if ((curChar == ' ' || i + 1 == n) && valueEnd >= 0 && versionStart >= 0) {
-                final String value = subString.substring(valueStart, valueEnd);
-                final String version = subString.substring(versionStart, i + 1);
-                result.add(new VersionedToken(value, version));
-                valueStart = i + 1;
-                valueEnd = -1;
-                versionStart = -1;
             }
+            i += 1;
         }
         return result;
     }
 
-    private static boolean charIsNumber(final CharSequence string, final int position) {
-        final char charAtPos = string.charAt(position);
-        return charAtPos >= '0' && charAtPos <= '9';
+    private static String getNextTokenIfVersion(final String string, final int start) {
+        for (int i = start; i < string.length(); i++) {
+            final char curChar = string.charAt(i);
+            if (curChar == ' ') {
+                return string.substring(start, i);
+            } else if (!isPartOfVersionString(curChar)) {
+                return "";
+            }
+        }
+        return "";
+    }
+
+    private static boolean isPartOfVersionString(final char character) {
+        return character == '.' || (character >= '0' && character <= '9');
     }
 
     private static List<VersionedToken> extractSemicolonSeparated(final String subString) {

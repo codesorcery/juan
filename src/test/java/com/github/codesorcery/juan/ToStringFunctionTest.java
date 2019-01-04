@@ -28,7 +28,7 @@ public class ToStringFunctionTest {
         assertThat(toStringResult, containsString("prefixValue='Mozilla'"));
         assertThat(toStringResult, containsString("prefixVersion='5.0'"));
         assertThat(toStringResult, containsString("systemTokens=[VersionedToken[value='iPhone', version=''], VersionedToken[value='CPU iPhone OS', version='10.3.2 like Mac OS X']]"));
-        assertThat(toStringResult, containsString("browserTokens=[VersionedToken[value='AppleWebKit', version='603.2.4'], VersionedToken[value='FxiOS', version='7.5b3349'], VersionedToken[value='Mobile', version='14F89'], VersionedToken[value='Safari', version='603.2.4']]"));
+        assertThat(toStringResult, containsString("browserTokens=[VersionedToken[value='AppleWebKit', version='603.2.4'], VersionedToken[value='(KHTML, like Gecko)', version=''], VersionedToken[value='FxiOS', version='7.5b3349'], VersionedToken[value='Mobile', version='14F89'], VersionedToken[value='Safari', version='603.2.4']]"));
         assertThat(toStringResult, not(containsString("allTokens")));
     }
 

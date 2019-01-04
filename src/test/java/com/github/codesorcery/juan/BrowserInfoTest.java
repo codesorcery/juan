@@ -352,4 +352,14 @@ public class BrowserInfoTest {
                 "Google", "Google Search App", "43.0.185608249", "Application (mobile)");
     }
 
+    @Test
+    public void instagramApp() {
+        final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15G77 Instagram 64.0.0.12.96 (iPhone10,6; iOS 11_4_1; en_AT; en; scale=3.00; gamut=wide; 1125x2436; 124976489)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Facebook", "Instagram App", "64.0.0.12.96", "Application (mobile)");
+    }
+
 }

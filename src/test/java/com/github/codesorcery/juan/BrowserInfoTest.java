@@ -362,4 +362,64 @@ public class BrowserInfoTest {
                 "Facebook", "Instagram App", "64.0.0.12.96", "Application (mobile)");
     }
 
+    @Test
+    public void xingApp() {
+        final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15G77; iPhone 7/11.4.1 XING/7.27.0 ttt_webview_iosm";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "XING", "XING App", "7.27.0", "Application (mobile)");
+    }
+
+    @Test
+    public void onePassword() {
+        final String input = "Mozilla/5.0 (iPad; CPU OS 12_0 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) 1Password/7.1.1 (like Version/12.0 Mobile/16A5345f Safari/600.1.4)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "AgileBits", "1Password", "7.1.1", "Application (mobile)");
+    }
+
+    @Test
+    public void iCab() {
+        final String input = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.59.10 (KHTML, like Gecko) iCab/5.5 Safari/533.16";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Alexander Clauss", "iCab", "5.5", "Browser (desktop)");
+    }
+
+    @Test
+    public void omniWeb() {
+        final String input = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) AppleWebKit/531.21.8+(KHTML, like Gecko, Safari/528.16) OmniWeb/v622.11.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "The Omni Group", "OmniWeb", "v622.11.0", "Browser (desktop)");
+    }
+
+    @Test
+    public void flipboard() {
+        final String input = "Mozilla/5.0 (iPad; CPU OS 11_2_5 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Mobile/15D60 Flipboard/4.2.19";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Flipboard", "Flipboard App", "4.2.19", "Application (mobile)");
+    }
+
+    @Test
+    public void chromeHeadless() {
+        final String input = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/71.0.3563.0 Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Google", "Chrome (headless)", "71.0.3563.0", "Browser (desktop)");
+    }
+
 }

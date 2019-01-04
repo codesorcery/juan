@@ -41,6 +41,9 @@ enum DirectlyIdentifiableMozillaAgent {
    OWNCLOUD_ANDROID("ownCloud-android", "ownCloud GmbH", "ownCloud sync client", AgentType.MOBILE_APPLICATION),
    OWNCLOUD_DESKTOP("mirall", "ownCloud GmbH", "ownCloud sync client", AgentType.DESKTOP_APPLICATION),
    WECHAT("MicroMessenger", "Tencent", "WeChat", AgentType.MOBILE_APPLICATION),
+   ONEPASSWORD("1Password", "AgileBits", "1Password", AgentType.MOBILE_APPLICATION),
+   XING("XING", "XING", "XING App", AgentType.MOBILE_APPLICATION),
+   FLIPBOARD("Flipboard", "Flipboard", "Flipboard App", AgentType.MOBILE_APPLICATION),
    /* Mobile & Desktop */
    BRAVE("Brave", "Brave Software", "Brave Browser", AgentType.BROWSER),
    /* Desktop */
@@ -50,6 +53,9 @@ enum DirectlyIdentifiableMozillaAgent {
    IRON("Iron", "SRWare", "Iron", AgentType.DESKTOP_BROWSER),
    SLEIPNIR("Sleipnir", "Fenrir", "Sleipnir", AgentType.DESKTOP_BROWSER),
    CHROMIUM("Chromium", Vendors.GOOGLE, "Chromium", AgentType.BROWSER),
+   ICAB("iCab", "Alexander Clauss", "iCab", AgentType.DESKTOP_BROWSER),
+   OMNIWEB("OmniWeb", "The Omni Group", "OmniWeb", AgentType.DESKTOP_BROWSER),
+   CHROME_HEADLESS("HeadlessChrome", Vendors.GOOGLE, "Chrome (headless)", AgentType.DESKTOP_BROWSER),
    /* Linux */
    GNOME_WEB("Epiphany", "GNOME Foundation", "GNOME Web", AgentType.DESKTOP_BROWSER),
    KONQUEROR("Konqueror", "KDE", "Konqueror", AgentType.DESKTOP_BROWSER),

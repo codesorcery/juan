@@ -12,6 +12,8 @@ public enum NonMozillaAgent {
     SAFARI_RSS("AppleSyndication", Vendors.APPLE, "Safari RSS Reader", AgentType.DESKTOP_APPLICATION),
     CYBERDUCK("Cyberduck", "iterate GmbH", "Cyberduck", AgentType.DESKTOP_APPLICATION),
     INSOMNIA("insomnia", "Floating Keyboard Software", "Insomnia REST client", AgentType.DESKTOP_APPLICATION),
+    WEBDE_MAIL("WEB.DE%20Mail", "1&1", "WEB.DE Mail App", AgentType.MOBILE_APPLICATION),
+    GMX_MAIL("GMX%20Mail", "1&1", "GMX Mail App", AgentType.MOBILE_APPLICATION),
     /* Command line tools */
     CURL("curl", "haxx", "curl", AgentType.CLI_APPLICATION),
     WGET("Wget", "FSF", "GNU Wget", AgentType.CLI_APPLICATION),

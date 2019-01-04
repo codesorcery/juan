@@ -25,21 +25,27 @@ enum DirectlyIdentifiableMozillaAgent {
    EDGE_ANDROID("EdgA", Vendors.MICROSOFT, "Edge Mobile", AgentType.MOBILE_BROWSER),
    /* iOS */
    FIREFOX_IOS("FxiOS", Vendors.MOZILLA, "Firefox Mobile", AgentType.MOBILE_BROWSER),
+   FIREFOX_FOCUS_IOS("FocusiOS", Vendors.MOZILLA, "Firefox Focus", AgentType.MOBILE_BROWSER),
    CHROME_IOS("CriOS", Vendors.GOOGLE, "Chrome Mobile", AgentType.MOBILE_BROWSER),
    OPERA_IOS("OPiOS", Vendors.OPERA, "Opera Mobile", AgentType.MOBILE_BROWSER),
    EDGE_IOS("EdgiOS", Vendors.MICROSOFT, "Edge Mobile", AgentType.MOBILE_BROWSER),
    /* APPS */
-   FACEBOOK_APP("FBAV", "Facebook", "Facebook App", AgentType.MOBILE_APPLICATION),
+   GOOGLE_SEARCH_APP("GSA", Vendors.GOOGLE, "Google Search App", AgentType.MOBILE_APPLICATION),
+   YAHOO_SEARCH_APP("YahooMobileSearch", "Yahoo", "Yahoo Search App", AgentType.MOBILE_APPLICATION),
+   FACEBOOK_APP("FBAV", Vendors.FACEBOOK, "Facebook App", AgentType.MOBILE_APPLICATION),
+   FACEBOOK_APP_IOS("FBSV", Vendors.FACEBOOK, "Facebook App", AgentType.MOBILE_APPLICATION),
+   INSTAGRAM("Instagram", Vendors.FACEBOOK, "Instagram App", AgentType.MOBILE_APPLICATION),
    SNAPCHAT("Snapchat", "Snap", "Snapchat", AgentType.MOBILE_APPLICATION),
    BING_SEARCH("BingWeb", Vendors.MICROSOFT, "Bing Search App", AgentType.MOBILE_APPLICATION),
    APPLE_NEWS("AppleNews", Vendors.APPLE, "Apple News", AgentType.MOBILE_APPLICATION),
    OWNCLOUD_ANDROID("ownCloud-android", "ownCloud GmbH", "ownCloud sync client", AgentType.MOBILE_APPLICATION),
    OWNCLOUD_DESKTOP("mirall", "ownCloud GmbH", "ownCloud sync client", AgentType.DESKTOP_APPLICATION),
+   WECHAT("MicroMessenger", "Tencent", "WeChat", AgentType.MOBILE_APPLICATION),
    /* Mobile & Desktop */
    BRAVE("Brave", "Brave Software", "Brave Browser", AgentType.BROWSER),
    /* Desktop */
    PALE_MOON("PaleMoon", "M.C. Straver", "PaleMoon Browser", AgentType.DESKTOP_BROWSER),
-   SEAMONKEY("SeaMonkey", "Mozilla", "SeaMonkey", AgentType.DESKTOP_BROWSER),
+   SEAMONKEY("SeaMonkey", Vendors.MOZILLA, "SeaMonkey", AgentType.DESKTOP_BROWSER),
    VIVALDI("Vivaldi", "Vivaldi Technologies", "Vivaldi", AgentType.DESKTOP_BROWSER),
    IRON("Iron", "SRWare", "Iron", AgentType.DESKTOP_BROWSER),
    SLEIPNIR("Sleipnir", "Fenrir", "Sleipnir", AgentType.DESKTOP_BROWSER),
@@ -47,6 +53,7 @@ enum DirectlyIdentifiableMozillaAgent {
    /* Linux */
    GNOME_WEB("Epiphany", "GNOME Foundation", "GNOME Web", AgentType.DESKTOP_BROWSER),
    KONQUEROR("Konqueror", "KDE", "Konqueror", AgentType.DESKTOP_BROWSER),
+   ICEWEASEL("Iceweasel", Vendors.MOZILLA, "Iceweasel", AgentType.DESKTOP_BROWSER),
    /* TV */
    VIERA("Viera", "Panasonic", "VIERA TV Browser", AgentType.EMBEDDED_BROWSER),
    /* Other */

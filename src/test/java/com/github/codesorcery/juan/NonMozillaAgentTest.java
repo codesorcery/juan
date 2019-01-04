@@ -144,4 +144,24 @@ public class NonMozillaAgentTest {
         Validators.validateAgent(agent,
                 "VideoLAN team", "VLC Media Player", "2.2.6", "Media player");
     }
+
+    @Test
+    public void webDeMail() {
+        final String input = "WEB.DE%20Mail/4815 CFNetwork/758.4.3 Darwin/15.5.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "1&1", "WEB.DE Mail App", "4815", "Application (mobile)");
+    }
+
+    @Test
+    public void gmxMail() {
+        final String input = "GMX%20Mail/4815 CFNetwork/758.4.3 Darwin/15.5.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "1&1", "GMX Mail App", "4815", "Application (mobile)");
+    }
 }

@@ -342,4 +342,14 @@ public class BrowserInfoTest {
                 "M.C. Straver", "PaleMoon Browser", "27.9.1", "Browser (desktop)");
     }
 
+    @Test
+    public void googleSearchApp() {
+        final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) GSA/43.0.185608249 Mobile/14G60 Safari/602.1";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Google", "Google Search App", "43.0.185608249", "Application (mobile)");
+    }
+
 }

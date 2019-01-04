@@ -12,4 +12,5 @@ public class Vendors {
     public static final String NINTENDO = "Nintendo";
     public static final String SONY = "Sony";
     public static final String BLACKBERRY = "BlackBerry";
+    public static final String FACEBOOK = "Facebook";
 }

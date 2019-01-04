@@ -68,6 +68,24 @@ public class OsInfoTest {
     }
 
     @Test
+    public void iPodTouch() {
+        final String input = "Mozilla/5.0 (iPod touch; CPU iPhone OS 9_3_5 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 EdgiOS/42.3.11 Mobile/13G36 Safari/601.1.46";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Apple", "iOS", "9.3.5", "Mobile");
+    }
+
+    @Test
+    public void iPod() {
+        final String input = "Mozilla/5.0 (iPod; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) GSA/58.0.212077146 Mobile/15D100 Safari/604.1";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Apple", "iOS", "11.2.6", "Mobile");
+    }
+
+    @Test
     public void windows10Edge() {
         final String input = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -137,6 +155,24 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "Microsoft", "Windows", "8.1", "Desktop");
+    }
+
+    @Test
+    public void windows7outlookExpress() {
+        final String input = "Outlook-Express/7.0 (MSIE 7.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; OfficeLiveConnector.1.5; OfficeLivePatch.1.3; AskTbAVR-4/5.15.31.57710; BRI/2; GWX:DOWNLOADED; TmstmpExt)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "7", "Desktop");
+    }
+
+    @Test
+    public void windows7thunderbird() {
+        final String input = "Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.1.5) Gecko/20091204 Thunderbird/3.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows", "7", "Desktop");
     }
 
     @Test
@@ -266,6 +302,15 @@ public class OsInfoTest {
     }
 
     @Test
+    public void microsoftLumia950XLWindowsPhone() {
+        final String input = "Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/8.0; Touch; rv:11.0; IEMobile/11.0; Microsoft; Lumia 950 XL) like Gecko";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Microsoft", "Windows Phone", "8.1", "Mobile");
+    }
+
+    @Test
     public void hpWebOsTablet() {
         final String input = "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.5; U; en-GB) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.83 Safari/534.6 TouchPad/1.0";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
@@ -281,5 +326,14 @@ public class OsInfoTest {
         final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
 
         Validators.validateOS(os, "BlackBerry", "RIM Tablet OS", "2.1.0", "Mobile");
+    }
+
+    @Test
+    public void androidQwant() {
+        final String input = "QwantMobile/2.0 (Android 4.1.2; Mobile; rv:61.0) Gecko/61.0 Firefox/59.0 QwantBrowser/61.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final OperatingSystem os = OperatingSystem.fromUserAgent(ua);
+
+        Validators.validateOS(os, "Google", "Android", "4.1.2", "Mobile");
     }
 }

@@ -34,17 +34,24 @@ public abstract class OperatingSystem {
         }
         switch (systemIdentifier) {
             case Tokens.WINDOWS:
+            case Tokens.WINDOWS_NT:
+            case "MSIE":
                 return new Windows(source);
             case Tokens.LINUX:
                 return linuxBasedOs(source);
+            case Tokens.ANDROID:
+                return new Android(source);
             case "iPad":
             case "iPhone":
+            case "iPod":
+            case "iPod touch":
                 return new IOS(source);
             case "Macintosh":
                 return new MacOS(source);
             case "X11":
                 return new X11(source);
             case "Mobile":
+            case Tokens.WINDOWS_PHONE:
                 return new Mobile(source);
             case "compatible":
                 return compatibleOs(source);
@@ -69,7 +76,7 @@ public abstract class OperatingSystem {
     private static OperatingSystem compatibleOs(final TokenizedUserAgent source) {
         for (final VersionedToken t : source.getSystemTokens()) {
             switch (t.getValue()) {
-                case Tokens.WINDOWS:
+                case Tokens.WINDOWS_NT:
                     return new Windows(source);
                 case Tokens.WINDOWS_PHONE:
                     return new Mobile(source);

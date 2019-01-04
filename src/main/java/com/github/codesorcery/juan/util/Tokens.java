@@ -16,7 +16,8 @@ public class Tokens {
 
     public static final String ANDROID = "Android";
     public static final String LINUX = "Linux";
-    public static final String WINDOWS = "Windows NT";
+    public static final String WINDOWS_NT = "Windows NT";
+    public static final String WINDOWS = "Windows";
     public static final String WINDOWS_PHONE = "Windows Phone";
     public static final String BLACKBERRY = "BlackBerry";
 }

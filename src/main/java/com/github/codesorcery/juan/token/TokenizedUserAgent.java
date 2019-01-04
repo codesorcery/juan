@@ -1,13 +1,10 @@
 package com.github.codesorcery.juan.token;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class TokenizedUserAgent {
-    private static final List<String> MOZILLA_STYLE_PREFIXES =
-            Arrays.asList("Mozilla", "Dalvik", "Opera");
 
     private final String prefixValue;
     private final String prefixVersion;
@@ -36,7 +33,7 @@ public class TokenizedUserAgent {
             final String prefixVersion = prefixEnd > -1
                     ? userAgentString.substring(prefixLimiterPos + 1, prefixEnd)
                     : userAgentString.substring(prefixLimiterPos + 1);
-            if (MOZILLA_STYLE_PREFIXES.contains(prefixValue)) {
+            if (openBracketFollows(userAgentString, prefixEnd)) {
                 final int systemOpen = userAgentString.indexOf('(');
                 final int systemClose = findMatchingClosingBracket(
                         systemOpen, userAgentString, '(', ')');
@@ -69,6 +66,21 @@ public class TokenizedUserAgent {
         }
         return new TokenizedUserAgent("", "", "",
                 userAgentString, "");
+    }
+
+    private static boolean openBracketFollows(final String string, final int start) {
+        if (start < 0) {
+            return false;
+        }
+        for (int i = start; i < string.length(); i++) {
+            final char curChar = string.charAt(i);
+            if (curChar == '(') {
+                return true;
+            } else if (curChar != ' ') {
+                return false;
+            }
+        }
+        return false;
     }
 
     private static int findMatchingClosingBracket(final int pos,

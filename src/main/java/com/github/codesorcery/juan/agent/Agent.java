@@ -31,6 +31,10 @@ public class Agent {
     }
 
     public static Agent fromUserAgent(final TokenizedUserAgent source) {
+        final NonMozillaAgent nmAgent = NON_MOZILLA_AGENT_MAP.get(source.getPrefixValue());
+        if (nmAgent != null) {
+            return new Agent(nmAgent.name, nmAgent.vendor, source.getPrefixVersion(), nmAgent.type);
+        }
         for (final VersionedToken token : source.getBrowserTokens()) {
             final DirectlyIdentifiableMozillaAgent agent = DIRECTLY_IDENTIFIABLE_BROWSERS_MAP.get(token.getValue());
             if (agent != null) {
@@ -42,10 +46,6 @@ public class Agent {
                 return new Agent(agent.name, agent.vendor,
                         getVersion(source.getAllTokens(), agent.versionSource), agent.type);
             }
-        }
-        final NonMozillaAgent agent = NON_MOZILLA_AGENT_MAP.get(source.getPrefixValue());
-        if (agent != null) {
-            return new Agent(agent.name, agent.vendor, source.getPrefixVersion(), agent.type);
         }
         return EMPTY;
     }

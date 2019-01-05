@@ -48,7 +48,7 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
                if (tokenPos > -1) {
                    value = token.getValue().substring(0, tokenPos).trim();
                }
-               final DeviceListEntry entry = deviceList.get(value);
+               final DeviceListEntry entry = lookupValue(value);
                if (entry != null) {
                    return Optional.of(new DeviceInfo(
                            entry.vendor,
@@ -60,9 +60,35 @@ public class PlayStoreDeviceListLookup implements DeviceLookup {
        return Optional.empty();
    }
 
+   private DeviceListEntry lookupValue(final String value) {
+       final DeviceListEntry entry = deviceList.get(value);
+       if (entry != null) {
+           return entry;
+       }
+       return deviceList.get(cleanUpValue(value));
+   }
+
+   private static final String[] VENDOR_STRINGS = {
+           "SAMSUNG", "LENOVO", "HUAWEI"
+   };
+
+   private String cleanUpValue(String value) {
+       final int dashPos = value.indexOf('/');
+       if (dashPos != -1) {
+           value = value.substring(0, dashPos).trim();
+       }
+       for (final String vendorString : VENDOR_STRINGS) {
+           final int pos = value.indexOf(vendorString + " ");
+           if (pos > -1) {
+               return value.substring(pos + vendorString.length() + 1);
+           }
+       }
+       return value;
+   }
+
    private boolean isAndroid(final TokenizedUserAgent tokenizedUserAgent) {
        for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
-           if (token.getValue().startsWith(Tokens.LINUX)) {
+           if (token.getValue().startsWith(Tokens.ANDROID)) {
                return true;
            }
        }

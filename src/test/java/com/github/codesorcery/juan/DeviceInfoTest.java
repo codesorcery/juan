@@ -76,6 +76,42 @@ public class DeviceInfoTest {
     }
 
     @Test
+    public void samsungGalaxyXcover3() {
+        final String input = "Mozilla/5.0 (Linux; Android 5.1.1; SAMSUNG SM-G388F/G388FXXS1BPL2 Build/LMY48B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/7.4 Chrome/59.0.3071.125 Mobile Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Samsung", "Galaxy Xcover3");
+    }
+
+    @Test
+    public void huaweiHonor5C() {
+        final String input = "Mozilla/5.0 (Linux; Android 7.0; HUAWEI NEM-L51 Build/HUAWEINEM-L51) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Huawei", "Honor 5C");
+    }
+
+    @Test
+    public void huaweiHonor8Lite() {
+        final String input = "Mozilla/5.0 (Android 8.0.0; HUAWEI PRA-LX1) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36 SurfBrowser/3.0";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Huawei", "Honor 8 Lite");
+    }
+
+    @Test
+    public void lenovoTab2() {
+        final String input = "Mozilla/5.0 (Linux; Android 6.0; LENOVO Lenovo TAB 2 A10-70F Build/NMF26F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36 AlohaBrowser/1.4.0.1";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Lenovo", "TAB 2 A10");
+    }
+
+    @Test
     public void kindleFire2013() {
         final String input = "Mozilla/5.0 (Linux; Android 4.4.3; KFTHWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/47.1.79 like Chrome/47.0.2526.80 Safari/537.36";
         final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);

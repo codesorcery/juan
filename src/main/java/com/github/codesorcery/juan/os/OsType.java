@@ -1,6 +1,6 @@
 package com.github.codesorcery.juan.os;
 
-public enum OsType {
+enum OsType {
     DESKTOP("Desktop"),
     MOBILE("Mobile"),
     UNKNOWN("");

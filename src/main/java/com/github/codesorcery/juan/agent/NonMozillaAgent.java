@@ -5,7 +5,7 @@ import com.github.codesorcery.juan.util.Vendors;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum NonMozillaAgent {
+enum NonMozillaAgent {
     /* Applications */
     WINDOWS_LIVE_MAIL("Outlook-Express", Vendors.MICROSOFT, "Windows Live Mail", AgentType.DESKTOP_APPLICATION),
     EVOLUTION("Evolution", "GNOME Foundation", "Evolution (mail client)", AgentType.DESKTOP_APPLICATION),

@@ -6,6 +6,10 @@ import com.github.codesorcery.juan.os.OperatingSystem;
 
 import java.util.StringJoiner;
 
+/**
+ * Holds the information extracted from the user agent string by
+ * the {@link UserAgentParser}.
+ */
 public class ParsedUserAgent {
     private final Agent agent;
     private final OperatingSystem os;
@@ -17,14 +21,26 @@ public class ParsedUserAgent {
         this.device = device;
     }
 
+    /**
+     * @return An entity containing the extracted information
+     * about the agent.
+     */
     public Agent agent() {
         return agent;
     }
 
+    /**
+     * @return An entity containing the extracted information
+     * about the operating system.
+     */
     public OperatingSystem os() {
         return os;
     }
 
+    /**
+     * @return An entity containing the extracted information
+     * about the device.
+     */
     public DeviceInfo device() {
         return device;
     }

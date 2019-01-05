@@ -3,7 +3,7 @@ package com.github.codesorcery.juan.os;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.util.Vendors;
 
-public class IOS extends OperatingSystem {
+class IOS extends OperatingSystem {
     IOS(final TokenizedUserAgent source) {
         super(
                 Vendors.APPLE,

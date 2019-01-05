@@ -1,5 +1,8 @@
 package com.github.codesorcery.juan.util;
 
+/**
+ * Utility class containing frequently used vendors.
+ **/
 public class Vendors {
     private Vendors() {}
 

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class CombinedDeviceLookup implements DeviceLookup {
+class CombinedDeviceLookup implements DeviceLookup {
     private final List<DeviceLookup> deviceLists;
 
     public CombinedDeviceLookup(final DeviceLookup... deviceLists) {

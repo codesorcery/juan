@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class DirectlyIdentifiableDeviceLookup implements DeviceLookup {
+class DirectlyIdentifiableDeviceLookup implements DeviceLookup {
     private static final Map<String, DirectlyIdentifiableDevice>
             DIRECTLY_IDENTIFIABLE_DEVICE_MAP = DirectlyIdentifiableDevice.valuesAsMap();
 

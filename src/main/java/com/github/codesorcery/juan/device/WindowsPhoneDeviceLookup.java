@@ -6,7 +6,7 @@ import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.Optional;
 
-public class WindowsPhoneDeviceLookup implements DeviceLookup {
+class WindowsPhoneDeviceLookup implements DeviceLookup {
     @Override
     public Optional<DeviceInfo> getDeviceInfo(final TokenizedUserAgent tokenizedUserAgent) {
         final int n = tokenizedUserAgent.getSystemTokens().size();

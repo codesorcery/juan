@@ -5,7 +5,7 @@ import com.github.codesorcery.juan.util.Vendors;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum DirectlyIdentifiableDevice {
+enum DirectlyIdentifiableDevice {
     IPAD("iPad", Vendors.APPLE, "iPad"),
     IPHONE("iPhone", Vendors.APPLE, "iPhone"),
     IPOD("iPod", Vendors.APPLE, "iPod"),

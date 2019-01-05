@@ -1,6 +1,6 @@
 package com.github.codesorcery.juan.os;
 
-public class UnknownOS extends OperatingSystem {
+class UnknownOS extends OperatingSystem {
     UnknownOS() {
         super("", "", "", OsType.UNKNOWN);
     }

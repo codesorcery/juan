@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class X11 extends OperatingSystem {
+class X11 extends OperatingSystem {
     private static final List<String> OS_NAMES = Collections.unmodifiableList(
             Arrays.asList(Tokens.LINUX, "CrOS", "OpenBSD", "FreeBSD", "SunOS", "DragonFly",
                     "TrueOS", "HP-UX", "NetBSD"));

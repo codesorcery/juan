@@ -2,8 +2,8 @@ package com.github.codesorcery.juan.os;
 
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 
-public class HPWebOs extends OperatingSystem {
-    protected HPWebOs(final TokenizedUserAgent source) {
+class HPWebOs extends OperatingSystem {
+    HPWebOs(final TokenizedUserAgent source) {
         super(
                 "HP",
                 "WebOS",

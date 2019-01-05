@@ -1,6 +1,6 @@
 package com.github.codesorcery.juan.agent;
 
-public enum AgentType {
+enum AgentType {
     BROWSER("Browser"),
     MOBILE_BROWSER("Browser (mobile)"),
     DESKTOP_BROWSER("Browser (desktop)"),

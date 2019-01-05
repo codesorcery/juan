@@ -8,7 +8,7 @@ import com.github.codesorcery.juan.util.Vendors;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mobile extends OperatingSystem {
+class Mobile extends OperatingSystem {
     Mobile(final TokenizedUserAgent source) {
         this(extractOsInfo(source));
     }

@@ -14,16 +14,20 @@ public abstract class OperatingSystem {
     private final String version;
     private final OsType type;
 
-    protected OperatingSystem(final String vendor,
-                              final String name,
-                              final String version,
-                              final OsType type) {
+    OperatingSystem(final String vendor, final String name,
+                    final String version, final OsType type) {
         this.vendor = vendor;
         this.name = name;
         this.version = version;
         this.type = type;
     }
 
+    /**
+     * Extract information about the os from a tokenized user agent.
+     * @param source The tokenized user agent from which
+     *               the information should be extracted.
+     * @return The extracted information about the os.
+     */
     public static OperatingSystem fromUserAgent(final TokenizedUserAgent source) {
         final List<VersionedToken> tokens = source.getSystemTokens();
         final String systemIdentifier;
@@ -87,8 +91,8 @@ public abstract class OperatingSystem {
         return new UnknownOS();
     }
 
-    protected static String extractOsVersion(final TokenizedUserAgent source,
-                                             final Predicate<VersionedToken> matcher) {
+    static String extractOsVersion(final TokenizedUserAgent source,
+                                   final Predicate<VersionedToken> matcher) {
         for (final VersionedToken t : source.getSystemTokens()) {
             if (matcher.test(t)) {
                 return t.getVersion();
@@ -97,18 +101,34 @@ public abstract class OperatingSystem {
         return "";
     }
 
+    /**
+     * @return The vendor of the operating system.
+     * Empty string if unknown.
+     */
     public String getVendor() {
         return vendor;
     }
 
+    /**
+     * @return The name of the operating system.
+     * Empty string if unknown.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return The version of the operating system.
+     * Empty string if unknown.
+     */
     public String getVersion() {
         return version;
     }
 
+    /**
+     * @return The type of the operating system.
+     * Empty string if unknown.
+     */
     public String getType() {
         return type.toString();
     }

@@ -6,7 +6,7 @@ import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.Optional;
 
-public class BlackBerryDeviceLookup implements DeviceLookup {
+class BlackBerryDeviceLookup implements DeviceLookup {
     @Override
     public Optional<DeviceInfo> getDeviceInfo(TokenizedUserAgent tokenizedUserAgent) {
         // Old devices

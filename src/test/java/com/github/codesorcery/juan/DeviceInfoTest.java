@@ -1,9 +1,7 @@
 package com.github.codesorcery.juan;
 
-import com.github.codesorcery.juan.device.CombinedDeviceLookup;
 import com.github.codesorcery.juan.device.DeviceInfo;
 import com.github.codesorcery.juan.device.DeviceLookup;
-import com.github.codesorcery.juan.device.PlayStoreDeviceListLookup;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
 
@@ -19,10 +17,10 @@ public class DeviceInfoTest {
 
     public DeviceInfoTest() throws IOException {
         final ClassLoader classLoader = getClass().getClassLoader();
-        final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
-                .fromCsvFile(classLoader.getResource("supported_devices_subset.csv"),
-                        Charset.forName("UTF-8"));
-        deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, UserAgentParser.STATIC_DEVICE_LOOKUPS);
+        deviceLookup = DeviceLookup.withPlayStoreDeviceList(
+                classLoader.getResource("supported_devices_subset.csv"),
+                Charset.forName("UTF-8")
+        );
     }
 
     @Test

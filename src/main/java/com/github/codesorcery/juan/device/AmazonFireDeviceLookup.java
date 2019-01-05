@@ -7,7 +7,7 @@ import com.github.codesorcery.juan.util.Vendors;
 import java.util.Map;
 import java.util.Optional;
 
-public class AmazonFireDeviceLookup implements DeviceLookup {
+class AmazonFireDeviceLookup implements DeviceLookup {
     private static final Map<String, String> AMAZON_FIRE_DEVICES = AmazonFireDevice.valuesAsMap();
 
     @Override

@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * Holds information about the agent (browser/application)
+ * extracted from the parsed user agent.
+ */
 public class Agent {
     private static final Map<String, DirectlyIdentifiableMozillaAgent>
             DIRECTLY_IDENTIFIABLE_BROWSERS_MAP = DirectlyIdentifiableMozillaAgent.valuesAsMap();
@@ -30,6 +34,12 @@ public class Agent {
         this.type = type;
     }
 
+    /**
+     * Extract information about the agent from a tokenized user agent.
+     * @param source The tokenized user agent from which
+     *               the information should be extracted.
+     * @return The extracted information about the agent.
+     */
     public static Agent fromUserAgent(final TokenizedUserAgent source) {
         final NonMozillaAgent nmAgent = NON_MOZILLA_AGENT_MAP.get(source.getPrefixValue());
         if (nmAgent != null) {

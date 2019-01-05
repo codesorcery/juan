@@ -5,7 +5,7 @@ import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
-public class Windows extends OperatingSystem {
+class Windows extends OperatingSystem {
 
     Windows(final TokenizedUserAgent source) {
         super(Vendors.MICROSOFT, "Windows", extractOsVersion(source), OsType.DESKTOP);

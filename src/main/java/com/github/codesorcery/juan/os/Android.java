@@ -5,7 +5,7 @@ import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
-public class Android extends OperatingSystem {
+class Android extends OperatingSystem {
     Android(final TokenizedUserAgent source) {
         super(Vendors.GOOGLE, "Android", extractOsVersion(source), OsType.MOBILE);
     }

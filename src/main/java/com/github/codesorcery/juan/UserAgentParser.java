@@ -1,7 +1,8 @@
 package com.github.codesorcery.juan;
 
 import com.github.codesorcery.juan.agent.Agent;
-import com.github.codesorcery.juan.device.*;
+import com.github.codesorcery.juan.device.DeviceInfo;
+import com.github.codesorcery.juan.device.DeviceLookup;
 import com.github.codesorcery.juan.os.OperatingSystem;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 
@@ -11,33 +12,37 @@ import java.nio.charset.Charset;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * The user agent parser.
+ * Takes user agent strings as input and returns the parsed data as
+ * {@link ParsedUserAgent}.
+ */
 public class UserAgentParser {
-    static final CombinedDeviceLookup STATIC_DEVICE_LOOKUPS =
-            new CombinedDeviceLookup(
-                    new DirectlyIdentifiableDeviceLookup(),
-                    new WindowsDeviceLookup(),
-                    new AmazonFireDeviceLookup(),
-                    new WindowsPhoneDeviceLookup(),
-                    new BlackBerryDeviceLookup()
-            );
-
-    private final CombinedDeviceLookup deviceLookup;
+    private final DeviceLookup deviceLookup;
     private Consumer<Supplier<String>> logger;
 
-    private UserAgentParser(final DeviceLookup... deviceLookups) {
-        deviceLookup = new CombinedDeviceLookup(deviceLookups);
+    private UserAgentParser(final DeviceLookup deviceLookup) {
+        this.deviceLookup = deviceLookup;
     }
 
+    /**
+     * @param location The location where the Google Play device list is stored.
+     * @param charset The charset of the Google Play device list file.
+     * @return A UserAgentParser instance with Android device lookup
+     * based on the Google Play device list enabled.
+     * @throws IOException If the Google Play device list could not be read.
+     */
     public static UserAgentParser withPlayStoreDeviceList(final URL location, final Charset charset)
             throws IOException {
-        return new UserAgentParser(
-                PlayStoreDeviceListLookup.fromCsvFile(location, charset),
-                STATIC_DEVICE_LOOKUPS
-        );
+        return new UserAgentParser(DeviceLookup.withPlayStoreDeviceList(location, charset));
     }
 
+    /**
+     * @return A UserAgentParser instance with Android device lookup
+     * based on the Google Play device list disabled.
+     */
     public static UserAgentParser withoutPlayStoreDeviceList() {
-        return new UserAgentParser(STATIC_DEVICE_LOOKUPS);
+        return new UserAgentParser(DeviceLookup.withoutPlayStoreDeviceList());
     }
 
     public UserAgentParser withTokenizedUALogger(final Consumer<Supplier<String>> loggingFunction) {
@@ -45,6 +50,10 @@ public class UserAgentParser {
         return this;
     }
 
+    /**
+     * @param userAgentString The user agent string which should be parsed.
+     * @return The parsed user agent information.
+     */
     public ParsedUserAgent parse(final String userAgentString) {
         final TokenizedUserAgent tokenizedUserAgent = TokenizedUserAgent
                 .forUserAgentString(userAgentString);

@@ -3,8 +3,8 @@ package com.github.codesorcery.juan.os;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import com.github.codesorcery.juan.util.Vendors;
 
-public class RimTabletOs extends OperatingSystem {
-    public RimTabletOs(final TokenizedUserAgent source) {
+class RimTabletOs extends OperatingSystem {
+    RimTabletOs(final TokenizedUserAgent source) {
         super(
                 Vendors.BLACKBERRY,
                 "RIM Tablet OS",

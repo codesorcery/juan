@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-public enum OtherIdentifiableMozillaAgent {
+enum OtherIdentifiableMozillaAgent {
     CHROME(Vendors.GOOGLE, "Chrome", tokenList ->
             tokenList.contains(Tokens.APPLE_WEBKIT)
                     && tokenList.contains(Tokens.CHROME)

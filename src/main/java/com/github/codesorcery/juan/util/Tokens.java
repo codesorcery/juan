@@ -1,8 +1,9 @@
 package com.github.codesorcery.juan.util;
 
+/**
+ * Utility class containing frequently used tokens.
+ */
 public class Tokens {
-
-
     private Tokens() {}
 
     public static final String FIREFOX = "Firefox";

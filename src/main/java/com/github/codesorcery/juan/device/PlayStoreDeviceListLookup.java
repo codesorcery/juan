@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class PlayStoreDeviceListLookup implements DeviceLookup {
+class PlayStoreDeviceListLookup implements DeviceLookup {
    private final Map<String, DeviceListEntry> deviceList;
 
    private PlayStoreDeviceListLookup(final Map<String, DeviceListEntry> deviceList) {

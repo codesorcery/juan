@@ -7,7 +7,7 @@ import com.github.codesorcery.juan.util.Vendors;
 
 import java.util.Optional;
 
-public class WindowsDeviceLookup implements DeviceLookup {
+class WindowsDeviceLookup implements DeviceLookup {
     @Override
     public Optional<DeviceInfo> getDeviceInfo(TokenizedUserAgent tokenizedUserAgent) {
         boolean isWindows = false;

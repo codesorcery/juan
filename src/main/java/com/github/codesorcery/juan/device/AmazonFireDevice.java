@@ -3,7 +3,7 @@ package com.github.codesorcery.juan.device;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum AmazonFireDevice {
+enum AmazonFireDevice {
     // Source: https://developer.amazon.com/docs/fire-tablets/ft-device-and-feature-specifications.html
     KFKAWI("Fire HD 8 (2018)"),
     KFSUWI("Fire HD 10 (2017)"),

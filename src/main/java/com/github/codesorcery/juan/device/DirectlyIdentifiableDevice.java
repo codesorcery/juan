@@ -10,6 +10,7 @@ public enum DirectlyIdentifiableDevice {
     IPHONE("iPhone", Vendors.APPLE, "iPhone"),
     IPOD("iPod", Vendors.APPLE, "iPod"),
     IPOD_TOUCH("iPod touch", Vendors.APPLE, "iPod Touch"),
+    MACINTOSH("Macintosh", Vendors.APPLE, "Macintosh"),
     PSP("PSP (PlayStation Portable)", Vendors.SONY, "PlayStation Portable"),
     PLAYSTATION_4("PlayStation 4", Vendors.SONY, "PlayStation 4"),
     PLAYSTATION_3("PLAYSTATION 3", Vendors.SONY, "PlayStation 3"),

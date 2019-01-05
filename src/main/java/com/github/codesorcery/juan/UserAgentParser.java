@@ -12,6 +12,15 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class UserAgentParser {
+    static final CombinedDeviceLookup STATIC_DEVICE_LOOKUPS =
+            new CombinedDeviceLookup(
+                    new DirectlyIdentifiableDeviceLookup(),
+                    new WindowsDeviceLookup(),
+                    new AmazonFireDeviceLookup(),
+                    new WindowsPhoneDeviceLookup(),
+                    new BlackBerryDeviceLookup()
+            );
+
     private final CombinedDeviceLookup deviceLookup;
     private Consumer<Supplier<String>> logger;
 
@@ -23,20 +32,12 @@ public class UserAgentParser {
             throws IOException {
         return new UserAgentParser(
                 PlayStoreDeviceListLookup.fromCsvFile(location, charset),
-                new DirectlyIdentifiableDeviceLookup(),
-                new AmazonFireDeviceLookup(),
-                new WindowsPhoneDeviceLookup(),
-                new BlackBerryDeviceLookup()
+                STATIC_DEVICE_LOOKUPS
         );
     }
 
     public static UserAgentParser withoutPlayStoreDeviceList() {
-        return new UserAgentParser(
-                new DirectlyIdentifiableDeviceLookup(),
-                new AmazonFireDeviceLookup(),
-                new WindowsPhoneDeviceLookup(),
-                new BlackBerryDeviceLookup()
-        );
+        return new UserAgentParser(STATIC_DEVICE_LOOKUPS);
     }
 
     public UserAgentParser withTokenizedUALogger(final Consumer<Supplier<String>> loggingFunction) {

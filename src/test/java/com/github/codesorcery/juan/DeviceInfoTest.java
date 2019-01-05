@@ -1,6 +1,9 @@
 package com.github.codesorcery.juan;
 
-import com.github.codesorcery.juan.device.*;
+import com.github.codesorcery.juan.device.CombinedDeviceLookup;
+import com.github.codesorcery.juan.device.DeviceInfo;
+import com.github.codesorcery.juan.device.DeviceLookup;
+import com.github.codesorcery.juan.device.PlayStoreDeviceListLookup;
 import com.github.codesorcery.juan.token.TokenizedUserAgent;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +22,7 @@ public class DeviceInfoTest {
         final PlayStoreDeviceListLookup playStoreDeviceList = PlayStoreDeviceListLookup
                 .fromCsvFile(classLoader.getResource("supported_devices_subset.csv"),
                         Charset.forName("UTF-8"));
-        deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, new AmazonFireDeviceLookup(),
-                new DirectlyIdentifiableDeviceLookup(), new WindowsPhoneDeviceLookup(),
-                new BlackBerryDeviceLookup());
+        deviceLookup = new CombinedDeviceLookup(playStoreDeviceList, UserAgentParser.STATIC_DEVICE_LOOKUPS);
     }
 
     @Test
@@ -261,5 +262,32 @@ public class DeviceInfoTest {
         final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
         assertTrue(deviceInfo.isPresent());
         Validators.validateDeviceInfo(deviceInfo.get(), "Lenovo", "ThinkPad Tablet");
+    }
+
+    @Test
+    public void microsoftXboxOne() {
+        final String input = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Xbox; Xbox One) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10553";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Microsoft", "Xbox One");
+    }
+
+    @Test
+    public void windowsPC() {
+        final String input = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "", "Windows PC");
+    }
+
+    @Test
+    public void appleMacintosh() {
+        final String input = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Optional<DeviceInfo> deviceInfo = deviceLookup.getDeviceInfo(ua);
+        assertTrue(deviceInfo.isPresent());
+        Validators.validateDeviceInfo(deviceInfo.get(), "Apple", "Macintosh");
     }
 }

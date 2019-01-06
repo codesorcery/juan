@@ -2,9 +2,29 @@
 [![Build Status](https://travis-ci.org/codesorcery/juan.svg?branch=master)](https://travis-ci.org/codesorcery/juan)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.github.codesorcery%3Ajuan&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.github.codesorcery%3Ajuan)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.github.codesorcery%3Ajuan&metric=coverage)](https://sonarcloud.io/dashboard?id=com.github.codesorcery%3Ajuan)
+[![License](https://img.shields.io/github/license/codesorcery/juan.svg)](https://choosealicense.com/licenses/mit/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.codesorcery/juan.svg)](https://search.maven.org/search?q=com.github.codesorcery)
+
+A fast and dependency-free user agent parser for Java 8+.
 
 ## Usage
 
+Simply add the library to the dependency section of your pom.xml (if you're using Maven):
+```xml
+<dependency>
+  <groupId>com.github.codesorcery</groupId>
+  <artifactId>juan</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+Or add it to your build.gradle (if you're using Gradle):
+````groovy
+dependencies {
+  compile('com.github.codesorcery:juan:0.1.0')
+}
+````
+
+The library can then be used as follows:
 ```java
 import com.github.codesorcery.juan.UserAgentParser;
 import com.github.codesorcery.juan.ParsedUserAgent;

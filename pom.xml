@@ -4,7 +4,7 @@
 
     <groupId>com.github.codesorcery</groupId>
     <artifactId>juan</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
     <name>Java Useragent ANalzyer</name>
     <description>Fast and dependency-free Java 8 user agent analyzer</description>
@@ -14,7 +14,7 @@
         <url>https://github.com/codesorcery/juan</url>
         <connection>scm:git:git@github.com:codesorcery/juan.git</connection>
         <developerConnection>scm:git:git@github.com:codesorcery/juan.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>juan-0.1.1</tag>
   </scm>
 
     <developers>

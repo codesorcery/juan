@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/codesorcery/juan.svg)](https://choosealicense.com/licenses/mit/)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.codesorcery/juan.svg)](https://search.maven.org/search?q=com.github.codesorcery)
 
-A fast and dependency-free user agent parser for Java 8+.
+A fast, thread-safe and dependency-free user agent parser for Java 8+.
 
 ## Usage
 
@@ -75,9 +75,13 @@ public class UserAgentParserExample {
 Benchmark performed on an Intel&reg; Core&trade; 2 Duo P8600 CPU @ 2.4GHz:
 
 Benchmark                                             | Mode  | Cnt  | Score | Error   | Units
------------------------------------------------------ | ----- | ---- | ----- | ------- | -----
-UserAgentParserBenchmark.amazonKindleFireSilkBrowser  | avgt  |   5  | 3.100 | ± 0.026 | us/op
-UserAgentParserBenchmark.curl                         | avgt  |   5  | 2.951 | ± 0.180 | us/op
-UserAgentParserBenchmark.iPadMobileSafari             | avgt  |   5  | 4.527 | ± 0.505 | us/op
-UserAgentParserBenchmark.samsungGalaxyS8chromeMobile  | avgt  |   5  | 5.417 | ± 0.411 | us/op
-UserAgentParserBenchmark.windows10Edge                | avgt  |   5  | 4.390 | ± 0.304 | us/op
+----------------------------------------------------- | ----- | ---- | ----- | ------- | ------
+UserAgentParserBenchmark.amazonKindleFireSilkBrowser  | avgt  |   5  | 4.641 | ± 0.136 |  us/op
+UserAgentParserBenchmark.curl                         | avgt  |   5  | 1.699 | ± 0.069 |  us/op
+UserAgentParserBenchmark.iPadMobileSafari             | avgt  |   5  | 6.370 | ± 0.266 |  us/op
+UserAgentParserBenchmark.iPhoneInstagram              | avgt  |   5  | 5.257 | ± 1.164 |  us/op
+UserAgentParserBenchmark.linuxFirefox                 | avgt  |   5  | 3.522 | ± 0.120 |  us/op
+UserAgentParserBenchmark.macOsSafari                  | avgt  |   5  | 3.126 | ± 0.022 |  us/op
+UserAgentParserBenchmark.samsungGalaxyS8ChromeMobile  | avgt  |   5  | 5.375 | ± 0.102 |  us/op
+UserAgentParserBenchmark.windows10Edge                | avgt  |   5  | 3.962 | ± 0.065 |  us/op
+UserAgentParserBenchmark.windowsPhone                 | avgt  |   5  | 9.555 | ± 0.190 |  us/op

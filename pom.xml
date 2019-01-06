@@ -6,7 +6,7 @@
 
     <groupId>com.github.codesorcery</groupId>
     <artifactId>juan</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Java Useragent ANalzyer</name>
     <description>Fast and dependency-free Java 8 user agent analyzer</description>

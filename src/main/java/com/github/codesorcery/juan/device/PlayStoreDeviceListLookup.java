@@ -13,15 +13,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class PlayStoreDeviceListLookup implements DeviceLookup {
+class PlayStoreDeviceListLookup implements AndroidDeviceLookup {
    private final Map<String, DeviceListEntry> deviceList;
 
    private PlayStoreDeviceListLookup(final Map<String, DeviceListEntry> deviceList) {
       this.deviceList = deviceList;
    }
 
-   public static PlayStoreDeviceListLookup fromCsvFile(final URL location, final Charset charset)
-           throws IOException {
+   static PlayStoreDeviceListLookup fromCsvFile(final URL location, final Charset charset) throws IOException {
       try (final BufferedReader br = new BufferedReader(new InputStreamReader(location.openStream(), charset))) {
           final Map<String, DeviceListEntry> deviceList = br.lines()
                   .skip(1)
@@ -36,9 +35,9 @@ class PlayStoreDeviceListLookup implements DeviceLookup {
       }
    }
 
-    @Override
+   @Override
    public Optional<DeviceInfo> getDeviceInfo(final TokenizedUserAgent tokenizedUserAgent) {
-       if (!isAndroid(tokenizedUserAgent)) {
+       if (notAndroid(tokenizedUserAgent)) {
            return Optional.empty();
        }
        for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
@@ -84,15 +83,6 @@ class PlayStoreDeviceListLookup implements DeviceLookup {
            }
        }
        return value;
-   }
-
-   private boolean isAndroid(final TokenizedUserAgent tokenizedUserAgent) {
-       for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
-           if (token.getValue().startsWith(Tokens.ANDROID)) {
-               return true;
-           }
-       }
-       return false;
    }
 
    private static class DeviceListEntry {

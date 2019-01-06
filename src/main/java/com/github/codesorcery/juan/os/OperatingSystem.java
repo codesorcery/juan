@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Predicate;
 
+/**
+ * Holds information about operating system extracted from the {@link TokenizedUserAgent}.
+ */
 public abstract class OperatingSystem {
     private final String vendor;
     private final String name;

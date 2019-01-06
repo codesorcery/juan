@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 
 /**
  * Holds information about the agent (browser/application)
- * extracted from the parsed user agent.
+ * extracted from the {@link TokenizedUserAgent}.
  */
 public class Agent {
     private static final Map<String, DirectlyIdentifiableMozillaAgent>

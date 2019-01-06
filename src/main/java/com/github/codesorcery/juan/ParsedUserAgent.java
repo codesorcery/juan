@@ -22,7 +22,7 @@ public class ParsedUserAgent {
     }
 
     /**
-     * @return An entity containing the extracted information
+     * @return An {@link Agent} entity containing the extracted information
      * about the agent.
      */
     public Agent agent() {
@@ -30,7 +30,7 @@ public class ParsedUserAgent {
     }
 
     /**
-     * @return An entity containing the extracted information
+     * @return An {@link OperatingSystem} entity containing the extracted information
      * about the operating system.
      */
     public OperatingSystem os() {
@@ -38,7 +38,7 @@ public class ParsedUserAgent {
     }
 
     /**
-     * @return An entity containing the extracted information
+     * @return A {@link DeviceInfo} entity containing the extracted information
      * about the device.
      */
     public DeviceInfo device() {

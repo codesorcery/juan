@@ -1,7 +1,7 @@
 package com.github.codesorcery.juan.util;
 
 /**
- * Utility class containing frequently used tokens.
+ * Utility class containing frequently used token values.
  */
 public class Tokens {
     private Tokens() {}

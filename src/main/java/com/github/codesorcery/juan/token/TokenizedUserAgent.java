@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+/**
+ * Tokenizes user agent strings into {@link VersionedToken}s and holds the results.
+ */
 public class TokenizedUserAgent {
 
     private final String prefixValue;
@@ -25,6 +28,11 @@ public class TokenizedUserAgent {
         allTokens.addAll(browserTokens);
     }
 
+    /**
+     * Tokenize a user agent string.
+     * @param userAgentString The user agent string to be tokenized.
+     * @return A TokenizedUserAgent entity holding the tokenized user agent string.
+     */
     public static TokenizedUserAgent forUserAgentString(final String userAgentString) {
         final int prefixLimiterPos = userAgentString.indexOf('/');
         if (prefixLimiterPos > -1) {
@@ -206,22 +214,48 @@ public class TokenizedUserAgent {
         return new VersionedToken(tokenString, "");
     }
 
+    /**
+     * The value of the first token of the user agent string.
+     * @return E.g. 'Mozilla' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     */
     public String getPrefixValue() {
         return prefixValue;
     }
 
+    /**
+     * The version of the first token of the user agent string.
+     * @return E.g. '5.0' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     */
     public String getPrefixVersion() {
         return prefixVersion;
     }
 
+    /**
+     * The {@link VersionedToken}s contained in the user agent string part
+     * which usually holds information about the system.
+     * @return E.g. [('foo','1.0'), ('bar','')]
+     *         for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     */
     public List<VersionedToken> getSystemTokens() {
         return systemTokens;
     }
 
+    /**
+     * The {@link VersionedToken}s contained in the user agent string parts
+     * which usually holds information about the browser.
+     * @return E.g. [('foobar','1.0'), ('foo','2.0'), ('bar'/'3.0')]
+     *         for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     */
     public List<VersionedToken> getBrowserTokens() {
         return browserTokens;
     }
 
+    /**
+     * The list of all {@link VersionedToken}s parsed from the user agent string (excluding the prefix).
+     * I.e. the combined result of {@link #getSystemTokens()} and {@link #getBrowserTokens()}.
+     * @return E.g. [('foo','1.0'), ('bar',''), ('foobar','1.0'), ('foo','2.0'), ('bar'/'3.0')]
+     *         for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     */
     public List<VersionedToken> getAllTokens() {
         return allTokens;
     }

@@ -1,10 +1,11 @@
 package com.github.codesorcery.juan.device;
 
+import com.github.codesorcery.juan.token.TokenizedUserAgent;
+
 import java.util.StringJoiner;
 
 /**
- * Holds information about the device
- * extracted from the parsed user agent.
+ * Holds information about the device extracted from the {@link TokenizedUserAgent}.
  */
 public class DeviceInfo {
     private static final DeviceInfo EMPTY = new DeviceInfo("", "");
@@ -17,6 +18,10 @@ public class DeviceInfo {
         this.name = name;
     }
 
+    /**
+     * Create an empty DeviceInfo entity.
+     * @return A DeviceInfo entity where all fields are empty strings.
+     */
     public static DeviceInfo empty() {
         return EMPTY;
     }

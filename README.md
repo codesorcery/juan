@@ -14,13 +14,13 @@ Simply add the library to the dependency section of your pom.xml (if you're usin
 <dependency>
   <groupId>com.github.codesorcery</groupId>
   <artifactId>juan</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 Or add it to your build.gradle (if you're using Gradle):
 ````groovy
 dependencies {
-  compile('com.github.codesorcery:juan:0.1.0')
+  compile('com.github.codesorcery:juan:0.1.1')
 }
 ````
 

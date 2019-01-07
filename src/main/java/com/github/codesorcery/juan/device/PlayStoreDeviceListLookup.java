@@ -34,7 +34,7 @@ class PlayStoreDeviceListLookup extends AndroidDeviceLookup {
     DeviceInfo lookup(final String value) {
         DeviceListEntry entry = deviceList.get(value);
         if (entry == null) {
-            entry = deviceList.get(cleanUpValue(value));
+            entry = entryForCleanedValue(value);
         }
         if (entry != null) {
             return new DeviceInfo(
@@ -50,7 +50,7 @@ class PlayStoreDeviceListLookup extends AndroidDeviceLookup {
             "SAMSUNG", "LENOVO", "HUAWEI"
     };
 
-    private String cleanUpValue(String value) {
+    private DeviceListEntry entryForCleanedValue(String value) {
         final int dashPos = value.indexOf('/');
         if (dashPos != -1) {
             value = value.substring(0, dashPos).trim();
@@ -58,10 +58,10 @@ class PlayStoreDeviceListLookup extends AndroidDeviceLookup {
         for (final String vendorString : VENDOR_STRINGS) {
             final int pos = value.indexOf(vendorString + " ");
             if (pos > -1) {
-                return value.substring(pos + vendorString.length() + 1);
+                return deviceList.get(value.substring(pos + vendorString.length() + 1));
             }
         }
-        return value;
+        return null;
     }
 
     private static class DeviceListEntry {

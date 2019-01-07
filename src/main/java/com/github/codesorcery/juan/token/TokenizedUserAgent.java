@@ -186,8 +186,6 @@ public class TokenizedUserAgent {
         return result;
     }
 
-    private static final VersionExtractor VERSION_EXTRACTOR = VersionExtractor.forLimiter('.', '_');
-
     private static VersionedToken extractToken(final String tokenString) {
         final int n = tokenString.length();
         int separatorPos = tokenString.lastIndexOf('/');
@@ -204,12 +202,11 @@ public class TokenizedUserAgent {
                     tokenString.substring(separatorPos + 1)
             );
         }
-        final VersionExtractor.ExtractionResult extractionResult =
-                VERSION_EXTRACTOR.extract(tokenString);
-        if (extractionResult.getStart() > -1) {
+        final int start = VersionExtractor.versionPos(tokenString);
+        if (start > -1) {
             return new VersionedToken(
-                    tokenString.substring(0, extractionResult.getStart()),
-                    tokenString.substring(extractionResult.getStart()).replace('_', '.')
+                    tokenString.substring(0, start),
+                    tokenString.substring(start).replace('_', '.')
             );
         }
         return new VersionedToken(tokenString, "");

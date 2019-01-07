@@ -5,9 +5,6 @@ import com.github.codesorcery.juan.token.VersionedToken;
 import com.github.codesorcery.juan.util.Tokens;
 import com.github.codesorcery.juan.util.Vendors;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Mobile extends OperatingSystem {
     Mobile(final TokenizedUserAgent source) {
         this(extractOsInfo(source));
@@ -18,22 +15,23 @@ class Mobile extends OperatingSystem {
     }
 
     private static OsInfo extractOsInfo(final TokenizedUserAgent source) {
-        final List<String> tokenValues = new ArrayList<>();
         for (final VersionedToken token : source.getAllTokens()) {
-            tokenValues.add(token.getValue());
+            switch (token.getValue()) {
+                case Tokens.WINDOWS_PHONE:
+                    return new OsInfo(Vendors.MICROSOFT, "Windows Phone",
+                            extractVersion(source, Tokens.WINDOWS_PHONE));
+                case "KAIOS":
+                    return new OsInfo("KaiOS Technologies Inc.", "KaiOS",
+                            extractVersion(source, "KAIOS"));
+                case Tokens.FIREFOX:
+                    if (source.getBrowserTokens().size() == 2) {
+                        return new OsInfo(Vendors.MOZILLA, "Firefox OS",
+                                extractVersion(source, Tokens.FIREFOX));
+                    }
+                default:
+            }
         }
-        if (tokenValues.contains(Tokens.WINDOWS_PHONE)) {
-            return new OsInfo(Vendors.MICROSOFT, "Windows Phone",
-                    extractVersion(source, Tokens.WINDOWS_PHONE));
-        } else if (tokenValues.contains("KAIOS")) {
-            return new OsInfo("KaiOS Technologies Inc.", "KaiOS",
-                    extractVersion(source, "KAIOS"));
-        } else if (tokenValues.contains(Tokens.GECKO) && tokenValues.contains(Tokens.FIREFOX)) {
-            return new OsInfo(Vendors.MOZILLA, "Firefox OS",
-                    extractVersion(source, Tokens.FIREFOX));
-        } else {
-            return new OsInfo("", "", "");
-        }
+        return new OsInfo("", "", "");
     }
 
     private static String extractVersion(final TokenizedUserAgent source, final String value) {

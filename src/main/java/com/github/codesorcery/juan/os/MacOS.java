@@ -8,7 +8,7 @@ class MacOS extends OperatingSystem {
         super(
                 Vendors.APPLE,
                 "macOS",
-                extractOsVersion(source, t -> t.getValue().contains("Intel")),
+                extractOsVersion(source, t -> t.getValue().startsWith("Intel")),
                 OsType.DESKTOP
         );
     }

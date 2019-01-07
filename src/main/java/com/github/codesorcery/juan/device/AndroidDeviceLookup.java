@@ -6,8 +6,10 @@ import com.github.codesorcery.juan.util.Tokens;
 
 import java.util.Optional;
 
+import static com.github.codesorcery.juan.util.StringUtils.substringUntil;
+
 abstract class AndroidDeviceLookup implements DeviceLookup {
-    boolean notAndroid(final TokenizedUserAgent tokenizedUserAgent) {
+    private boolean notAndroid(final TokenizedUserAgent tokenizedUserAgent) {
         for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
             if (token.getValue().equals(Tokens.ANDROID)) {
                 return false;
@@ -24,13 +26,9 @@ abstract class AndroidDeviceLookup implements DeviceLookup {
             return Optional.empty();
         }
         for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
-            String value = token.getValue();
+            final String value = token.getValue();
             if (!value.equals(Tokens.ANDROID) && !value.equals(Tokens.LINUX)) {
-                final int tokenPos = token.getValue().indexOf("Build");
-                if (tokenPos > -1) {
-                    value = token.getValue().substring(0, tokenPos).trim();
-                }
-                final DeviceInfo device = lookup(value);
+                final DeviceInfo device = lookup(substringUntil(value, " Build"));
                 if (device != null) {
                     return Optional.of(device);
                 }

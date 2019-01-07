@@ -7,17 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VersionExtractorTest {
     @Test
     public void onlyVersionString() {
-        assertEquals(0, VersionExtractor.versionPos("1.34.1"));
+        assertEquals(-1, VersionExtractor.versionPos("1.34.1"));
     }
 
     @Test
-    public void onlyVersionStringUnderscoreAsLimiter() {
-        assertEquals(0, VersionExtractor.versionPos("1_34_1"));
-    }
-
-    @Test
-    public void onlySimpleVersion() {
-        assertEquals(0, VersionExtractor.versionPos("24"));
+    public void withPrefixAndSimpleVersion() {
+        assertEquals(4, VersionExtractor.versionPos("foo 24"));
     }
 
     @Test
@@ -26,8 +21,13 @@ public class VersionExtractorTest {
     }
 
     @Test
+    public void withPrefixAndUnderscoreAsLimiter() {
+        assertEquals(4, VersionExtractor.versionPos("bar 1_34_1"));
+    }
+
+    @Test
     public void withPostfix() {
-        assertEquals(0, VersionExtractor.versionPos("1.2.3 bar"));
+        assertEquals(-1, VersionExtractor.versionPos("1.2.3 bar"));
     }
 
     @Test
@@ -42,12 +42,12 @@ public class VersionExtractorTest {
 
     @Test
     public void withPostfixEndsWithNumber() {
-        assertEquals(0, VersionExtractor.versionPos("1.2.3 foo12"));
+        assertEquals(4, VersionExtractor.versionPos("foo 1.2.3 foo12"));
     }
 
     @Test
     public void withPostfixStartsWithNumber() {
-        assertEquals(0, VersionExtractor.versionPos("1.2.3 12foo"));
+        assertEquals(4, VersionExtractor.versionPos("foo 1.2.3 12foo"));
     }
 
     @Test

@@ -31,13 +31,13 @@ enum AmazonFireDevice {
     AFTMM("Fire TV Stick 4K"),
     AFTN("Fire TV (Gen 3)"),
     AFTS("Fire TV (Gen 2)"),
-    AFTT( "Fire TV Stick (Gen 2)"),
+    AFTT("Fire TV Stick (Gen 2)"),
     AFTM("Fire TV Stick (Gen 1)"),
     AFTEAMR311("Fire TV Edition - Insignia HD (2018)"),
-    AFTJMST12( "Fire TV Edition - Insignia 4K (2018)"),
+    AFTJMST12("Fire TV Edition - Insignia 4K (2018)"),
     AFTBAMR311("Fire TV Edition - Toshiba HD (2018)"),
     AFTKMST12("Fire TV Edition - Toshiba 4K (2018)"),
-    AFTRS( "Fire TV Edition - Element 4K (2017)"),
+    AFTRS("Fire TV Edition - Element 4K (2017)"),
     ;
 
     private final String value;

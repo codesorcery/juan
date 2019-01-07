@@ -6,7 +6,7 @@ import java.util.List;
 class VersionExtractor {
     private final List<Character> limiters;
 
-    private VersionExtractor(final Character ... limiters) {
+    private VersionExtractor(final Character... limiters) {
         this.limiters = Arrays.asList(limiters);
     }
 
@@ -23,7 +23,7 @@ class VersionExtractor {
                 if (end == -1) {
                     end = i;
                 }
-            } else if (c == ' '){
+            } else if (c == ' ') {
                 if (currentValid && end > -1) {
                     return getResult(i + 1, end + 1);
                 }

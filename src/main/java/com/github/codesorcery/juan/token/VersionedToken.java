@@ -9,7 +9,7 @@ public class VersionedToken {
     private final String value;
     private final String version;
 
-    VersionedToken(final String value, final String  version) {
+    VersionedToken(final String value, final String version) {
         this.value = value.trim();
         this.version = version.trim();
     }
@@ -23,7 +23,7 @@ public class VersionedToken {
 
     /**
      * @return The version string of the token.
-     *         Empty string if no version was extracted.
+     * Empty string if no version was extracted.
      */
     public String getVersion() {
         return version;

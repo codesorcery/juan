@@ -27,10 +27,11 @@ public class UserAgentParser {
 
     /**
      * Create a new UserAgentParser with Android device lookup using the device list from Google Play.
+     *
      * @param location The location where the Google Play device list is stored.
-     * @param charset The charset of the Google Play device list file.
+     * @param charset  The charset of the Google Play device list file.
      * @return A UserAgentParser instance with Android device lookup
-     *         based on the Google Play device list enabled.
+     * based on the Google Play device list enabled.
      * @throws IOException If the Google Play device list could not be read.
      */
     public static UserAgentParser withPlayStoreDeviceList(final URL location, final Charset charset)
@@ -40,8 +41,9 @@ public class UserAgentParser {
 
     /**
      * Create a new UserAgentParser without the device list from Google Play.
+     *
      * @return A UserAgentParser instance with Android device lookup
-     *         based on the Google Play device list disabled.
+     * based on the Google Play device list disabled.
      */
     public static UserAgentParser withoutPlayStoreDeviceList() {
         return new UserAgentParser(DeviceLookup.withoutPlayStoreDeviceList());
@@ -50,6 +52,7 @@ public class UserAgentParser {
     /**
      * Configure a logging function for the string representation of the
      * intermediary tokenized user agent (for debugging purposes).
+     *
      * @param loggingFunction A function which consumes the
      *                        {@link TokenizedUserAgent#toString()} function
      *                        of the intermediary tokenized user agent.
@@ -62,6 +65,7 @@ public class UserAgentParser {
 
     /**
      * Parse a user agent string.
+     *
      * @param userAgentString The user agent string which should be parsed.
      * @return The parsed user agent information.
      */

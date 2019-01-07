@@ -26,11 +26,11 @@ enum OtherIdentifiableMozillaAgent {
     ),
     SAFARI(Vendors.APPLE, "Safari", tokenList ->
             tokenList.contains(Tokens.SAFARI)
-                && tokenList.contains(Tokens.VERSION)
-                && !tokenList.contains(Tokens.MOBILE)
-                && !tokenList.contains(Tokens.CHROME)
-                && !tokenList.contains(Tokens.FIREFOX)
-                && !tokenList.contains(Tokens.ANDROID),
+                    && tokenList.contains(Tokens.VERSION)
+                    && !tokenList.contains(Tokens.MOBILE)
+                    && !tokenList.contains(Tokens.CHROME)
+                    && !tokenList.contains(Tokens.FIREFOX)
+                    && !tokenList.contains(Tokens.ANDROID),
             Tokens.VERSION,
             AgentType.DESKTOP_BROWSER
     ),
@@ -77,7 +77,7 @@ enum OtherIdentifiableMozillaAgent {
             Tokens.VERSION,
             AgentType.MOBILE_BROWSER
     ),
-;
+    ;
 
     private final Predicate<List<String>> predicate;
     final String vendor;

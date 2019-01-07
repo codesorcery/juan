@@ -27,6 +27,7 @@ public abstract class OperatingSystem {
 
     /**
      * Extract information about the os from a tokenized user agent.
+     *
      * @param source The tokenized user agent from which
      *               the information should be extracted.
      * @return The extracted information about the os.

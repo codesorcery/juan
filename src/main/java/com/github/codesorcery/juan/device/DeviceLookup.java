@@ -13,18 +13,20 @@ import java.util.Optional;
 public interface DeviceLookup {
     /**
      * Extract the device information from a {@link TokenizedUserAgent}.
+     *
      * @param tokenizedUserAgent The {@link TokenizedUserAgent} to extract the information from.
      * @return The extracted device information.
-     *         {@link Optional#empty()} if the device lookup did not find a match.
+     * {@link Optional#empty()} if the device lookup did not find a match.
      */
     Optional<DeviceInfo> getDeviceInfo(TokenizedUserAgent tokenizedUserAgent);
 
     /**
      * Create a new DeviceLookup with Android device lookup using the device list from Google Play enabled.
+     *
      * @param location The location where the Google Play device list is stored.
-     * @param charset The charset of the Google Play device list file.
+     * @param charset  The charset of the Google Play device list file.
      * @return A DeviceLookup instance with Android device lookup
-     *         based on the Google Play device list enabled.
+     * based on the Google Play device list enabled.
      * @throws IOException If the Google Play device list could not be read.
      */
     static DeviceLookup withPlayStoreDeviceList(final URL location, final Charset charset)
@@ -37,8 +39,9 @@ public interface DeviceLookup {
 
     /**
      * Create a new DeviceLookup without the device list from Google Play.
+     *
      * @return A DeviceLookup instance with Android device lookup
-     *         based on the Google Play device list disabled.
+     * based on the Google Play device list disabled.
      */
     static DeviceLookup withoutPlayStoreDeviceList() {
         return new CombinedDeviceLookup(

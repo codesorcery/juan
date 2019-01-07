@@ -4,7 +4,8 @@ package com.github.codesorcery.juan.util;
  * Utility class containing frequently used token values.
  */
 public class Tokens {
-    private Tokens() {}
+    private Tokens() {
+    }
 
     public static final String FIREFOX = "Firefox";
     public static final String SAFARI = "Safari";

@@ -20,6 +20,7 @@ public class DeviceInfo {
 
     /**
      * Create an empty DeviceInfo entity.
+     *
      * @return A DeviceInfo entity where all fields are empty strings.
      */
     public static DeviceInfo empty() {

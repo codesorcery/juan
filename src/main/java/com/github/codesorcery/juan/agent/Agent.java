@@ -36,6 +36,7 @@ public class Agent {
 
     /**
      * Extract information about the agent from a tokenized user agent.
+     *
      * @param source The tokenized user agent from which
      *               the information should be extracted.
      * @return The extracted information about the agent.

@@ -37,10 +37,14 @@ class X11 extends OperatingSystem {
 
     private static OsInfo mapOsName(final String name, final TokenizedUserAgent source) {
         switch (name) {
-            case Tokens.LINUX: return extractLinuxDistribution(source);
-            case "CrOS": return new OsInfo("Chrome OS", "");
-            case "DragonFly": return new OsInfo("DragonFly BSD", "");
-            default: return new OsInfo(name, "");
+            case Tokens.LINUX:
+                return extractLinuxDistribution(source);
+            case "CrOS":
+                return new OsInfo("Chrome OS", "");
+            case "DragonFly":
+                return new OsInfo("DragonFly BSD", "");
+            default:
+                return new OsInfo(name, "");
         }
     }
 
@@ -55,7 +59,7 @@ class X11 extends OperatingSystem {
                 return new OsInfo("Linux (" + t.getValue() + ")", "");
             }
         }
-        return new OsInfo("Linux",  "");
+        return new OsInfo("Linux", "");
     }
 
     private static class OsInfo {

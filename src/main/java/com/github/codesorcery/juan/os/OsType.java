@@ -15,5 +15,5 @@ enum OsType {
     public String toString() {
         return value;
     }
-    
+
 }

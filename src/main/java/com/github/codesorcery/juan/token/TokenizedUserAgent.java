@@ -30,6 +30,7 @@ public class TokenizedUserAgent {
 
     /**
      * Tokenize a user agent string.
+     *
      * @param userAgentString The user agent string to be tokenized.
      * @return A TokenizedUserAgent entity holding the tokenized user agent string.
      */
@@ -102,12 +103,12 @@ public class TokenizedUserAgent {
         for (int i = pos + 1; i < string.length(); i++) {
             final char curChar = string.charAt(i);
             if (curChar == opening) {
-                open ++;
+                open++;
             } else if (curChar == closing) {
                 if (open == 0) {
                     return i;
                 } else {
-                    open --;
+                    open--;
                 }
             }
         }
@@ -120,7 +121,7 @@ public class TokenizedUserAgent {
         int separatorPos = -1;
         final int n = subString.length();
         int i = 0;
-        while (i < n){
+        while (i < n) {
             final char curChar = subString.charAt(i);
             if (curChar == '/') {
                 separatorPos = i;
@@ -216,6 +217,7 @@ public class TokenizedUserAgent {
 
     /**
      * The value of the first token of the user agent string.
+     *
      * @return E.g. 'Mozilla' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public String getPrefixValue() {
@@ -224,6 +226,7 @@ public class TokenizedUserAgent {
 
     /**
      * The version of the first token of the user agent string.
+     *
      * @return E.g. '5.0' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public String getPrefixVersion() {
@@ -233,8 +236,9 @@ public class TokenizedUserAgent {
     /**
      * The {@link VersionedToken}s contained in the user agent string part
      * which usually holds information about the system.
+     *
      * @return E.g. [('foo','1.0'), ('bar','')]
-     *         for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     * for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public List<VersionedToken> getSystemTokens() {
         return systemTokens;
@@ -243,8 +247,9 @@ public class TokenizedUserAgent {
     /**
      * The {@link VersionedToken}s contained in the user agent string parts
      * which usually holds information about the browser.
+     *
      * @return E.g. [('foobar','1.0'), ('foo','2.0'), ('bar'/'3.0')]
-     *         for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     * for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public List<VersionedToken> getBrowserTokens() {
         return browserTokens;
@@ -253,8 +258,9 @@ public class TokenizedUserAgent {
     /**
      * The list of all {@link VersionedToken}s parsed from the user agent string (excluding the prefix).
      * I.e. the combined result of {@link #getSystemTokens()} and {@link #getBrowserTokens()}.
+     *
      * @return E.g. [('foo','1.0'), ('bar',''), ('foobar','1.0'), ('foo','2.0'), ('bar'/'3.0')]
-     *         for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     * for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public List<VersionedToken> getAllTokens() {
         return allTokens;

@@ -4,7 +4,8 @@ package com.github.codesorcery.juan.util;
  * Utility class containing frequently used vendors.
  **/
 public class Vendors {
-    private Vendors() {}
+    private Vendors() {
+    }
 
     public static final String GOOGLE = "Google";
     public static final String APPLE = "Apple";

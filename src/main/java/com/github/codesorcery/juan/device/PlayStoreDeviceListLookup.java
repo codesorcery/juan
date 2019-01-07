@@ -1,19 +1,14 @@
 package com.github.codesorcery.juan.device;
 
-import com.github.codesorcery.juan.token.TokenizedUserAgent;
-import com.github.codesorcery.juan.token.VersionedToken;
-import com.github.codesorcery.juan.util.Tokens;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-class PlayStoreDeviceListLookup implements AndroidDeviceLookup {
+class PlayStoreDeviceListLookup extends AndroidDeviceLookup {
    private final Map<String, DeviceListEntry> deviceList;
 
    private PlayStoreDeviceListLookup(final Map<String, DeviceListEntry> deviceList) {
@@ -35,37 +30,21 @@ class PlayStoreDeviceListLookup implements AndroidDeviceLookup {
       }
    }
 
-   @Override
-   public Optional<DeviceInfo> getDeviceInfo(final TokenizedUserAgent tokenizedUserAgent) {
-       if (notAndroid(tokenizedUserAgent)) {
-           return Optional.empty();
-       }
-       for (final VersionedToken token : tokenizedUserAgent.getSystemTokens()) {
-           String value = token.getValue();
-           if (!value.startsWith(Tokens.ANDROID) && !value.equals(Tokens.LINUX)) {
-               final int tokenPos = token.getValue().indexOf("Build");
-               if (tokenPos > -1) {
-                   value = token.getValue().substring(0, tokenPos).trim();
-               }
-               final DeviceListEntry entry = lookupValue(value);
-               if (entry != null) {
-                   return Optional.of(new DeviceInfo(
-                           entry.vendor,
-                           entry.name.isEmpty() ? value.replace('_', ' ') : entry.name
-                   ));
-               }
-           }
-       }
-       return Optional.empty();
-   }
-
-   private DeviceListEntry lookupValue(final String value) {
-       final DeviceListEntry entry = deviceList.get(value);
-       if (entry != null) {
-           return entry;
-       }
-       return deviceList.get(cleanUpValue(value));
-   }
+    @Override
+    DeviceInfo lookup(final String value) {
+        DeviceListEntry entry = deviceList.get(value);
+        if (entry == null) {
+            entry = deviceList.get(cleanUpValue(value));
+        }
+        if (entry != null) {
+            return new DeviceInfo(
+                    entry.vendor,
+                    entry.name.isEmpty() ? value.replace('_', ' ') : entry.name
+            );
+            
+        }
+        return null;
+    }
 
    private static final String[] VENDOR_STRINGS = {
            "SAMSUNG", "LENOVO", "HUAWEI"

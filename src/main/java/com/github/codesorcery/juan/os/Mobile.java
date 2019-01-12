@@ -18,29 +18,17 @@ class Mobile extends OperatingSystem {
         for (final VersionedToken token : source.getAllTokens()) {
             switch (token.getValue()) {
                 case Tokens.WINDOWS_PHONE:
-                    return new OsInfo(Vendors.MICROSOFT, "Windows Phone",
-                            extractVersion(source, Tokens.WINDOWS_PHONE));
+                    return new OsInfo(Vendors.MICROSOFT, "Windows Phone", token.getVersion());
                 case "KAIOS":
-                    return new OsInfo("KaiOS Technologies Inc.", "KaiOS",
-                            extractVersion(source, "KAIOS"));
+                    return new OsInfo("KaiOS Technologies Inc.", "KaiOS", token.getVersion());
                 case Tokens.FIREFOX:
                     if (source.getBrowserTokens().size() == 2) {
-                        return new OsInfo(Vendors.MOZILLA, "Firefox OS",
-                                extractVersion(source, Tokens.FIREFOX));
+                        return new OsInfo(Vendors.MOZILLA, "Firefox OS", token.getVersion());
                     }
                 default:
             }
         }
         return new OsInfo("", "", "");
-    }
-
-    private static String extractVersion(final TokenizedUserAgent source, final String value) {
-        for (final VersionedToken t : source.getAllTokens()) {
-            if (t.getValue().equals(value)) {
-                return t.getVersion();
-            }
-        }
-        return "";
     }
 
     private static class OsInfo {

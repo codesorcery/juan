@@ -76,6 +76,10 @@ public class UserAgentParser {
             logger.accept(tokenizedUserAgent::toString);
         }
         final Agent agent = Agent.fromUserAgent(tokenizedUserAgent);
+        if (agent.isCrawler()) {
+            // Crawlers send no reliable os or device info, so leave them empty
+            return new ParsedUserAgent(agent, OperatingSystem.unknown(), DeviceInfo.empty());
+        }
         final OperatingSystem os = OperatingSystem.fromUserAgent(tokenizedUserAgent);
         final DeviceInfo device = deviceLookup.getDeviceInfo(tokenizedUserAgent)
                 .orElse(DeviceInfo.empty());

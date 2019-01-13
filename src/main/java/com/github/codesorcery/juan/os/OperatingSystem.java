@@ -106,6 +106,13 @@ public abstract class OperatingSystem {
     }
 
     /**
+     * @return An operating system with empty information fields.
+     */
+    public static OperatingSystem unknown() {
+        return new UnknownOS();
+    }
+
+    /**
      * @return The vendor of the operating system.
      * Empty string if unknown.
      */

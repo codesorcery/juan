@@ -105,6 +105,10 @@ public class Agent {
         return type.toString();
     }
 
+    public boolean isCrawler() {
+        return AgentType.CRAWLER.equals(type);
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")

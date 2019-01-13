@@ -75,6 +75,12 @@ enum DirectlyIdentifiableMozillaAgent {
     POWERSHELL("WindowsPowerShell", Vendors.MICROSOFT, "PowerShell", AgentType.CLI_APPLICATION),
     ELECTRON("Electron", "Electron community", "Electron framework", AgentType.DESKTOP_APPLICATION),
     PINTEREST("Pinterest", "Pinterest", "Pinterest App", AgentType.MOBILE_APPLICATION),
+    /* Crawlers */
+    /* https://support.google.com/webmasters/answer/1061943?hl=en */
+    GOOGLE_BOT("Googlebot", Vendors.GOOGLE, "Googlebot", AgentType.CRAWLER),
+    GOOGLE_ADSBOT_MOBILE("AdsBot-Google-Mobile", Vendors.GOOGLE, "AdsBot Mobile Web", AgentType.CRAWLER),
+    GOOGLE_MOBILE_APPS_ANDROID("AdsBot-Google-Mobile-Apps", Vendors.GOOGLE, "AdsBot Mobile Apps", AgentType.CRAWLER),
+    GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, "AdSense", AgentType.CRAWLER),
     ;
 
     private final String identifier;

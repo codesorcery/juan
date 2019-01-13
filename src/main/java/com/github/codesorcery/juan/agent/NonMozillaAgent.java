@@ -43,6 +43,15 @@ enum NonMozillaAgent {
     PLEX("Plex", "Plex community", "Plex Medica Center", AgentType.MEDIA_PLAYER),
     ALEXA_MEDIAPLAYER("AlexaMediaPlayer", Vendors.AMAZON, "Alexa MediaPlayer", AgentType.MEDIA_PLAYER),
     APPLE_TV("AppleTV", Vendors.APPLE, "tvOS", AgentType.MEDIA_PLAYER),
+    /* Crawlers */
+    /* https://support.google.com/webmasters/answer/1061943?hl=en */
+    GOOGLE_BOT("Googlebot", Vendors.GOOGLE, "Googlebot", AgentType.CRAWLER),
+    GOOGLE_BOT_IMAGES("Googlebot-Image", Vendors.GOOGLE, "Googlebot Images", AgentType.CRAWLER),
+    GOOGLE_BOT_NEWS("Googlebot-News", Vendors.GOOGLE, "Googlebot News", AgentType.CRAWLER),
+    GOOGLE_BOT_VIDEO("Googlebot-Video", Vendors.GOOGLE, "Googlebot Video", AgentType.CRAWLER),
+    GOOGLE_ADSBOT("AdsBot-Google", Vendors.GOOGLE, "AdsBot", AgentType.CRAWLER),
+    GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, "AdSense", AgentType.CRAWLER),
+    GOOGLE_APIS("APIs-Google", Vendors.GOOGLE, "Google APIs", AgentType.CRAWLER),
     ;
 
     private final String identifier;

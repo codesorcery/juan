@@ -46,10 +46,13 @@ public class Agent {
         if (nmAgent != null) {
             return new Agent(nmAgent.name, nmAgent.vendor, source.getPrefixVersion(), nmAgent.type);
         }
-        for (final VersionedToken token : source.getBrowserTokens()) {
+        for (final VersionedToken token : source.getAllTokens()) {
             final DirectlyIdentifiableMozillaAgent agent = DIRECTLY_IDENTIFIABLE_BROWSERS_MAP.get(token.getValue());
             if (agent != null) {
-                return new Agent(agent.name, agent.vendor, token.getVersion(), agent.type);
+                final String version = token.getVersion().isEmpty()
+                        ? getVersion(source.getBrowserTokens(), token.getValue())
+                        : token.getVersion();
+                return new Agent(agent.name, agent.vendor, version, agent.type);
             }
         }
         for (final OtherIdentifiableMozillaAgent agent : OTHER_IDENTIFIABLE_BROWSERS_LIST) {

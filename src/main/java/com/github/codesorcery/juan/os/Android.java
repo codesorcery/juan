@@ -12,7 +12,7 @@ class Android extends OperatingSystem {
 
     private static String extractOsVersion(final TokenizedUserAgent source) {
         for (final VersionedToken token : source.getSystemTokens()) {
-            if (token.getValue().contains(Tokens.ANDROID)) {
+            if (token.getValue().equals(Tokens.ANDROID)) {
                 return token.getVersion();
             }
         }

@@ -11,6 +11,7 @@ enum AgentType {
     LIBRARY("Library"),
     VALIDATOR("Validator"),
     MEDIA_PLAYER("Media player"),
+    CRAWLER("Web crawler"),
     UNKNOWN(""),
     ;
 

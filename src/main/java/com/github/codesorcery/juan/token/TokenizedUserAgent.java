@@ -35,7 +35,7 @@ public class TokenizedUserAgent {
      * @return A TokenizedUserAgent entity holding the tokenized user agent string.
      */
     public static TokenizedUserAgent forUserAgentString(final String userAgentString) {
-        final int prefixLimiterPos = userAgentString.indexOf('/');
+        final int prefixLimiterPos = getPrefixLimiterPos(userAgentString);
         if (prefixLimiterPos > -1) {
             final int prefixEnd = userAgentString.indexOf(' ', prefixLimiterPos);
             final String prefixValue = userAgentString.substring(0, prefixLimiterPos);
@@ -73,8 +73,31 @@ public class TokenizedUserAgent {
                         userAgentString, "");
             }
         }
-        return new TokenizedUserAgent("", "", "",
-                userAgentString, "");
+        return new TokenizedUserAgent(extractBasicPrefix(userAgentString), "",
+                "", userAgentString, "");
+    }
+
+    private static String extractBasicPrefix(final String userAgentString) {
+        final int pos = userAgentString.indexOf(' ');
+        if (pos != -1) {
+            return userAgentString.substring(0, pos);
+        } else {
+            return userAgentString;
+        }
+    }
+
+    private static int getPrefixLimiterPos(final String userAgentString) {
+        final int prefixLimiterPos = userAgentString.indexOf('/');
+        if (prefixLimiterPos == -1) {
+            return -1;
+        } else {
+            final int firstOpeningBracket = userAgentString.indexOf('(');
+            if ((firstOpeningBracket == -1 || firstOpeningBracket > prefixLimiterPos)) {
+                return prefixLimiterPos;
+            } else {
+                return  -1;
+            }
+        }
     }
 
     private static boolean openBracketFollows(final String string, final int start) {
@@ -129,7 +152,7 @@ public class TokenizedUserAgent {
                 final int closing = findMatchingClosingBracket(i, subString, '(', ')');
                 if (closing != -1) {
                     final String value = subString.substring(i, closing + 1);
-                    result.add(new VersionedToken(value, ""));
+                    result.addAll(extractSemicolonSeparated(value));
                     i = closing;
                     valueStart = i + 1;
                     separatorPos = -1;

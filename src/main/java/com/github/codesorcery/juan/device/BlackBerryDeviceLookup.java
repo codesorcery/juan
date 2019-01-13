@@ -10,10 +10,10 @@ class BlackBerryDeviceLookup implements DeviceLookup {
     @Override
     public Optional<DeviceInfo> getDeviceInfo(TokenizedUserAgent tokenizedUserAgent) {
         // Old devices
-        if (tokenizedUserAgent.getPrefixValue().startsWith(Tokens.BLACKBERRY)) {
+        if (tokenizedUserAgent.getPrefix().getValue().startsWith(Tokens.BLACKBERRY)) {
             return Optional.of(new DeviceInfo(
                     "BlackBerry",
-                    tokenizedUserAgent.getPrefixValue().substring(Tokens.BLACKBERRY.length())
+                    tokenizedUserAgent.getPrefix().getValue().substring(Tokens.BLACKBERRY.length())
             ));
         }
         // Newer devices

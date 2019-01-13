@@ -11,7 +11,14 @@ public class VersionedToken {
 
     VersionedToken(final String value, final String version) {
         this.value = value.trim();
-        this.version = version.trim();
+        this.version = extraTrim(version.trim());
+    }
+
+    private String extraTrim(final String value) {
+        if (!value.isEmpty() && value.charAt(value.length() - 1) == ';') {
+            return value.substring(0, value.length() -1);
+        }
+        return value;
     }
 
     /**

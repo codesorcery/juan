@@ -76,15 +76,11 @@ enum DirectlyIdentifiableMozillaAgent {
     PINTEREST("Pinterest", "Pinterest", "Pinterest App", AgentType.MOBILE_APPLICATION),
     /* Crawlers */
     /* https://support.google.com/webmasters/answer/1061943?hl=en */
-    GOOGLE_BOT("Googlebot", Vendors.GOOGLE, "Googlebot", AgentType.CRAWLER),
-    GOOGLE_ADSBOT_MOBILE("AdsBot-Google-Mobile", Vendors.GOOGLE, "AdsBot Mobile Web", AgentType.CRAWLER),
-    GOOGLE_MOBILE_APPS_ANDROID("AdsBot-Google-Mobile-Apps", Vendors.GOOGLE, "AdsBot Mobile Apps", AgentType.CRAWLER),
-    GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, "AdSense", AgentType.CRAWLER),
+    GOOGLE_BOT("Googlebot", Vendors.GOOGLE, AgentType.CRAWLER),
+    GOOGLE_MOBILE_APPS_ANDROID("AdsBot-Google-Mobile-Apps", Vendors.GOOGLE, AgentType.CRAWLER),
+    GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, AgentType.CRAWLER),
     /* https://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0 */
-    MICROSOFT_BINGBOT("bingbot", Vendors.MICROSOFT, "Bingbot", AgentType.CRAWLER),
-    MICROSOFT_ADIDXBOT("adidxbot", Vendors.MICROSOFT, "AdIdxBot", AgentType.CRAWLER),
-    MICROSOFT_BINGPREVIEW("BingPreview", Vendors.MICROSOFT, "BingPreview", AgentType.CRAWLER),
-    
+    MICROSOFT_BINGPREVIEW("BingPreview", Vendors.MICROSOFT, AgentType.CRAWLER),
     ;
 
     private final String identifier;
@@ -98,6 +94,10 @@ enum DirectlyIdentifiableMozillaAgent {
         this.vendor = vendor;
         this.name = name;
         this.type = type;
+    }
+
+    DirectlyIdentifiableMozillaAgent(final String identifier, final String vendor, final AgentType type) {
+        this(identifier, vendor, identifier, type);
     }
 
     static Map<String, DirectlyIdentifiableMozillaAgent> valuesAsMap() {

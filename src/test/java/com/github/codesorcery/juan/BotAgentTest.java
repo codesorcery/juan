@@ -52,7 +52,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "Googlebot Images", "1.0", "Web crawler");
+                "Google", "Googlebot-Image", "1.0", "Web crawler");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "Googlebot News", "", "Web crawler");
+                "Google", "Googlebot-News", "", "Web crawler");
     }
 
     @Test
@@ -72,7 +72,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "Googlebot Video", "1.0", "Web crawler");
+                "Google", "Googlebot-Video", "1.0", "Web crawler");
     }
 
     @Test
@@ -82,7 +82,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "AdsBot", "", "Web crawler");
+                "Google", "AdsBot-Google", "", "Web crawler");
     }
 
     @Test
@@ -92,7 +92,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "AdsBot Mobile Web", "", "Web crawler");
+                "Google", "AdsBot-Google-Mobile", "", "Web crawler");
     }
 
     @Test
@@ -102,7 +102,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "AdSense", "", "Web crawler");
+                "Google", "Mediapartners-Google", "", "Web crawler");
     }
 
     @Test
@@ -112,7 +112,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Google", "Google APIs", "", "Web crawler");
+                "Google", "APIs-Google", "", "Web crawler");
     }
 
     @Test
@@ -122,7 +122,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "Bingbot", "2.0", "Web crawler");
+                "Microsoft", "bingbot", "2.0", "Web crawler");
     }
 
     @Test
@@ -132,7 +132,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "Bingbot", "2.0", "Web crawler");
+                "Microsoft", "bingbot", "2.0", "Web crawler");
     }
 
 
@@ -143,7 +143,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "Bingbot", "2.0", "Web crawler");
+                "Microsoft", "bingbot", "2.0", "Web crawler");
     }
 
     @Test
@@ -153,7 +153,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "MSNBot", "2.0b", "Web crawler");
+                "Microsoft", "msnbot", "2.0b", "Web crawler");
     }
 
     @Test
@@ -163,7 +163,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "MSNBot-Media", "1.1", "Web crawler");
+                "Microsoft", "msnbot-media", "1.1", "Web crawler");
     }
 
     @Test
@@ -173,7 +173,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "AdIdxBot", "2.0", "Web crawler");
+                "Microsoft", "adidxbot", "2.0", "Web crawler");
     }
 
     @Test
@@ -183,7 +183,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "AdIdxBot", "2.0", "Web crawler");
+                "Microsoft", "adidxbot", "2.0", "Web crawler");
     }
 
     @Test
@@ -193,7 +193,7 @@ public class BotAgentTest {
         final Agent agent = Agent.fromUserAgent(ua);
 
         Validators.validateAgent(agent,
-                "Microsoft", "AdIdxBot", "2.0", "Web crawler");
+                "Microsoft", "adidxbot", "2.0", "Web crawler");
     }
 
     @Test
@@ -214,5 +214,106 @@ public class BotAgentTest {
 
         Validators.validateAgent(agent,
                 "Microsoft", "BingPreview", "1.0b", "Web crawler");
+    }
+
+    @Test
+    public void yandexBot() {
+        final String input = "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Yandex", "YandexBot", "3.0", "Web crawler");
+    }
+
+
+    @Test
+    public void yandexDirectFetcher() {
+        final String input = "Mozilla/5.0 (compatible; YaDirectFetcher/1.0; Dyatel; +http://yandex.com/bots)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Yandex", "YaDirectFetcher", "1.0", "Web crawler");
+    }
+
+    @Test
+    public void yandexScreenshotBot() {
+        final String input = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 (compatible; YandexScreenshotBot/3.0; +http://yandex.com/bots)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Yandex", "YandexScreenshotBot", "3.0", "Web crawler");
+    }
+
+    @Test
+    public void yahooSlurp() {
+        final String input = "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Yahoo", "Yahoo! Slurp", "", "Web crawler");
+    }
+
+    @Test
+    public void duckDuckBot() {
+        final String input = "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "DuckDuckGo", "DuckDuckBot", "1.0", "Web crawler");
+    }
+
+    @Test
+    public void baiduSpider() {
+        final String input = "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Baidu", "Baiduspider", "2.0", "Web crawler");
+    }
+
+    @Test
+    public void exabot() {
+        final String input = "Mozilla/5.0 (compatible; Exabot/3.0; +http://www.exabot.com/go/robot)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "", "Exabot", "3.0", "Web crawler");
+    }
+
+    @Test
+    public void facebookFacebot() {
+        final String input = "facebot";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Facebook", "facebot", "", "Web crawler");
+    }
+
+    @Test
+    public void facebookExternalHit() {
+        final String input = "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Facebook", "facebookexternalhit", "1.1", "Web crawler");
+    }
+
+    @Test
+    public void alexaIAArchiver() {
+        final String input = "ia_archiver (+http://www.alexa.com/site/help/webmasters; crawler@alexa.com)\n";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Alexa", "ia_archiver", "", "Web crawler");
     }
 }

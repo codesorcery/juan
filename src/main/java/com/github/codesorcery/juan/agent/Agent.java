@@ -18,6 +18,7 @@ public class Agent {
             OTHER_IDENTIFIABLE_BROWSERS_LIST = OtherIdentifiableMozillaAgent.valuesAsList();
     private static final Map<String, NonMozillaAgent>
             NON_MOZILLA_AGENT_MAP = NonMozillaAgent.valuesAsMap();
+    private static final List<CrawlerVendor> crawlerVendors = CrawlerVendor.valuesAsList();
 
     private static final Agent EMPTY = new Agent("", "", "", AgentType.UNKNOWN);
 
@@ -42,9 +43,14 @@ public class Agent {
      * @return The extracted information about the agent.
      */
     public static Agent fromUserAgent(final TokenizedUserAgent source) {
-        final NonMozillaAgent nmAgent = NON_MOZILLA_AGENT_MAP.get(source.getPrefixValue());
+        final VersionedToken crawler = GenericCrawlerCheck.check(source);
+        if (crawler != null) {
+            return new Agent(crawler.getValue(), getCrawlerVendor(crawler.getValue()),
+                    crawler.getVersion(), AgentType.CRAWLER);
+        }
+        final NonMozillaAgent nmAgent = NON_MOZILLA_AGENT_MAP.get(source.getPrefix().getValue());
         if (nmAgent != null) {
-            return new Agent(nmAgent.name, nmAgent.vendor, source.getPrefixVersion(), nmAgent.type);
+            return new Agent(nmAgent.name, nmAgent.vendor, source.getPrefix().getVersion(), nmAgent.type);
         }
         for (final VersionedToken token : source.getAllTokens()) {
             final DirectlyIdentifiableMozillaAgent agent = DIRECTLY_IDENTIFIABLE_BROWSERS_MAP.get(token.getValue());
@@ -68,6 +74,16 @@ public class Agent {
         for (final VersionedToken t : tokens) {
             if (t.getValue().equals(value)) {
                 return t.getVersion();
+            }
+        }
+        return "";
+    }
+
+    private static String getCrawlerVendor(final String id) {
+        final String lowercaseId = id.toLowerCase();
+        for (final CrawlerVendor vendor : crawlerVendors) {
+            if (vendor.matches(lowercaseId)) {
+                return vendor.getName();
             }
         }
         return "";

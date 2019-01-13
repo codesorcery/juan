@@ -45,16 +45,13 @@ enum NonMozillaAgent {
     APPLE_TV("AppleTV", Vendors.APPLE, "tvOS", AgentType.MEDIA_PLAYER),
     /* Crawlers */
     /* https://support.google.com/webmasters/answer/1061943?hl=en */
-    GOOGLE_BOT("Googlebot", Vendors.GOOGLE, "Googlebot", AgentType.CRAWLER),
-    GOOGLE_BOT_IMAGES("Googlebot-Image", Vendors.GOOGLE, "Googlebot Images", AgentType.CRAWLER),
-    GOOGLE_BOT_NEWS("Googlebot-News", Vendors.GOOGLE, "Googlebot News", AgentType.CRAWLER),
-    GOOGLE_BOT_VIDEO("Googlebot-Video", Vendors.GOOGLE, "Googlebot Video", AgentType.CRAWLER),
-    GOOGLE_ADSBOT("AdsBot-Google", Vendors.GOOGLE, "AdsBot", AgentType.CRAWLER),
-    GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, "AdSense", AgentType.CRAWLER),
-    GOOGLE_APIS("APIs-Google", Vendors.GOOGLE, "Google APIs", AgentType.CRAWLER),
-    /* https://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0 */
-    MSN_BOT("msnbot", Vendors.MICROSOFT, "MSNBot", AgentType.CRAWLER),
-    MSN_BOT_MEDIA("msnbot-media", Vendors.MICROSOFT, "MSNBot-Media", AgentType.CRAWLER),
+    GOOGLE_BOT("Googlebot", Vendors.GOOGLE, AgentType.CRAWLER),
+    GOOGLE_BOT_IMAGES("Googlebot-Image", Vendors.GOOGLE,  AgentType.CRAWLER),
+    GOOGLE_BOT_NEWS("Googlebot-News", Vendors.GOOGLE,  AgentType.CRAWLER),
+    GOOGLE_BOT_VIDEO("Googlebot-Video", Vendors.GOOGLE,  AgentType.CRAWLER),
+    GOOGLE_ADSBOT("AdsBot-Google", Vendors.GOOGLE,  AgentType.CRAWLER),
+    GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE,  AgentType.CRAWLER),
+    FACEBOOK_FACEBOT("facebot", Vendors.FACEBOOK, AgentType.CRAWLER),
     ;
 
     private final String identifier;
@@ -68,6 +65,10 @@ enum NonMozillaAgent {
         this.vendor = vendor;
         this.name = name;
         this.type = type;
+    }
+
+    NonMozillaAgent(final String identifier, final String vendor, final AgentType type) {
+        this(identifier, vendor, identifier, type);
     }
 
     static Map<String, NonMozillaAgent> valuesAsMap() {

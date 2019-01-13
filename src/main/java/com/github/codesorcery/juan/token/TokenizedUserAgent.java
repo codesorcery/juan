@@ -39,23 +39,13 @@ public class TokenizedUserAgent {
         return Tokenizer.tokenizeUserAgentString(userAgentString);
     }
 
-
     /**
-     * The value of the first token of the user agent string.
+     * The first token of the user agent string.
      *
-     * @return E.g. 'Mozilla' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
+     * @return E.g. ('Mozilla', '5.0') for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
-    public String getPrefixValue() {
-        return prefix.getValue();
-    }
-
-    /**
-     * The version of the first token of the user agent string.
-     *
-     * @return E.g. '5.0' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
-     */
-    public String getPrefixVersion() {
-        return prefix.getVersion();
+    public VersionedToken getPrefix() {
+        return prefix;
     }
 
     /**
@@ -71,6 +61,17 @@ public class TokenizedUserAgent {
         } else {
             return systemTokens.get(0);
         }
+    }
+
+    /**
+     * The {@link VersionedToken}s contained in allt user agent string parts
+     * which may hold information about the system.
+     *
+     * @return E.g. [[('foo','1.0'), ('bar','')], ['ack', '2.3']]
+     * for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 (ack 2.3) [foo/2.0; bar/3.0]"
+     */
+    public List<List<VersionedToken>> getAllSystemTokens() {
+        return systemTokens;
     }
 
     /**

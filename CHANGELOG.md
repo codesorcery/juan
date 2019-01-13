@@ -1,5 +1,9 @@
 # JUAN Releases
 
+# v0.2.0
+ - General performance improvements.
+ - Generic detection of web crawlers.
+
 # v0.1.1
  - Improve execution time of device detection class for Amazon Fire devices.
    Also now only executed if device is detected as Android device.

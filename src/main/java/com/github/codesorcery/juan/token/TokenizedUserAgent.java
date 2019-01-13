@@ -1,6 +1,7 @@
 package com.github.codesorcery.juan.token;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -9,23 +10,23 @@ import java.util.StringJoiner;
  */
 public class TokenizedUserAgent {
 
-    private final String prefixValue;
-    private final String prefixVersion;
-    private final List<VersionedToken> systemTokens;
+    private final VersionedToken prefix;
+    private final List<List<VersionedToken>> systemTokens;
     private final List<VersionedToken> browserTokens;
     private final List<VersionedToken> allTokens;
 
-    private TokenizedUserAgent(final String prefixValue, final String prefixVersion,
-                               final String systemInfoString, final String browserInfoString,
-                               final String additionalInfoString) {
-        this.prefixValue = prefixValue;
-        this.prefixVersion = prefixVersion;
-        this.systemTokens = extractSemicolonSeparated(systemInfoString);
-        browserTokens = extractBrowserInfo(browserInfoString);
-        browserTokens.addAll(extractSemicolonSeparated(additionalInfoString));
-        allTokens = new ArrayList<>();
-        allTokens.addAll(systemTokens);
-        allTokens.addAll(browserTokens);
+    private TokenizedUserAgent(final List<VersionedToken> allTokens,
+                               final List<VersionedToken> browserTokens,
+                               final List<List<VersionedToken>> systemTokens) {
+        this.allTokens = allTokens;
+        this.browserTokens = browserTokens;
+        this.systemTokens = systemTokens;
+        if (allTokens.isEmpty()) {
+            prefix = new VersionedToken("", "");
+        } else {
+            prefix = allTokens.get(0);
+        }
+        
     }
 
     /**
@@ -35,205 +36,9 @@ public class TokenizedUserAgent {
      * @return A TokenizedUserAgent entity holding the tokenized user agent string.
      */
     public static TokenizedUserAgent forUserAgentString(final String userAgentString) {
-        final int prefixLimiterPos = getPrefixLimiterPos(userAgentString);
-        if (prefixLimiterPos > -1) {
-            final int prefixEnd = userAgentString.indexOf(' ', prefixLimiterPos);
-            final String prefixValue = userAgentString.substring(0, prefixLimiterPos);
-            final String prefixVersion = prefixEnd > -1
-                    ? userAgentString.substring(prefixLimiterPos + 1, prefixEnd)
-                    : userAgentString.substring(prefixLimiterPos + 1);
-            if (openBracketFollows(userAgentString, prefixEnd)) {
-                final int systemOpen = userAgentString.indexOf('(');
-                final int systemClose = findMatchingClosingBracket(
-                        systemOpen, userAgentString, '(', ')');
-                final int additionalOpen = userAgentString.indexOf('[', systemClose);
-                final int additionalClose = findMatchingClosingBracket(
-                        additionalOpen, userAgentString, '[', ']');
-                if (systemClose > -1) {
-                    final String systemString =
-                            userAgentString.substring(systemOpen + 1, systemClose);
-                    if (additionalOpen > -1 && additionalClose > -1) {
-                        return new TokenizedUserAgent(
-                                prefixValue, prefixVersion,
-                                systemString,
-                                userAgentString.substring(systemClose + 1, additionalOpen),
-                                userAgentString.substring(additionalOpen + 1, additionalClose)
-                        );
-                    } else {
-                        return new TokenizedUserAgent(
-                                prefixValue, prefixVersion,
-                                systemString,
-                                userAgentString.substring(systemClose + 1),
-                                ""
-                        );
-                    }
-                }
-            } else {
-                return new TokenizedUserAgent(prefixValue, prefixVersion, "",
-                        userAgentString, "");
-            }
-        }
-        return new TokenizedUserAgent(extractBasicPrefix(userAgentString), "",
-                "", userAgentString, "");
+        return Tokenizer.tokenizeUserAgentString(userAgentString);
     }
 
-    private static String extractBasicPrefix(final String userAgentString) {
-        final int pos = userAgentString.indexOf(' ');
-        if (pos != -1) {
-            return userAgentString.substring(0, pos);
-        } else {
-            return userAgentString;
-        }
-    }
-
-    private static int getPrefixLimiterPos(final String userAgentString) {
-        final int prefixLimiterPos = userAgentString.indexOf('/');
-        if (prefixLimiterPos == -1) {
-            return -1;
-        } else {
-            final int firstOpeningBracket = userAgentString.indexOf('(');
-            if ((firstOpeningBracket == -1 || firstOpeningBracket > prefixLimiterPos)) {
-                return prefixLimiterPos;
-            } else {
-                return  -1;
-            }
-        }
-    }
-
-    private static boolean openBracketFollows(final String string, final int start) {
-        if (start < 0) {
-            return false;
-        }
-        for (int i = start; i < string.length(); i++) {
-            final char curChar = string.charAt(i);
-            if (curChar == '(') {
-                return true;
-            } else if (curChar != ' ') {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    private static int findMatchingClosingBracket(final int pos,
-                                                  final String string,
-                                                  final char opening,
-                                                  final char closing) {
-        if (pos == -1) {
-            return -1;
-        }
-        int open = 0;
-        for (int i = pos + 1; i < string.length(); i++) {
-            final char curChar = string.charAt(i);
-            if (curChar == opening) {
-                open++;
-            } else if (curChar == closing) {
-                if (open == 0) {
-                    return i;
-                } else {
-                    open--;
-                }
-            }
-        }
-        return -1;
-    }
-
-    private static List<VersionedToken> extractBrowserInfo(final String subString) {
-        final List<VersionedToken> result = new ArrayList<>();
-        int valueStart = 0;
-        int separatorPos = -1;
-        final int n = subString.length();
-        int i = 0;
-        while (i < n) {
-            final char curChar = subString.charAt(i);
-            if (curChar == '/') {
-                separatorPos = i;
-            } else if (curChar == '(') {
-                final int closing = findMatchingClosingBracket(i, subString, '(', ')');
-                if (closing != -1) {
-                    final String value = subString.substring(i, closing + 1);
-                    result.addAll(extractSemicolonSeparated(value));
-                    i = closing;
-                    valueStart = i + 1;
-                    separatorPos = -1;
-                }
-            } else if (curChar == ' ' || i + 1 == n) {
-                if (separatorPos != -1) {
-                    final String value = subString.substring(valueStart, separatorPos);
-                    final String version = subString.substring(separatorPos + 1, i + 1);
-                    result.add(new VersionedToken(value, version));
-                } else if (i > valueStart) {
-                    final String value = subString.substring(valueStart, i);
-                    final String version = getNextTokenIfVersion(subString, i + 1);
-                    result.add(new VersionedToken(value, version));
-                    i += version.length();
-                }
-                separatorPos = -1;
-                valueStart = i + 1;
-            }
-            i += 1;
-        }
-        return result;
-    }
-
-    private static String getNextTokenIfVersion(final String string, final int start) {
-        for (int i = start; i < string.length(); i++) {
-            final char curChar = string.charAt(i);
-            if (curChar == ' ') {
-                return string.substring(start, i);
-            } else if (!isPartOfVersionString(curChar)) {
-                return "";
-            }
-        }
-        return "";
-    }
-
-    private static boolean isPartOfVersionString(final char character) {
-        return character == '.' || (character >= '0' && character <= '9');
-    }
-
-    private static List<VersionedToken> extractSemicolonSeparated(final String subString) {
-        final List<VersionedToken> result = new ArrayList<>();
-        int valueStart = 0;
-        final int n = subString.length();
-        for (int i = 0; i < n; i++) {
-            final char curChar = subString.charAt(i);
-            if (curChar == ';') {
-                result.add(extractToken(subString.substring(valueStart, i)));
-                valueStart = i + 1;
-            }
-        }
-        if (valueStart != n) {
-            result.add(extractToken(subString.substring(valueStart)));
-        }
-        return result;
-    }
-
-    private static VersionedToken extractToken(final String tokenString) {
-        final int n = tokenString.length();
-        int separatorPos = tokenString.lastIndexOf('/');
-        if (separatorPos > 0 && separatorPos < n - 1) {
-            return new VersionedToken(
-                    tokenString.substring(0, separatorPos),
-                    tokenString.substring(separatorPos + 1)
-            );
-        }
-        separatorPos = tokenString.lastIndexOf(':');
-        if (separatorPos > 0 && separatorPos < n - 1) {
-            return new VersionedToken(
-                    tokenString.substring(0, separatorPos),
-                    tokenString.substring(separatorPos + 1)
-            );
-        }
-        final int start = VersionExtractor.versionPos(tokenString);
-        if (start > -1) {
-            return new VersionedToken(
-                    tokenString.substring(0, start),
-                    tokenString.substring(start).replace('_', '.')
-            );
-        }
-        return new VersionedToken(tokenString, "");
-    }
 
     /**
      * The value of the first token of the user agent string.
@@ -241,7 +46,7 @@ public class TokenizedUserAgent {
      * @return E.g. 'Mozilla' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public String getPrefixValue() {
-        return prefixValue;
+        return prefix.getValue();
     }
 
     /**
@@ -250,7 +55,7 @@ public class TokenizedUserAgent {
      * @return E.g. '5.0' for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public String getPrefixVersion() {
-        return prefixVersion;
+        return prefix.getVersion();
     }
 
     /**
@@ -261,7 +66,11 @@ public class TokenizedUserAgent {
      * for "Mozilla/5.0 (foo 1.0; bar) foobar/1.0 [foo/2.0; bar/3.0]"
      */
     public List<VersionedToken> getSystemTokens() {
-        return systemTokens;
+        if (systemTokens.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return systemTokens.get(0);
+        }
     }
 
     /**
@@ -289,10 +98,46 @@ public class TokenizedUserAgent {
     @Override
     public String toString() {
         return new StringJoiner(", ", TokenizedUserAgent.class.getSimpleName() + "[", "]")
-                .add("prefixValue='" + prefixValue + "'")
-                .add("prefixVersion='" + prefixVersion + "'")
+                .add("prefixValue='" + prefix.getValue() + "'")
+                .add("prefixVersion='" + prefix.getVersion() + "'")
                 .add("systemTokens=" + systemTokens)
                 .add("browserTokens=" + browserTokens)
                 .toString();
+    }
+
+    /*
+     * Builder
+     */
+
+    static class Builder {
+        private final List<VersionedToken> allTokens;
+        private final List<VersionedToken> browserTokens;
+        private final List<List<VersionedToken>> systemTokens;
+
+        Builder() {
+            allTokens = new ArrayList<>();
+            browserTokens = new ArrayList<>();
+            systemTokens = new ArrayList<>();
+        }
+
+        void addBrowserToken(final VersionedToken token) {
+            allTokens.add(token);
+            browserTokens.add(token);
+        }
+
+
+        void addBrowserTokens(final List<VersionedToken> tokens) {
+            allTokens.addAll(tokens);
+            browserTokens.addAll(tokens);
+        }
+
+        void addSystemTokens(final List<VersionedToken> tokens) {
+            allTokens.addAll(tokens);
+            systemTokens.add(tokens);
+        }
+
+        TokenizedUserAgent build() {
+            return new TokenizedUserAgent(allTokens, browserTokens, systemTokens);
+        }
     }
 }

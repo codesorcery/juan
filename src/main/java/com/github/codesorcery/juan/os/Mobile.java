@@ -22,7 +22,7 @@ class Mobile extends OperatingSystem {
                 case "KAIOS":
                     return new OsInfo("KaiOS Technologies Inc.", "KaiOS", token.getVersion());
                 case Tokens.FIREFOX:
-                    if (source.getBrowserTokens().size() == 2) {
+                    if (source.getBrowserTokens().size() == 3) {
                         return new OsInfo(Vendors.MOZILLA, "Firefox OS", token.getVersion());
                     }
                 default:

@@ -52,6 +52,9 @@ enum NonMozillaAgent {
     GOOGLE_ADSBOT("AdsBot-Google", Vendors.GOOGLE, "AdsBot", AgentType.CRAWLER),
     GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, "AdSense", AgentType.CRAWLER),
     GOOGLE_APIS("APIs-Google", Vendors.GOOGLE, "Google APIs", AgentType.CRAWLER),
+    /* https://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0 */
+    MSN_BOT("msnbot", Vendors.MICROSOFT, "MSNBot", AgentType.CRAWLER),
+    MSN_BOT_MEDIA("msnbot-media", Vendors.MICROSOFT, "MSNBot-Media", AgentType.CRAWLER),
     ;
 
     private final String identifier;

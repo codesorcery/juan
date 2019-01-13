@@ -77,6 +77,10 @@ enum OtherIdentifiableMozillaAgent {
             Tokens.VERSION,
             AgentType.MOBILE_BROWSER
     ),
+    IE_MOBILE(Vendors.MICROSOFT, "Internet Explorer Mobile", tokenList ->
+            tokenList.contains("IEMobile"),
+            "IEMobile",
+            AgentType.MOBILE_BROWSER),
     ;
 
     private final Predicate<List<String>> predicate;

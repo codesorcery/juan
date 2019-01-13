@@ -10,7 +10,6 @@ enum DirectlyIdentifiableMozillaAgent {
     AMAZON_SILK("Silk", Vendors.AMAZON, "Silk", AgentType.MOBILE_BROWSER),
     SAMSUNG_BROWSER("SamsungBrowser", "Samsung", "Samsung Browser", AgentType.MOBILE_BROWSER),
     YANDEX_BROWSER("YaBrowser", "Yandex", "Yandex Browser", AgentType.MOBILE_BROWSER),
-    IE_MOBILE("IEMobile", Vendors.MICROSOFT, "Internet Explorer Mobile", AgentType.MOBILE_BROWSER),
     MIUI_BROWSER("XiaoMi/MiuiBrowser", "XioMi", "MIUI Browser", AgentType.MOBILE_BROWSER),
     PUFFIN("Puffin", "", "Puffin Browser", AgentType.MOBILE_BROWSER),
     UC_BROWSER("UCBrowser", "UCWeb", "UC Browser", AgentType.MOBILE_BROWSER),
@@ -81,6 +80,11 @@ enum DirectlyIdentifiableMozillaAgent {
     GOOGLE_ADSBOT_MOBILE("AdsBot-Google-Mobile", Vendors.GOOGLE, "AdsBot Mobile Web", AgentType.CRAWLER),
     GOOGLE_MOBILE_APPS_ANDROID("AdsBot-Google-Mobile-Apps", Vendors.GOOGLE, "AdsBot Mobile Apps", AgentType.CRAWLER),
     GOOGLE_ADSENSE("Mediapartners-Google", Vendors.GOOGLE, "AdSense", AgentType.CRAWLER),
+    /* https://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0 */
+    MICROSOFT_BINGBOT("bingbot", Vendors.MICROSOFT, "Bingbot", AgentType.CRAWLER),
+    MICROSOFT_ADIDXBOT("adidxbot", Vendors.MICROSOFT, "AdIdxBot", AgentType.CRAWLER),
+    MICROSOFT_BINGPREVIEW("BingPreview", Vendors.MICROSOFT, "BingPreview", AgentType.CRAWLER),
+    
     ;
 
     private final String identifier;

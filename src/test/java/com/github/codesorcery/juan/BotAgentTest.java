@@ -114,4 +114,105 @@ public class BotAgentTest {
         Validators.validateAgent(agent,
                 "Google", "Google APIs", "", "Web crawler");
     }
+
+    @Test
+    public void microsoftBingbot1() {
+        final String input = "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "Bingbot", "2.0", "Web crawler");
+    }
+
+    @Test
+    public void microsoftBingbot2() {
+        final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "Bingbot", "2.0", "Web crawler");
+    }
+
+
+    @Test
+    public void microsoftBingbot3() {
+        final String input = "Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "Bingbot", "2.0", "Web crawler");
+    }
+
+    @Test
+    public void microsoftMSNBot() {
+        final String input = "msnbot/2.0b (+http://search.msn.com/msnbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "MSNBot", "2.0b", "Web crawler");
+    }
+
+    @Test
+    public void microsoftMSNBotMedia() {
+        final String input = "msnbot-media/1.1 (+http://search.msn.com/msnbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "MSNBot-Media", "1.1", "Web crawler");
+    }
+
+    @Test
+    public void microsoftAdIdxBot1() {
+        final String input = "Mozilla/5.0 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "AdIdxBot", "2.0", "Web crawler");
+    }
+
+    @Test
+    public void microsoftAdIdxBot2() {
+        final String input = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "AdIdxBot", "2.0", "Web crawler");
+    }
+
+    @Test
+    public void microsoftAdIdxBot3() {
+        final String input = "Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "AdIdxBot", "2.0", "Web crawler");
+    }
+
+    @Test
+    public void microsoftBingPreview1() {
+        final String input = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "BingPreview", "1.0b", "Web crawler");
+    }
+
+    @Test
+    public void microsoftBingPreview2() {
+        final String input = "Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 530) like Gecko BingPreview/1.0b";
+        final TokenizedUserAgent ua = TokenizedUserAgent.forUserAgentString(input);
+        final Agent agent = Agent.fromUserAgent(ua);
+
+        Validators.validateAgent(agent,
+                "Microsoft", "BingPreview", "1.0b", "Web crawler");
+    }
 }
